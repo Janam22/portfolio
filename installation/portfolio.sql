@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2025 at 11:41 AM
+-- Generation Time: Mar 10, 2025 at 01:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `naccfl`
+-- Database: `portfolio`
 --
 
 -- --------------------------------------------------------
@@ -37,6 +37,7 @@ CREATE TABLE `admins` (
   `password` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) DEFAULT NULL,
+  `fcm_token` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
@@ -46,10 +47,10 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `f_name`, `l_name`, `phone`, `email`, `image`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(1, 'Janam', 'Pandey', '+9779866077949', 'janampandey2@gmail.com', '2025-02-11-67ab3043027e3.png', '$2y$10$q5mHXA4mgUct1bVoPpblTOJdIKafmV0CQy1RaR8MHLJoX25tBBjnq', 1, NULL, '2023-09-30 04:31:25', '2025-03-02 05:33:00', 1),
-(2, 'Prince', 'Yadav', '9813104240', 'prince@gmail.com', '2023-10-09-65241d9daf392.png', '$2y$10$q5mHXA4mgUct1bVoPpblTOJdIKafmV0CQy1RaR8MHLJoX25tBBjnq', 1, NULL, '2023-10-09 21:19:53', '2025-02-25 09:13:48', 5),
-(5, 'Shristi', 'Shrestha', '9828367494', 'jananpandey1995@gmail.com', '2025-01-10-6780b2424a617.png', '$2y$10$/cQcMpqdFvVobRp5ZPM2q.Zx1sxzI21Z9R9Vx7kJSeJGZhYc/xofO', 1, NULL, '2024-05-19 16:09:05', '2025-02-16 12:24:07', 5);
+INSERT INTO `admins` (`id`, `f_name`, `l_name`, `phone`, `email`, `image`, `password`, `status`, `remember_token`, `fcm_token`, `created_at`, `updated_at`, `role_id`) VALUES
+(1, 'Janam', 'Pandey', '+9779866077949', 'janampandey2@gmail.com', '2025-02-11-67ab3043027e3.png', '$2y$10$q5mHXA4mgUct1bVoPpblTOJdIKafmV0CQy1RaR8MHLJoX25tBBjnq', 1, NULL, NULL, '2023-09-30 04:31:25', '2025-03-02 05:33:00', 1),
+(2, 'Prince', 'Yadav', '9813104240', 'prince@gmail.com', '2023-10-09-65241d9daf392.png', '$2y$10$q5mHXA4mgUct1bVoPpblTOJdIKafmV0CQy1RaR8MHLJoX25tBBjnq', 1, NULL, NULL, '2023-10-09 21:19:53', '2025-02-25 09:13:48', 5),
+(5, 'Shristi', 'Shrestha', '9828367494', 'jananpandey1995@gmail.com', '2025-01-10-6780b2424a617.png', '$2y$10$q5mHXA4mgUct1bVoPpblTOJdIKafmV0CQy1RaR8MHLJoX25tBBjnq', 1, NULL, NULL, '2024-05-19 16:09:05', '2025-02-16 12:24:07', 5);
 
 -- --------------------------------------------------------
 
@@ -77,76 +78,6 @@ INSERT INTO `admin_roles` (`id`, `name`, `modules`, `status`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attendance_logs`
---
-
-CREATE TABLE `attendance_logs` (
-  `id` int(11) NOT NULL,
-  `emp_id` bigint(20) NOT NULL,
-  `checkin_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `ci_lat` varchar(191) NOT NULL,
-  `ci_lon` varchar(191) NOT NULL,
-  `checkout_time` datetime DEFAULT NULL,
-  `co_lat` varchar(191) DEFAULT NULL,
-  `co_lon` varchar(191) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `attendance_logs`
---
-
-INSERT INTO `attendance_logs` (`id`, `emp_id`, `checkin_time`, `ci_lat`, `ci_lon`, `checkout_time`, `co_lat`, `co_lon`, `created_at`, `updated_at`) VALUES
-(9, 5, '2025-02-18 17:12:48', '27.7108', '85.3251', NULL, NULL, NULL, '2025-02-18 17:12:48', '2025-02-18 17:12:48'),
-(10, 5, '2025-02-27 17:29:21', '27.6955787', '85.3006855', '2025-02-27 17:39:25', '27.6941615', '85.3006854', '2025-02-27 17:29:21', '2025-02-27 17:39:25');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `business_settings`
---
-
-CREATE TABLE `business_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `key` varchar(191) NOT NULL,
-  `value` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `business_settings`
---
-
-INSERT INTO `business_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
-(4, 'mail_config', '{\"status\":\"1\",\"name\":\"NACCFL\",\"host\":\"mail.thinktankinfotech.com\",\"driver\":\"smtp\",\"port\":\"465\",\"username\":\"info@thinktankinfotech.com\",\"email_id\":\"info@thinktankinfotech.com\",\"encryption\":\"ssl\",\"password\":\"ThinkTankInfoTech#@21^^??\"}', NULL, '2025-02-16 09:36:29'),
-(16, 'business_name', 'Field Staff Management System', NULL, NULL),
-(18, 'logo', '2025-02-16-67b1a0b670313.png', NULL, NULL),
-(19, 'phone', '+977015153170', NULL, NULL),
-(20, 'email_address', 'skbks.nepal@gmail.com', NULL, NULL),
-(21, 'address', 'Dhobighat-3 Lalitpur Province -3,Nepal', NULL, NULL),
-(22, 'footer_text', 'All Right Reserved', NULL, NULL),
-(23, 'customer_verification', '1', NULL, NULL),
-(37, 'timezone', 'Asia/Katmandu', NULL, NULL),
-(44, 'country', 'AF', NULL, NULL),
-(78, 'recaptcha', '{\"status\":\"1\",\"site_key\":\"6Lf8pr0qAAAAABgqOAwm5wLrXmBdr__BFJS2Y6Zu\",\"secret_key\":\"6Lf8pr0qAAAAAEYX6SgutPJ-B3W0L9UnoHIqN3j1\"}', '2025-01-20 16:49:04', '2025-01-20 16:49:04'),
-(79, 'language', '[\"en\"]', NULL, '2025-01-05 06:06:19'),
-(82, 'icon', '2025-02-16-67b1ab9c9d143.png', NULL, NULL),
-(97, 'feature', '[]', NULL, NULL),
-(100, 'system_language', '[{\"id\":1,\"direction\":\"ltr\",\"code\":\"en\",\"status\":1,\"default\":true}]', '2023-07-10 00:56:39', '2025-01-05 06:06:19'),
-(134, 'forget_password_mail_status_admin', '1', NULL, NULL),
-(153, 'system_php_path', '/usr/bin/php', NULL, NULL),
-(193, 'country_picker_status', '0', '2024-07-09 13:53:09', '2024-07-09 13:53:09'),
-(194, 'local_storage', '1', '2024-07-09 16:07:20', '2024-07-09 16:07:20'),
-(209, 'cookies_text', NULL, NULL, NULL),
-(210, 'default_location', '{\"lat\":null,\"lng\":null}', NULL, NULL),
-(211, 'timeformat', '12', NULL, NULL),
-(212, 'digit_after_decimal_point', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `data_settings`
 --
 
@@ -164,8 +95,7 @@ CREATE TABLE `data_settings` (
 --
 
 INSERT INTO `data_settings` (`id`, `key`, `value`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51'),
-(2, 'admin_employee_login_url', 'staff', 'login_admin_employee', '2023-06-20 16:55:51', '2023-06-20 16:55:51');
+(1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51');
 
 -- --------------------------------------------------------
 
@@ -215,62 +145,6 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `leave_requests`
---
-
-CREATE TABLE `leave_requests` (
-  `id` bigint(20) NOT NULL,
-  `emp_id` bigint(20) NOT NULL,
-  `leave_type` varchar(255) NOT NULL COMMENT 'sl = Sick Leave\r\nel = Emergency Leave',
-  `from_date` date NOT NULL DEFAULT current_timestamp(),
-  `to_date` date NOT NULL DEFAULT current_timestamp(),
-  `subject` varchar(255) NOT NULL,
-  `reason_description` varchar(255) NOT NULL,
-  `leave_status` varchar(255) NOT NULL DEFAULT 'pending',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `leave_requests`
---
-
-INSERT INTO `leave_requests` (`id`, `emp_id`, `leave_type`, `from_date`, `to_date`, `subject`, `reason_description`, `leave_status`, `created_at`, `updated_at`) VALUES
-(1, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(2, 2, 'el', '2025-02-27', '2025-02-28', '', 'I need leave', 'approved', '2025-02-25 14:59:21', '2025-02-27 13:35:58'),
-(3, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(4, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'rejected', '2025-02-25 13:57:32', '2025-02-25 16:52:37'),
-(5, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(6, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(7, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(8, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(9, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(10, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(11, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(12, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(13, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(14, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(15, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(16, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(17, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(18, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(19, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(20, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(21, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(22, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(23, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(24, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(25, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(26, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(27, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(28, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(29, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(30, 5, 'sl', '2025-02-26', '2025-03-01', '', 'I have fever. So, I cant come.', 'approved', '2025-02-25 13:57:32', '2025-02-25 14:54:50'),
-(31, 5, 'el', '2025-02-28', '2025-03-05', 'Bratabandha Leave', 'I have to attend my son\'s bratabandha. So, I need leave.', 'rejected', '2025-02-27 10:45:38', '2025-02-27 12:35:39');
 
 -- --------------------------------------------------------
 
@@ -358,25 +232,48 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `timesheets`
+-- Table structure for table `system_settings`
 --
 
-CREATE TABLE `timesheets` (
-  `id` bigint(20) NOT NULL,
-  `emp_id` bigint(20) NOT NULL,
-  `details` varchar(500) NOT NULL,
-  `supporting_images` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `system_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(191) NOT NULL,
+  `value` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `timesheets`
+-- Dumping data for table `system_settings`
 --
 
-INSERT INTO `timesheets` (`id`, `emp_id`, `details`, `supporting_images`, `created_at`, `updated_at`) VALUES
-(1, 5, 'fdasgvfsdg', NULL, '2025-03-02 12:31:24', '2025-03-02 12:31:24'),
-(2, 5, 'drsfgdfgdfshgsfd', '[{\"img\":\"2025-03-02-67c40f10d755f.png\",\"storage\":\"public\"},{\"img\":\"2025-03-02-67c40f10dabe9.png\",\"storage\":\"public\"},{\"img\":\"2025-03-02-67c40f10dc792.png\",\"storage\":\"public\"}]', '2025-03-02 13:41:00', '2025-03-02 13:41:00');
+INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
+(4, 'mail_config', '{\"status\":\"1\",\"name\":\"Janam Pandey\",\"host\":\"mail.thinktankinfotech.com\",\"driver\":\"smtp\",\"port\":\"465\",\"username\":\"info@thinktankinfotech.com\",\"email_id\":\"info@thinktankinfotech.com\",\"encryption\":\"ssl\",\"password\":\"ThinkTankInfoTech#@21^^??\"}', NULL, '2025-03-10 07:17:54'),
+(16, 'system_name', 'Janam Pandey\'s Portfolio', NULL, NULL),
+(18, 'logo', '2025-03-10-67ce8be992d07.png', NULL, NULL),
+(19, 'phone', '9866077949', NULL, NULL),
+(20, 'email_address', 'jananpandey1995@gmail.com', NULL, NULL),
+(21, 'address', 'Kathmandu Metro 16, Balaju, Kathmandu, Nepal', NULL, NULL),
+(22, 'footer_text', 'All Right Reserved', NULL, NULL),
+(23, 'customer_verification', '1', NULL, NULL),
+(37, 'timezone', 'Asia/Katmandu', NULL, NULL),
+(44, 'country', 'AF', NULL, NULL),
+(78, 'recaptcha', '{\"status\":\"1\",\"site_key\":\"6Lf8pr0qAAAAABgqOAwm5wLrXmBdr__BFJS2Y6Zu\",\"secret_key\":\"6Lf8pr0qAAAAAEYX6SgutPJ-B3W0L9UnoHIqN3j1\"}', '2025-01-20 16:49:04', '2025-01-20 16:49:04'),
+(79, 'language', '[\"en\"]', NULL, '2025-01-05 06:06:19'),
+(82, 'icon', '2025-03-10-67ce8be99ab6d.png', NULL, NULL),
+(97, 'feature', '[]', NULL, NULL),
+(100, 'system_language', '[{\"id\":1,\"direction\":\"ltr\",\"code\":\"en\",\"status\":1,\"default\":true}]', '2023-07-10 00:56:39', '2025-01-05 06:06:19'),
+(134, 'forget_password_mail_status_admin', '1', NULL, NULL),
+(153, 'system_php_path', '/usr/bin/php', NULL, NULL),
+(193, 'country_picker_status', '0', '2024-07-09 13:53:09', '2024-07-09 13:53:09'),
+(194, 'local_storage', '1', '2024-07-09 16:07:20', '2024-07-09 16:07:20'),
+(209, 'cookies_text', NULL, NULL, NULL),
+(210, 'default_location', '{\"lat\":null,\"lng\":null}', NULL, NULL),
+(211, 'timeformat', '12', NULL, NULL),
+(212, 'digit_after_decimal_point', NULL, NULL, NULL),
+(213, 'push_notification_service_file_content', '{\n  \"type\": \"service_account\",\n  \"project_id\": \"janam-70bc3\",\n  \"private_key_id\": \"5de4441ad35cf390430265858abfc34e3f907f58\",\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDHi2jjnQgy6bJH\\nOxEGNqVkneF3PztB+Vqan33M1cYMZ4cRZzYpoVwfxjQuk7jLZu8dxCGE2iSr4SoM\\nirFceh/ky48fmBZeJWhywXYIcU4WOknQ17gmyyBn1+QtytoQk3Q33gLAlR7dZAQa\\nzMmN3QRJg+DpkwXPuzDDPe1RVCnY0HqSmiGfudKt+vkmCkBN5sv/Gq19p1CHuoNr\\ngBQwBq1WFDVNMGBfCUeXJ6UR0l3idmxocL1Zg0NKC4qdDfElBqDhLAf2k3RYwZOu\\n7QUaRkh2VSbvof8FyD49Aya68zPMU+5Ta5ZizLlFgTiOFOEtPOQyZZvV2pg2q2ky\\nufA4DPzfAgMBAAECggEAN92D5BWWsgpTazXSMlciPuUktmnxgSr6fsegRLSk2dwy\\nKGEo/Ma8L/khqtiYp/mNgFvktnkMQ0KqrxA1T5qxSzDiRQojWQBIGbin/v0Zy4dO\\nGzYJzHKaA/ihXWCpZHKj2vBA/QHCvmC99XLYCuuRw7M0SLBstBfIMyEnS9mwTY6x\\nJhBZqV+qUpYiXusRWV/ufjIvLSZavRtiH895+KPciyojjxGEGeS6nsAtIpI1+Ei9\\nZ5AIa3GUCgADF6NXWDR8/cBk0C9fHV+RmBVSYJSLbJolvXvBpDl4TVpw8Ts7t4so\\npawnGPRTpuafg1NApDYuNz8thGxwgvlYF54wbWFLQQKBgQD8/yxQMw3o21WzP2ID\\na6qGM1n5Tcob8r3OoG1L1N51BzEsORBi037JLh0vOrHXGAb3BuGmMxNH2MseUWQ+\\nsyFQqkUBZlcV63TKP2Uw8eg3Njf3+GztSz/tUUUqDrpz08MbxBDCcZw2los2HhhT\\nE5tCcLO46q2xHNHI3hbdhfo3aQKBgQDJ6c1Bvuq0KHmPf+QePOidjiERgqokEdwu\\nBgrG50UrNNeOcopR4c+/KDTgn0U97I2gzAYwYi6UiOoR426NgU029QcGVQTZB+ln\\nYe2Xdz3ruu39zWKCvnOacF0uPIsq+cDfReXW8MBEsH3twrbLDVBWumuOJiOgECtK\\nCPuWPtuRBwKBgAGkAfyPKDLvYTHlYlRVWWi/YoD8YSgnPdXeMndAbSTjJA1+XT3W\\n00aotuW8grS7Yigt8j6qrCBWJpMOwhCqBrhIMmRc7omk2kAJgzV7DB93iYthIAu1\\n5jc6xLEOIWVo5SYD8nvgUrwD4+k47r1zLhmTM4cqdm/kmPOthQZwvPupAoGAJWYs\\nAbCGMqaIlZ7ftwYbJAvObjrgntu8B75QwrTVqAIapyTqH+6Ol16wJKb7oVOujAke\\nYFnfPN37VSLmOEmp7rMGARNAWZ7Qibim1HZevsoaCPfA9mymZwXHDKhkMqqeIf0F\\nbIGda1uxh5eYWhX2Ooo/H85KrPwxuH3fc93it4MCgYBBAVX4vgschHb+Ydj8rOFX\\nzYnVywjtFzStfO5NnGcCW2LSoZi9P85feU96+NLj+6viIJpVcEASMflfzgHG0CXP\\n9ukfy6pJBkj2p+0iH6hrWQ8PDtcLVWwtM8KpLzjldKVzK/NgKQCKlJHA9zsd7KWZ\\noduMgbyopSNHJFCZFD42Mg==\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\": \"firebase-adminsdk-fbsvc@janam-70bc3.iam.gserviceaccount.com\",\n  \"client_id\": \"105140497374677914505\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40janam-70bc3.iam.gserviceaccount.com\",\n  \"universe_domain\": \"googleapis.com\"\n}', NULL, NULL),
+(214, 'fcm_project_id', 'janam-70bc3', NULL, NULL),
+(215, 'fcm_credentials', '{\"apiKey\":\"AIzaSyCEFDZRDS95ct94KIX5ylmDoa8NEY3ZQEI\",\"authDomain\":\"janam-70bc3.firebaseapp.com\",\"projectId\":\"janam-70bc3\",\"storageBucket\":\"janam-70bc3.firebasestorage.app\",\"messagingSenderId\":\"430545914406\",\"appId\":\"1:430545914406:web:e0fd2298ba372136a4f4e7\",\"measurementId\":\"G-ZWHHS5BBCC\"}', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -412,31 +309,6 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (160, 'App\\Models\\EmailTemplate', 28, 'en', 'copyright_text', '© 2024 Knockdoor. All rights reserved.', NULL, NULL),
 (3921, 'App\\Models\\AdminRole', 5, 'en', 'name', 'Staff', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `travel_orders`
---
-
-CREATE TABLE `travel_orders` (
-  `id` bigint(20) NOT NULL,
-  `emp_id` bigint(20) NOT NULL,
-  `from_date` date NOT NULL DEFAULT current_timestamp(),
-  `to_date` date NOT NULL DEFAULT current_timestamp(),
-  `travel_place` varchar(255) NOT NULL,
-  `travel_mode` varchar(255) NOT NULL,
-  `travel_order_status` varchar(255) NOT NULL DEFAULT 'pending',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `travel_orders`
---
-
-INSERT INTO `travel_orders` (`id`, `emp_id`, `from_date`, `to_date`, `travel_place`, `travel_mode`, `travel_order_status`, `created_at`, `updated_at`) VALUES
-(1, 5, '2025-03-03', '2025-03-08', 'Chitwan', 'Bus', 'approved', '2025-02-27 12:09:32', '2025-02-27 12:13:45');
-
 --
 -- Indexes for dumped tables
 --
@@ -452,18 +324,6 @@ ALTER TABLE `admins`
 -- Indexes for table `admin_roles`
 --
 ALTER TABLE `admin_roles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `attendance_logs`
---
-ALTER TABLE `attendance_logs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `business_settings`
---
-ALTER TABLE `business_settings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -486,12 +346,6 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `leave_requests`
---
-ALTER TABLE `leave_requests`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -512,9 +366,9 @@ ALTER TABLE `storages`
   ADD KEY `storages_value_index` (`value`);
 
 --
--- Indexes for table `timesheets`
+-- Indexes for table `system_settings`
 --
-ALTER TABLE `timesheets`
+ALTER TABLE `system_settings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -524,12 +378,6 @@ ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `translations_translationable_id_index` (`translationable_id`),
   ADD KEY `translations_locale_index` (`locale`);
-
---
--- Indexes for table `travel_orders`
---
-ALTER TABLE `travel_orders`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -546,18 +394,6 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `admin_roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `attendance_logs`
---
-ALTER TABLE `attendance_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `business_settings`
---
-ALTER TABLE `business_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT for table `data_settings`
@@ -578,12 +414,6 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `leave_requests`
---
-ALTER TABLE `leave_requests`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -596,22 +426,16 @@ ALTER TABLE `storages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `timesheets`
+-- AUTO_INCREMENT for table `system_settings`
 --
-ALTER TABLE `timesheets`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `system_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3928;
-
---
--- AUTO_INCREMENT for table `travel_orders`
---
-ALTER TABLE `travel_orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
