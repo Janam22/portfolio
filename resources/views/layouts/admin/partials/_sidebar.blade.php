@@ -75,7 +75,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-info nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('About') }}</span>
                             </a>
@@ -86,7 +86,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-brain nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Skills') }}</span>
                             </a>
@@ -97,7 +97,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-file-outlined nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Resume') }}</span>
                             </a>
@@ -108,7 +108,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-folder-opened-labeled nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Projects') }}</span>
                             </a>
@@ -119,7 +119,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-quotes nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Testimonials') }}</span>
                             </a>
@@ -130,7 +130,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-media-photo nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Social_Media') }}</span>
                             </a>
@@ -141,7 +141,7 @@
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
                                 title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-incognito nav-icon"></i>
+                                <i class="tio-edit nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Blogs') }}</span>
                             </a>
