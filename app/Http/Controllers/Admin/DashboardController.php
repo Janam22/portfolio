@@ -13,20 +13,8 @@ class DashboardController extends Controller
     {    
         $user_id = auth('admin')->user()->id;
         $today = Carbon::today(); // Get today's date
-    
-        // Check if user has checked in today
-        $hasCheckedIn = DB::table('attendance_logs')
-            ->where('emp_id', $user_id)
-            ->whereDate('checkin_time', $today)
-            ->exists();
-    
-        // Check if user has checked in today
-        $hasCheckedOut = DB::table('attendance_logs')
-            ->where('emp_id', $user_id)
-            ->whereDate('checkout_time', $today)
-            ->exists();
 
-        return view('admin-views.dashboard', compact('hasCheckedIn', 'hasCheckedOut'));
+        return view('admin-views.dashboard');
     }
 
 }

@@ -66,7 +66,7 @@
                         <!-- Employee-->
                         <li class="nav-item">
                             <small class="nav-subtitle"
-                                title="{{ translate('messages.attendance_handle') }}">{{ translate('messages.Internal_Management') }}</small>
+                                title="{{ translate('messages.internal_management_handle') }}">{{ translate('messages.Internal_Management') }}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
 
@@ -74,7 +74,7 @@
                             class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/add-timesheet') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.about') }}">
                                 <i class="tio-info nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('About') }}</span>
@@ -85,7 +85,7 @@
                             class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/my-timesheets') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.skills') }}">
                                 <i class="tio-brain nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Skills') }}</span>
@@ -96,7 +96,7 @@
                             class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.resume') }}">
                                 <i class="tio-file-outlined nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Resume') }}</span>
@@ -107,29 +107,18 @@
                             class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.projects') }}">
                                 <i class="tio-folder-opened-labeled nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Projects') }}</span>
                             </a>
                         </li>
-                        
+                                                
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/social') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
-                                <i class="tio-quotes nav-icon"></i>
-                                <span
-                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Testimonials') }}</span>
-                            </a>
-                        </li>
-                        
-                        <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
-                            <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.social_media') }}">
                                 <i class="tio-media-photo nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Social_Media') }}</span>
@@ -137,16 +126,44 @@
                         </li>
                         
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href=""
-                                title="{{ translate('messages.timesheet') }}">
+                                title="{{ translate('messages.blog') }}">
                                 <i class="tio-edit nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Blogs') }}</span>
                             </a>
                         </li>
 
+                        <!-- External Management -->
+                        <li class="nav-item">
+                            <small class="nav-subtitle"
+                                title="{{ translate('messages.external_management_handle') }}">{{ translate('messages.External_Management') }}</small>
+                            <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+                        </li>
+
+                        <li
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/add-timesheet') ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                href=""
+                                title="{{ translate('messages.users') }}">
+                                <i class="tio-send nav-icon"></i>
+                                <span
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Service_Requests') }}</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                href=""
+                                title="{{ translate('messages.testimonials') }}">
+                                <i class="tio-quotes nav-icon"></i>
+                                <span
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Testimonials') }}</span>
+                            </a>
+                        </li>
 
                     <!-- Settings -->
                         <li class="nav-item">
