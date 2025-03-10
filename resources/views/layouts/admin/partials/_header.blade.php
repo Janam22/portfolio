@@ -4,7 +4,7 @@
         <div class="navbar-nav-wrap">
             <div class="navbar-brand-wrapper">
                 <!-- Logo -->
-                @php($restaurant_logo=\App\Models\BusinessSetting::where(['key'=>'logo'])->first())
+                @php($restaurant_logo=\App\Models\SystemSetting::where(['key'=>'logo'])->first())
                 <a class="navbar-brand d-none d-md-block" href="{{route('admin.dashboard')}}" aria-label="">
                          <img class="navbar-brand-logo brand--logo-design-2"
                          src="{{ \App\CentralLogics\Helpers::get_full_url('business',$restaurant_logo?->value,$restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"

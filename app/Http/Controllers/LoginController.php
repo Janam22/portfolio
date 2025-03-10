@@ -7,7 +7,7 @@ use App\Models\DataSetting;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use Illuminate\Support\Carbon;
-use App\Models\BusinessSetting;
+use App\Models\SystemSetting;
 use App\CentralLogics\SMS_module;
 use Illuminate\Support\Facades\DB;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     public function login($login_url)
     {
-        $language = BusinessSetting::where('key', 'system_language')->first();
+        $language = SystemSetting::where('key', 'system_language')->first();
         if($language){
             foreach (json_decode($language->value, true) as $key => $data) {
                 if ($data['default'] == true) {
@@ -41,21 +41,18 @@ class LoginController extends Controller
                 }
             }
         }
-        $data=array_column(DataSetting::whereIn('key',['admin_employee_login_url','admin_login_url'
+        $data=array_column(DataSetting::whereIn('key',['admin_login_url'
         ])->get(['key','value'])->toArray(), 'value', 'key');
 
         $loginTypes = [
-            'admin' => 'admin_login_url',
-            'admin_employee' => 'admin_employee_login_url'
+            'admin' => 'admin_login_url'
         ];
 
         $siteDirections = [
-            'admin' => session()?->get('site_direction') ?? $direction ??  'ltr',
-            'admin_employee' => session()?->get('site_direction') ?? $direction ?? 'ltr'
+            'admin' => session()?->get('site_direction') ?? $direction ??  'ltr'
         ];
         $locals = [
-            'admin' => session()?->get('local') ?? $lang ?? 'en',
-            'admin_employee' => session()?->get('local') ?? $lang ?? 'en'
+            'admin' => session()?->get('local') ?? $lang ?? 'en'
         ];
         $role = null;
 
@@ -84,7 +81,7 @@ class LoginController extends Controller
     }
 
     public function login_attemp($role,$email ,$password, $remember = false){
-        $auth= ($role == 'admin_employee' ? 'admin' :$role);
+        $auth = ($role == 'admin') ? 'admin' : null;
 
         $user = Admin::where('email', $email)->first();
         if ($user->status == 0) {
@@ -142,13 +139,6 @@ class LoginController extends Controller
         } else if (strtolower(session('six_captcha')) != strtolower($request->custome_recaptcha)) {
             Toastr::error(translate('messages.ReCAPTCHA Failed'));
             return back();
-        }
-        if($request->role == 'admin_employee'){
-            $data= Admin:: where('email', $request->email)->where('role_id',1)->exists();
-            if($data){
-                return redirect()->back()->withInput($request->only('email', 'remember'))
-                ->withErrors(['Credentials does not match.']);
-            }
         }
 
         $data=$this->login_attemp($request->role,$request->email ,$request->password, $request->remember);
@@ -228,8 +218,6 @@ class LoginController extends Controller
                 ]);
                 if($data->created_by == 'admin'){
                     $user_link = Helpers::get_login_url('admin_login_url');
-                } else if($data->created_by == 'admin_employee'){
-                    $user_link = Helpers::get_login_url('admin_employee_login_url');
                 }
                 DB::table('password_resets')->where(['token' => $request['reset_token']])->delete();
                 Toastr::success(translate('messages.password_changed_successfully'));
@@ -242,7 +230,7 @@ class LoginController extends Controller
     }
     public function reset_password(Request $request)
     {
-        $language = BusinessSetting::where('key', 'system_language')->first();
+        $language = SystemSetting::where('key', 'system_language')->first();
         if($language){
             foreach (json_decode($language->value, true) as $key => $data) {
                 if ($data['default'] == true) {
@@ -264,11 +252,7 @@ class LoginController extends Controller
         if($data->created_by == 'admin'){
             $admin = Admin::where('email',$data->email)->where('role_id',1)->first();
             return view('auth.reset-password', compact('token','admin','site_direction','locale'));
-        }else{
-            $admin_employee = Admin::where('email',$data->email)->where('role_id', "!==" , 1)->first();
-            return view('auth.reset-password', compact('token','admin_employee','site_direction','locale'));
         }
-
     }
 
     public function logout()
@@ -276,8 +260,6 @@ class LoginController extends Controller
         try {
             if (auth()?->guard('admin')?->user()?->role_id == 1) {
                 $user_link = Helpers::get_login_url('admin_login_url');
-            } else {
-                $user_link = Helpers::get_login_url('admin_employee_login_url');
             }
             auth()?->guard('admin')?->logout();
             return to_route('login',[$user_link]);

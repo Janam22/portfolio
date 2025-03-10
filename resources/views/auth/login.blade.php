@@ -8,11 +8,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @php
-        $app_name = \App\CentralLogics\Helpers::get_business_settings('business_name', false);
+        $app_name = \App\CentralLogics\Helpers::get_business_settings('system_name', false);
         $icon = \App\CentralLogics\Helpers::get_business_settings('icon', false);
     @endphp
     <!-- Title -->
-    <title>{{ translate('messages.login') }} | {{$app_name??translate('NACCFL')}}</title>
+    <title>{{ translate('messages.login') }} | {{$app_name??translate("Janam Pandey's Portfolio")}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
@@ -41,7 +41,7 @@
         </div>
         <div class="auth-wrapper">
             <div class="auth-wrapper-body auth-form-appear">
-                @php($systemlogo=\App\Models\BusinessSetting::where(['key'=>'logo'])->first())
+                @php($systemlogo=\App\Models\SystemSetting::where(['key'=>'logo'])->first())
                 @php($role = $role ?? null )
                 <a class="auth-logo mb-5" href="javascript:">
                     <img class="z-index-2 onerror-image"
@@ -50,11 +50,11 @@
                 </a>
                 <div class="text-center">
                     <div class="auth-header mb-5">
-                        <h2 class="signin-txt">{{ translate('messages.Signin_To_Your_Panel')}}</h2>
+                        <h2 class="signin-txt">{{ translate('messages.Signin_To_System_Panel')}}</h2>
                     </div>
                 </div>
                 <!-- Content -->
-                <label class="badge badge-soft-success float-right initial-1">
+                <label class="badge badge-soft-primary float-right initial-1">
                     {{translate('messages.software_version')}} : {{env('SOFTWARE_VERSION')}}
                 </label>
                 <!-- Form -->

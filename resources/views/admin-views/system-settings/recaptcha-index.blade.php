@@ -15,7 +15,7 @@
                     {{translate('messages.reCaptcha_credentials_setup')}}
                 </span>
             </h1>
-            @include('admin-views.business-settings.partials.third-party-links')
+            @include('admin-views.system-settings.partials.third-party-links')
         </div>
         <!-- End Page Header -->
 
@@ -44,7 +44,7 @@
                 </div>
                 @php($config=\App\CentralLogics\Helpers::get_business_settings('recaptcha'))
                 <form
-                    action="{{env('APP_MODE')!='demo'?route('admin.business-settings.recaptcha_update',['recaptcha']):'javascript:'}}"
+                    action="{{env('APP_MODE')!='demo'?route('admin.system-settings.recaptcha_update',['recaptcha']):'javascript:'}}"
                     method="post">
                     @csrf
                     <label class="toggle-switch h--45px toggle-switch-sm d-flex justify-content-between border rounded px-3 py-0 form-control mb-4">
@@ -148,10 +148,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 @endsection
 

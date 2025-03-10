@@ -20,13 +20,13 @@
                     </span>
                 </h1>
             </div>
-            @include('admin-views.business-settings.email-format-setting.partials.admin-email-template-setting-links')
+            @include('admin-views.system-settings.email-format-setting.partials.admin-email-template-setting-links')
         </div>
 
         <div class="tab-content">
             <div class="tab-pane fade show active">
                 <div class="card mb-3">
-                    @php($mail_status=\App\Models\BusinessSetting::where('key','forget_password_mail_status_admin')->first())
+                    @php($mail_status=\App\Models\SystemSetting::where('key','forget_password_mail_status_admin')->first())
                     @php($mail_status = $mail_status ? $mail_status->value : '0')
                     <div class="card-body">
                         <div class="maintainance-mode-toggle-bar d-flex flex-wrap justify-content-between border rounded align-items-center p-2">
@@ -52,24 +52,24 @@
                                 </span>
                             </label>
                         </div>
-                        <form action="{{route('admin.business-settings.email-status',['admin','forgot-password',$mail_status == '1'?0:1])}}" method="get" id="mail-status_form">
+                        <form action="{{route('admin.system-settings.email-status',['admin','forgot-password',$mail_status == '1'?0:1])}}" method="get" id="mail-status_form">
                         </form>
                     </div>
                 </div>
                 @php($data=\App\Models\EmailTemplate::where('type','admin')->where('email_type', 'forget_password')->first())
                 @php($template= $template ?? $data?->email_template ?? 5)
-                <form action="{{ route('admin.business-settings.email-setup', ['admin','forget-password']) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.system-settings.email-setup', ['admin','forget-password']) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card border-0">
                         <div class="card-body">
                             <div class="email-format-wrapper">
                                 <div class="left-content">
                                     <div class="d-inline-block">
-                                        @include('admin-views.business-settings.email-format-setting.partials.email-template-section')
+                                        @include('admin-views.system-settings.email-format-setting.partials.email-template-section')
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
-                                            @include('admin-views.business-settings.email-format-setting.templates.email-format-'.$template)
+                                            @include('admin-views.system-settings.email-format-setting.templates.email-format-'.$template)
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     <div class="d-flex flex-wrap justify-content-between __gap-15px mt-2 mb-5">
                                         @php($data=\App\Models\EmailTemplate::withoutGlobalScope('translate')->with('translations')->where('type','admin')->where('email_type', 'forget_password')->first())
 
-                                        @php($language=\App\Models\BusinessSetting::where('key','language')->first())
+                                        @php($language=\App\Models\SystemSetting::where('key','language')->first())
                                         @php($language = $language->value ?? null)
                                         @php($default_lang = str_replace('_', '-', app()->getLocale()))
                                         @if($language)
@@ -323,7 +323,7 @@
 
 
         <!-- Instructions Modal -->
-@include('admin-views.business-settings.email-format-setting.partials.email-template-instructions')
+@include('admin-views.system-settings.email-format-setting.partials.email-template-instructions')
 
     </div>
     @endsection

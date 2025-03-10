@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <?php
             $site_direction = session()->get('site_direction');
-            $country=\App\Models\BusinessSetting::where('key','country')->first();
+            $country=\App\Models\SystemSetting::where('key','country')->first();
             $countryCode= strtolower($country?$country->value:'auto');
     ?>
 
@@ -14,7 +14,7 @@
     <!-- Title -->
     <title>@yield('title')</title>
     <!-- Favicon -->
-    @php($logo = \App\Models\BusinessSetting::where(['key' => 'icon'])->first()->value)
+    @php($logo = \App\Models\SystemSetting::where(['key' => 'icon'])->first()->value)
     <link rel="shortcut icon" href="">
     <link rel="icon" type="image/x-icon" href="{{ dynamicStorage('storage/app/public/business/' . $logo ?? '') }}">
     <!-- Font -->
@@ -285,7 +285,7 @@
                     $(".direction-toggle").find('span').text('Toggle LTR')
                 }
                 $.get({
-                        url: '{{ route('admin.business-settings.site_direction') }}',
+                        url: '{{ route('admin.system-settings.site_direction') }}',
                         dataType: 'json',
                         data: {
                             status: status,
@@ -538,7 +538,7 @@
                     formatOnDisplay: false,
                     strictMode: true,
                     // allowDropdown: false,
-                    @if (\App\Models\BusinessSetting::where('key', 'country_picker_status')->first()?->value  != 1)
+                    @if (\App\Models\SystemSetting::where('key', 'country_picker_status')->first()?->value  != 1)
                     onlyCountries: ["{{$countryCode}}"],
                     @endif
                 });

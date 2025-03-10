@@ -13,7 +13,7 @@
                 <span>{{ translate('messages.smtp_mail_setup') }}
                 </span>
             </h1>
-            @include('admin-views.business-settings.partials.third-party-links')
+            @include('admin-views.system-settings.partials.third-party-links')
         </div>
         <!-- End Page Header -->
 
@@ -47,9 +47,9 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane fade show active " id="mail-config">
-                        @php($config = \App\Models\BusinessSetting::where(['key' => 'mail_config'])->first())
+                        @php($config = \App\Models\SystemSetting::where(['key' => 'mail_config'])->first())
                         @php($data = $config ? json_decode($config['value'], true) : null)
-                        <form action="{{ env('APP_MODE') != 'demo' ? route('admin.business-settings.mail-config-status') : 'javascript:' }}"
+                        <form action="{{ env('APP_MODE') != 'demo' ? route('admin.system-settings.mail-config-status') : 'javascript:' }}"
                             method="post" id="mail-config-disable_form">
                             @csrf
 
@@ -361,7 +361,7 @@
                         }
                     });
                     $.ajax({
-                        url: "{{route('admin.business-settings.mail.send')}}",
+                        url: "{{route('admin.system-settings.mail.send')}}",
                         method: 'GET',
                         data: {
                             "email": $('#test-email').val()
@@ -400,7 +400,7 @@
             }
         });
         $.ajax({
-            url: "{{ route('admin.business-settings.mail-config') }}",
+            url: "{{ route('admin.system-settings.mail-config') }}",
             method: 'POST',
             data: $('#mail-config-form').serialize(),
             beforeSend: function() {

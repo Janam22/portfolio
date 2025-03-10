@@ -12,7 +12,7 @@
                         <img src="{{ dynamicAsset('public/assets/admin/img/business.png') }}" class="w--20" alt="">
                     </span>
                     <span>
-                        {{ translate('messages.organization_setup') }}
+                        {{ translate('messages.system_setup') }}
                     </span>
                 </h1>
             <div class="d-flex flex-wrap justify-content-end align-items-center flex-grow-1">
@@ -27,13 +27,13 @@
                 </div>
             </div>
             </div>
-            @include('admin-views.business-settings.partials.nav-menu')
+            @include('admin-views.system-settings.partials.nav-menu')
         </div>
 
         <div class="tab-content">
             <div class="tab-pane fade show active" id="business-setup">
 
-                <form action="{{ route('admin.business-settings.update-setup') }}" method="post"
+                <form action="{{ route('admin.system-settings.update-setup') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <h4 class="card-title mb-3 mt-1">
@@ -45,7 +45,7 @@
 
                             <div class="row">
                                 <div class="col-md-3 col-sm-6">
-                                    @php($name = \App\Models\BusinessSetting::where('key', 'business_name')->first())
+                                    @php($name = \App\Models\SystemSetting::where('key', 'system_name')->first())
                                     <div class="form-group">
                                         <label class="form-label" for="exampleFormControlInput1">{{ translate('messages.system_name') }}
                                             &nbsp;
@@ -59,7 +59,7 @@
                                             placeholder="{{ translate('messages.Ex :') }} ABC Company" required>
                                     </div>
                                 </div>
-                                @php($email = \App\Models\BusinessSetting::where('key', 'email_address')->first())
+                                @php($email = \App\Models\SystemSetting::where('key', 'email_address')->first())
                                 <div class="col-md-3 col-sm-6">
                                     <div class="form-group">
                                         <label class="input-label"
@@ -68,7 +68,7 @@
                                             class="form-control" placeholder="{{ translate('messages.Ex :') }} contact@company.com" required>
                                     </div>
                                 </div>
-                                @php($phone = \App\Models\BusinessSetting::where('key', 'phone')->first())
+                                @php($phone = \App\Models\SystemSetting::where('key', 'phone')->first())
                                 <div class="col-md-3 col-sm-6">
                                     <div class="form-group">
                                         <label class="input-label"
@@ -345,7 +345,7 @@
 
                             <div class="row gy-3">
                                 <div class="col-lg-6">
-                                    @php($address = \App\Models\BusinessSetting::where('key', 'address')->first())
+                                    @php($address = \App\Models\SystemSetting::where('key', 'address')->first())
                                     <div class="form-group">
                                         <label class="input-label"
                                             for="exampleFormControlInput1">{{ translate('messages.address') }}</label>
@@ -357,7 +357,7 @@
                                 <div class="col-lg-6">
                                     <div class="d-flex __gap-12px mt-4">
                                         <label class="__custom-upload-img mr-lg-5">
-                                            @php($logo = \App\Models\BusinessSetting::where('key', 'logo')->first())
+                                            @php($logo = \App\Models\SystemSetting::where('key', 'logo')->first())
                                             <label class="form-label">
                                                 {{ translate('logo') }} <span class="text--primary">({{ translate('3:1') }})</span>
                                             </label>
@@ -371,7 +371,7 @@
                                         </label>
 
                                         <label class="__custom-upload-img">
-                                            @php($icon = \App\Models\BusinessSetting::where('key', 'icon')->first())
+                                            @php($icon = \App\Models\SystemSetting::where('key', 'icon')->first())
                                             <label class="form-label">
                                                 {{ translate('Favicon') }}  <span class="text--primary">({{ translate('1:1') }})</span>
                                             </label>
@@ -399,7 +399,7 @@
                         <div class="card-body pb-0">
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
-                                    @php($tz = \App\Models\BusinessSetting::where('key', 'timezone')->first())
+                                    @php($tz = \App\Models\SystemSetting::where('key', 'timezone')->first())
                                     @php($tz = $tz ? $tz->value : 0)
                                     <div class="form-group">
                                         <label
@@ -502,7 +502,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
-                                    @php($tf = \App\Models\BusinessSetting::where('key', 'timeformat')->first())
+                                    @php($tf = \App\Models\SystemSetting::where('key', 'timeformat')->first())
                                     @php($tf = $tf ? $tf->value : '24')
                                     <div class="form-group">
                                         <label
@@ -519,7 +519,7 @@
                                 </div>
 
                                 <div class="col-sm-6 col-md-5">
-                                    @php($footer_text = \App\Models\BusinessSetting::where('key', 'footer_text')->first())
+                                    @php($footer_text = \App\Models\SystemSetting::where('key', 'footer_text')->first())
                                     <div class="form-group">
                                         <label class="input-label">{{ translate('copy_right_text') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('make_visitors_aware_of_your_business‘s_rights_&_legal_information') }}" data-toggle="tooltip" alt=""> </label>
                                         <textarea type="text" value="" name="footer_text" class="form-control" placeholder="" rows="3"
@@ -590,7 +590,7 @@
 
         $(document).on('ready', function() {
             initAutocomplete();
-            @php($country = \App\Models\BusinessSetting::where('key', 'country')->first())
+            @php($country = \App\Models\SystemSetting::where('key', 'country')->first())
 
             @if ($country)
                 $("#country option[value='{{ $country->value }}']").attr('selected', 'selected').change();

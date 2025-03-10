@@ -7,7 +7,7 @@ use App\Models\DataSetting;
 use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\Models\BusinessSetting;
+use App\Models\SystemSetting;
 use Illuminate\Support\Facades\DB;
 use App\Models\NotificationSetting;
 use Illuminate\Support\Facades\App;
@@ -37,7 +37,7 @@ class Helpers
     {
         $config = null;
 
-        $paymentmethod = BusinessSetting::where('key', $name)->first();
+        $paymentmethod = SystemSetting::where('key', $name)->first();
 
         if ($paymentmethod) {
             $config = $json_decode ? json_decode($paymentmethod->value, true) : $paymentmethod->value;
@@ -480,7 +480,7 @@ class Helpers
 
     public static function get_view_keys()
     {
-        $keys = BusinessSetting::whereIn('key', ['toggle_home_external', 'toggle_dm_registration', 'toggle_restaurant_registration'])->get();
+        $keys = SystemSetting::whereIn('key', ['toggle_home_external', 'toggle_dm_registration', 'toggle_restaurant_registration'])->get();
         $data = [];
         foreach ($keys as $key) {
             $data[$key->key] = (bool)$key->value ?? 0;

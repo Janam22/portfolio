@@ -3,8 +3,8 @@
         <!-- Nav -->
         <ul class="nav nav-tabs border-0 nav--tabs nav--pills">
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('admin/business-settings/email-setup/admin/forgot-password') ? 'active' : '' }}"
-                href="{{ route('admin.business-settings.email-setup', ['admin','forgot-password']) }}">
+                <a class="nav-link {{ Request::is('admin/system-settings/email-setup/admin/forgot-password') ? 'active' : '' }}"
+                href="{{ route('admin.system-settings.email-setup', ['admin','forgot-password']) }}">
                     {{translate('Forgot_Password')}}
                 </a>
             </li>

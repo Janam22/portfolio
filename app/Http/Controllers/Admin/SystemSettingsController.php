@@ -8,9 +8,8 @@ use App\Models\Translation;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\CentralLogics\Helpers;
-use App\Models\BusinessSetting;
+use App\Models\SystemSetting;
 use Illuminate\Support\Facades\DB;
-use App\Models\NotificationSetting;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\File;
@@ -18,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class BusinessSettingsController extends Controller
+class SystemSettingsController extends Controller
 {
     use Processor;
 
@@ -29,11 +28,11 @@ class BusinessSettingsController extends Controller
             return back();
         }
         if ($tab == 'business') {
-            return view('admin-views.business-settings.business-index');
+            return view('admin-views.system-settings.system-index');
         }
     }
 
-    public function business_setup(Request $request)
+    public function system_setup(Request $request)
     {
 
         if (env('APP_MODE') == 'demo') {
@@ -52,16 +51,16 @@ class BusinessSettingsController extends Controller
         }
 
         $key =['logo','icon',];
-        $settings =  array_column(BusinessSetting::whereIn('key', $key)->get()->toArray(), 'value', 'key');
+        $settings =  array_column(SystemSetting::whereIn('key', $key)->get()->toArray(), 'value', 'key');
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'country_picker_status'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'country_picker_status'], [
             'value' => $request['country_picker_status'] ? $request['country_picker_status'] : 0
         ]);
-        BusinessSetting::query()->updateOrInsert(['key' => 'business_name'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'business_name'], [
             'value' => $request['restaurant_name']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'timezone'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'timezone'], [
             'value' => $request['timezone']
         ]);
 
@@ -72,7 +71,7 @@ class BusinessSettingsController extends Controller
             $image_name = $settings['logo'];
         }
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'logo'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'logo'], [
             'value' => $image_name
         ]);
 
@@ -83,43 +82,43 @@ class BusinessSettingsController extends Controller
             $image_name = $settings['icon'];
         }
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'icon'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'icon'], [
             'value' => $image_name
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'phone'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'phone'], [
             'value' => $request['phone']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'email_address'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'email_address'], [
             'value' => $request['email']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'address'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'address'], [
             'value' => $request['address']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'footer_text'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'footer_text'], [
             'value' => $request['footer_text']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'cookies_text'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'cookies_text'], [
             'value' => $request['cookies_text']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'country'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'country'], [
             'value' => $request['country']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'default_location'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'default_location'], [
             'value' => json_encode(['lat' => $request['latitude'], 'lng' => $request['longitude']])
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'timeformat'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'timeformat'], [
             'value' => $request['time_format']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'digit_after_decimal_point'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'digit_after_decimal_point'], [
             'value' => $request['digit_after_decimal_point']
         ]);
 
@@ -129,7 +128,7 @@ class BusinessSettingsController extends Controller
 
     public function mail_index()
     {
-        return view('admin-views.business-settings.mail-index');
+        return view('admin-views.system-settings.mail-index');
     }
 
     public function mail_config(Request $request)
@@ -138,7 +137,7 @@ class BusinessSettingsController extends Controller
             Toastr::info(translate('messages.update_option_is_disable_for_demo'));
             return back();
         }
-        BusinessSetting::updateOrInsert(
+        SystemSetting::updateOrInsert(
             ['key' => 'mail_config'],
             [
                 'value' => json_encode([
@@ -165,11 +164,11 @@ class BusinessSettingsController extends Controller
             Toastr::info(translate('messages.update_option_is_disable_for_demo'));
             return back();
         }
-        $config = BusinessSetting::where(['key' => 'mail_config'])->first();
+        $config = SystemSetting::where(['key' => 'mail_config'])->first();
 
         $data = $config ? json_decode($config['value'], true) : null;
 
-        BusinessSetting::updateOrInsert(
+        SystemSetting::updateOrInsert(
             ['key' => 'mail_config'],
             [
                 'value' => json_encode([
@@ -192,7 +191,7 @@ class BusinessSettingsController extends Controller
 
     public function app_settings()
     {
-        return view('admin-views.business-settings.app-settings');
+        return view('admin-views.system-settings.app-settings');
     }
 
     private function update_data($request, $key_data){
@@ -237,16 +236,16 @@ class BusinessSettingsController extends Controller
 
     public function config_setup()
     {
-        return view('admin-views.business-settings.config');
+        return view('admin-views.system-settings.config');
     }
 
     public function config_update(Request $request)
     {
-        BusinessSetting::query()->updateOrInsert(['key' => 'map_api_key'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'map_api_key'], [
             'value' => $request['map_api_key']
         ]);
 
-        BusinessSetting::query()->updateOrInsert(['key' => 'map_api_key_server'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'map_api_key_server'], [
             'value' => $request['map_api_key_server']
         ]);
 
@@ -256,7 +255,7 @@ class BusinessSettingsController extends Controller
 
     public function toggle_settings($key, $value)
     {
-        BusinessSetting::query()->updateOrInsert(['key' => $key], [
+        SystemSetting::query()->updateOrInsert(['key' => $key], [
             'value' => $value
         ]);
 
@@ -267,12 +266,12 @@ class BusinessSettingsController extends Controller
     //recaptcha
     public function recaptcha_index(Request $request)
     {
-        return view('admin-views.business-settings.recaptcha-index');
+        return view('admin-views.system-settings.recaptcha-index');
     }
 
     public function recaptcha_update(Request $request)
     {
-        BusinessSetting::query()->updateOrInsert(['key' => 'recaptcha'], [
+        SystemSetting::query()->updateOrInsert(['key' => 'recaptcha'], [
             'key' => 'recaptcha',
             'value' => json_encode([
                 'status' => $request['status'],
@@ -309,12 +308,12 @@ class BusinessSettingsController extends Controller
             return response()->json();
         }
         if($request->status == 1){
-            BusinessSetting::query()->updateOrInsert(['key' => 'site_direction'], [
+            SystemSetting::query()->updateOrInsert(['key' => 'site_direction'], [
                 'value' => 'ltr'
             ]);
         } else
         {
-            BusinessSetting::query()->updateOrInsert(['key' => 'site_direction'], [
+            SystemSetting::query()->updateOrInsert(['key' => 'site_direction'], [
                 'value' => 'rtl'
             ]);
         }
@@ -325,7 +324,7 @@ class BusinessSettingsController extends Controller
     {
         $template = $request->query('template',null);
         if ($tab == 'forgot-password') {
-            return view('admin-views.business-settings.email-format-setting.'.$type.'-email-formats.forgot-pass-format',compact('template'));
+            return view('admin-views.system-settings.email-format-setting.'.$type.'-email-formats.forgot-pass-format',compact('template'));
         }
     }
 
@@ -530,7 +529,7 @@ class BusinessSettingsController extends Controller
         }
 
         if ($tab == 'forgot-password') {
-            BusinessSetting::query()->updateOrInsert(['key' => 'forget_password_mail_status_'.$type], [
+            SystemSetting::query()->updateOrInsert(['key' => 'forget_password_mail_status_'.$type], [
                 'value' => $status
             ]);
         }
@@ -551,17 +550,11 @@ class BusinessSettingsController extends Controller
         $request->validate([
             'type' => 'required',
             'admin_login_url' => 'nullable|regex:/^[a-zA-Z0-9\-\_]+$/u|unique:data_settings,value',
-            'admin_employee_login_url' => 'nullable|regex:/^[a-zA-Z0-9\-\_]+$/u|unique:data_settings,value',
         ]);
 
         if($request->type == 'admin') {
             DataSetting::query()->updateOrInsert(['key' => 'admin_login_url','type' => 'login_admin'], [
                 'value' => $request->admin_login_url
-            ]);
-        }
-        elseif($request->type == 'admin_employee') {
-            DataSetting::query()->updateOrInsert(['key' => 'admin_employee_login_url','type' => 'login_admin_employee'], [
-                'value' => $request->admin_employee_login_url
             ]);
         }
         Toastr::success(translate('messages.update_successfull'));
@@ -626,7 +619,7 @@ class BusinessSettingsController extends Controller
             return response()->json(['status' => 'error', 'message' => $error[0]['message']]);
         }
 
-        DB::table('business_settings')->updateOrInsert(['key' => 'landing_integration_type'], [
+        DB::table('system_settings')->updateOrInsert(['key' => 'landing_integration_type'], [
             'value' => $request['landing_integration_via']
         ]);
         $status = 'success';
@@ -664,7 +657,7 @@ class BusinessSettingsController extends Controller
         }
 
         if($request->landing_integration_via == 'url'){
-            DB::table('business_settings')->updateOrInsert(['key' => 'landing_page_custom_url'], [
+            DB::table('system_settings')->updateOrInsert(['key' => 'landing_page_custom_url'], [
                 'value' => $request['redirect_url']
             ]);
 
@@ -691,36 +684,5 @@ class BusinessSettingsController extends Controller
             return back();
         }
     }
-
-    public function notification_setup(Request $request){
-        if(NotificationSetting::count() == 0 ){
-            Helpers::notificationDataSetup();
-        }
-        $data= NotificationSetting::
-            when( $request?->type == null ||  $request?->type == 'admin'  , function($query){
-            $query->where('type','admin');
-        })->get();
-
-        $business_name= BusinessSetting::where('key','business_name')->first()?->value;
-        return view('admin-views.business-settings.notification_setup',compact('business_name' ,'data'));
-    }
-
-    public function notification_status_change($key,$user_type, $type){
-        $data= NotificationSetting::where('type',$user_type)->where('key',$key)->first();
-        if(!$data){
-            Toastr::error(translate('messages.Notification_settings_not_found'));
-            return back();
-        }
-        if($type == 'Mail' ) {
-            $data->mail_status =  $data->mail_status == 'active' ? 'inactive' : 'active';
-        }
-        elseif($type == 'SMS' ) {
-            $data->sms_status =  $data->sms_status == 'active' ? 'inactive' : 'active';
-        }
-        $data?->save();
-        Toastr::success(translate('messages.Notification_settings_updated'));
-        return back();
-    }
-
 
 }

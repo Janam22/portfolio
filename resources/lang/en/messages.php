@@ -7022,4 +7022,12 @@
   'Timesheet_Date_Range' => 'Timesheet Date Range',
   'travel_request_lists' => 'Travel request lists',
   'Ex:_98********' => 'Ex: 98********',
+  'Internal_Management' => 'Internal Management',
+  'About' => 'About',
+  'Skills' => 'Skills',
+  'Projects' => 'Projects',
+  'Blogs' => 'Blogs',
+  'system_setup' => 'System setup',
+  'NACCFL' => 'NACCFL',
+  'Signin_To_System_Panel' => 'Signin To System Panel',
 );

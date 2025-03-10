@@ -3,7 +3,7 @@
         <!-- Nav -->
         <ul class="nav nav-tabs border-0 nav--tabs nav--pills">
             <li class="nav-item">
-                <a class="nav-link  {{ Request::is('admin/business-settings/business-setup') ?'active':'' }}" href="{{ route('admin.business-settings.business-setup') }}"   aria-disabled="true">{{translate('messages.organization_settings')}}</a>
+                <a class="nav-link  {{ Request::is('admin/system-settings/system-setup') ?'active':'' }}" href="{{ route('admin.system-settings.system-setup') }}"   aria-disabled="true">{{translate('messages.system_settings')}}</a>
             </li>
         </ul>
         <!-- End Nav -->
