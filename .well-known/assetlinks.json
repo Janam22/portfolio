@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bhojmandu.online",
+      "sha256_cert_fingerprints": [
+        "93:38:7F:11:B0:84:CD:7A:83:A6:6E:FB:3A:18:FC:0D:C2:15:EA:A3:BF:77:4F:32:F7:80:59:67:4A:5D:F9:15"
+      ]
+    }
+  }
+]
