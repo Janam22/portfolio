@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
-use App\Models\BusinessSetting;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Validation\Rules\Password;
@@ -67,19 +66,6 @@ class SystemController extends Controller
         $admin->save();
         Toastr::success(translate('messages.admin_password_updated_successfully'));
         return back();
-    }
-    
-    public function landing_page()
-    {
-        $landing_page = BusinessSetting::where('key', 'landing_page')->first();
-        BusinessSetting::updateOrCreate(['key' => 'landing_page'], [
-                'value' =>$landing_page?->value == 1 ? 0 : 1,
-            ]);
-
-        if (isset($landing_page) && $landing_page->value) {
-            return response()->json(['message' => translate('landing_page_is_off.')]);
-        }
-        return response()->json(['message' => translate('landing_page_is_on.')]);
     }
 
 }

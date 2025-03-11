@@ -56,8 +56,8 @@ class SystemSettingsController extends Controller
         SystemSetting::query()->updateOrInsert(['key' => 'country_picker_status'], [
             'value' => $request['country_picker_status'] ? $request['country_picker_status'] : 0
         ]);
-        SystemSetting::query()->updateOrInsert(['key' => 'business_name'], [
-            'value' => $request['restaurant_name']
+        SystemSetting::query()->updateOrInsert(['key' => 'system_name'], [
+            'value' => $request['system_name']
         ]);
 
         SystemSetting::query()->updateOrInsert(['key' => 'timezone'], [
@@ -102,24 +102,12 @@ class SystemSettingsController extends Controller
             'value' => $request['footer_text']
         ]);
 
-        SystemSetting::query()->updateOrInsert(['key' => 'cookies_text'], [
-            'value' => $request['cookies_text']
-        ]);
-
         SystemSetting::query()->updateOrInsert(['key' => 'country'], [
             'value' => $request['country']
         ]);
 
-        SystemSetting::query()->updateOrInsert(['key' => 'default_location'], [
-            'value' => json_encode(['lat' => $request['latitude'], 'lng' => $request['longitude']])
-        ]);
-
         SystemSetting::query()->updateOrInsert(['key' => 'timeformat'], [
             'value' => $request['time_format']
-        ]);
-
-        SystemSetting::query()->updateOrInsert(['key' => 'digit_after_decimal_point'], [
-            'value' => $request['digit_after_decimal_point']
         ]);
 
         Toastr::success( translate('Successfully updated. To see the changes in app restart the app.'));

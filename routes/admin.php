@@ -26,7 +26,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('update-priority', 'SystemSettingsController@update_priority')->name('update-priority');
             Route::get('config-setup', 'SystemSettingsController@config_setup')->name('config-setup');
             Route::post('config-update', 'SystemSettingsController@config_update')->name('config-update');
-            Route::post('update-setup', 'SystemSettingsController@business_setup')->name('update-setup');
+            Route::post('update-setup', 'SystemSettingsController@system_setup')->name('update-setup');
             Route::get('theme-settings', 'SystemSettingsController@theme_settings')->name('theme-settings');
             Route::POST('theme-settings-update', 'SystemSettingsController@update_theme_settings')->name('theme-settings-update');
             Route::get('app-settings', 'SystemSettingsController@app_settings')->name('app-settings');
