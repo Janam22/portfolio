@@ -104,9 +104,20 @@
                         </li>
                         
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/services/add') || Request::is('admin/services/edit/*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.service.add') }}"
+                                title="{{ translate('messages.services') }}">
+                                <i class="tio-folder-opened-labeled nav-icon"></i>
+                                <span
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Services') }}</span>
+                            </a>
+                        </li>
+                        
+                        <li
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/projects/add') || Request::is('admin/projects/edit/*') ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                href="{{ route('admin.project.add') }}"
                                 title="{{ translate('messages.projects') }}">
                                 <i class="tio-folder-opened-labeled nav-icon"></i>
                                 <span
@@ -115,9 +126,9 @@
                         </li>
                                                 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/social') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/system-settings/social-media') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.system-settings.social-media.index') }}"
                                 title="{{ translate('messages.social_media') }}">
                                 <i class="tio-media-photo nav-icon"></i>
                                 <span

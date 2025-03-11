@@ -50,9 +50,35 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('email-setup/{type}/{tab?}', 'SystemSettingsController@email_index')->name('email-setup');
             Route::POST('email-setup/{type}/{tab?}', 'SystemSettingsController@update_email_index')->name('email-setup');
             Route::get('email-status/{type}/{tab}/{status}', 'SystemSettingsController@update_email_status')->name('email-status');
+            
+            Route::get('social-media/fetch', 'SocialMediaController@fetch')->name('social-media.fetch');
+            Route::get('social-media/status-update', 'SocialMediaController@social_media_status_update')->name('social-media.status-update');
+            Route::resource('social-media', 'SocialMediaController');
         });
 
-        Route::group(['prefix' => 'system-settings', 'as' => 'language.','middleware' => ['module:settings']], function () {
+        Route::group(['prefix' => 'projects', 'as' => 'project.'], function () {
+            Route::get('add', 'ProjectController@index')->name('add');
+            Route::post('store', 'ProjectController@store')->name('store');
+            Route::get('edit/{id}', 'ProjectController@edit')->name('edit');
+            Route::post('update/{id}', 'ProjectController@update')->name('update');
+            Route::get('update-priority/{category}', 'ProjectController@update_priority')->name('priority');
+            Route::get('status/{id}/{status}', 'ProjectController@status')->name('status');
+            Route::delete('delete/{id}', 'ProjectController@delete')->name('delete');
+            Route::get('export-projects', 'ProjectController@export_projects')->name('export-projects');
+        });
+        
+        Route::group(['prefix' => 'services', 'as' => 'service.'], function () {
+            Route::get('add', 'ServiceController@index')->name('add');
+            Route::post('store', 'ServiceController@store')->name('store');
+            Route::get('edit/{id}', 'ServiceController@edit')->name('edit');
+            Route::post('update/{id}', 'ServiceController@update')->name('update');
+            Route::get('update-priority/{category}', 'ServiceController@update_priority')->name('priority');
+            Route::get('status/{id}/{status}', 'ServiceController@status')->name('status');
+            Route::delete('delete/{id}', 'ServiceController@delete')->name('delete');
+            Route::get('export-services', 'ServiceController@export_services')->name('export-services');
+        });
+
+        Route::group(['prefix' => 'system-settings', 'as' => 'language.'], function () {
             Route::get('language', 'LanguageController@index')->name('index');
             Route::post('language/add-new', 'LanguageController@store')->name('add-new');
             Route::get('language/update-status', 'LanguageController@update_status')->name('update-status');
