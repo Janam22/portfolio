@@ -9,25 +9,22 @@ use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\CentralLogics\Helpers;
 use App\Models\SystemSetting;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SystemSettingsController extends Controller
 {
     use Processor;
 
-    public function business_index($tab = 'business')
+    public function system_index($tab = 'system')
     {
         if (!Helpers::module_permission_check('settings')) {
             Toastr::error(translate('messages.access_denied'));
             return back();
         }
-        if ($tab == 'business') {
+        if ($tab == 'system') {
             return view('admin-views.system-settings.system-index');
         }
     }
@@ -66,7 +63,7 @@ class SystemSettingsController extends Controller
 
         if ($request->has('logo')) {
 
-            $image_name = Helpers::update( dir: 'business/', old_image:$settings['logo'],format: 'png',image: $request->file('logo'));
+            $image_name = Helpers::update( dir: 'system/', old_image:$settings['logo'],format: 'png',image: $request->file('logo'));
         } else {
             $image_name = $settings['logo'];
         }
@@ -77,7 +74,7 @@ class SystemSettingsController extends Controller
 
         if ($request->has('icon')) {
 
-            $image_name = Helpers::update( dir: 'business/', old_image:$settings['icon'], format:'png', image: $request->file('icon'));
+            $image_name = Helpers::update( dir: 'system/', old_image:$settings['icon'], format:'png', image: $request->file('icon'));
         } else {
             $image_name = $settings['icon'];
         }
@@ -527,7 +524,7 @@ class SystemSettingsController extends Controller
     }
 
     public function login_url_page(){
-        $data=array_column(DataSetting::whereIn('key',['restaurant_employee_login_url','restaurant_login_url','admin_employee_login_url','admin_login_url'
+        $data=array_column(DataSetting::whereIn('key',['admin_login_url'
                 ])->get(['key','value'])->toArray(), 'value', 'key');
 
         return view('admin-views.login-setup.login_setup',compact('data'));
@@ -589,88 +586,17 @@ class SystemSettingsController extends Controller
         return back();
     }
 
-    public function landing_page_settings_update(Request $request)
+    public function about()
     {
-        // dd($request->all());
-        $validator = Validator::make($request->all(), [
-            'landing_integration_via' => 'required',
-            'redirect_url' => 'required_if:landing_integration_via,url',
-            'file_upload' => 'mimes:zip'
-        ]);
-
-        if(!File::exists('resources/views/layouts/landing/custom/index.blade.php') && ($request->landing_integration_via == 'file_upload') && (!$request->file('file_upload'))){
-            $validator->getMessageBag()->add('file_upload', translate('messages.zip_file_is_required'));
-        }
-
-        if ($validator->errors()->count() > 0) {
-            $error = Helpers::error_processor($validator);
-            return response()->json(['status' => 'error', 'message' => $error[0]['message']]);
-        }
-
-        DB::table('system_settings')->updateOrInsert(['key' => 'landing_integration_type'], [
-            'value' => $request['landing_integration_via']
-        ]);
-        $status = 'success';
-        $message = translate('updated_successfully!');
-
-        if($request->landing_integration_via == 'file_upload'){
-
-            $file = $request->file('file_upload');
-            if($file){
-
-                $filename = $file->getClientOriginalName();
-                $tempPath = $file->storeAs('temp', $filename);
-                $zip = new \ZipArchive();
-                if ($zip->open(storage_path('app/' . $tempPath)) === TRUE) {
-                    // Extract the contents to a directory
-                    $extractPath = base_path('resources/views/layouts/landing/custom');
-                    $zip->extractTo($extractPath);
-                    $zip->close();
-                    if(File::exists($extractPath.'/index.blade.php')){
-                        Toastr::success(translate('file_upload_successfully!'));
-                        $status = 'success';
-                        $message = translate('file_upload_successfully!');
-                    }else{
-                        File::deleteDirectory($extractPath);
-                        $status = 'error';
-                        $message = translate('invalid_file!');
-                    }
-                }else{
-                    $status = 'error';
-                    $message = translate('file_upload_fail!');
-                }
-
-                Storage::delete($tempPath);
-            }
-        }
-
-        if($request->landing_integration_via == 'url'){
-            DB::table('system_settings')->updateOrInsert(['key' => 'landing_page_custom_url'], [
-                'value' => $request['redirect_url']
-            ]);
-
-            $status = 'success';
-            $message = translate('url_saved_successfully!');
-        }
-
-        return response()->json([
-            'status' => $status,
-            'message'=> $message
-        ]);
+        $about =DataSetting::withoutGlobalScope('translate')->where('type', 'admin_landing_page')->where('key', 'about')->first();
+        return view('admin-views.system-settings.about', compact('about'));
     }
 
-    public function delete_custom_landing_page()
+    public function about_update(Request $request)
     {
-        $filePath = 'resources/views/layouts/landing/custom/index.blade.php';
-
-        if (File::exists($filePath)) {
-            File::delete($filePath);
-            Toastr::success(translate('messages.File_deleted_successfully'));
-            return back();
-        } else {
-            Toastr::error(translate('messages.File_not_found'));
-            return back();
-        }
+        $this->update_data($request , 'about');
+        Toastr::success(translate('messages.about_updated'));
+        return back();
     }
-
+    
 }

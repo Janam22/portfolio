@@ -17,7 +17,7 @@ class ProjectController extends Controller
 {
     function index(Request $request)
     {
-        $services = Service::get();
+        $services = Service::Active()->get();
         $key = explode(' ', $request['search']);
         $projects = Project::latest()
         ->when(isset($key) , function ($q) use($key){
@@ -92,7 +92,7 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $services = Service::get();
+        $services = Service::Active()->get();
         $project = Project::withoutGlobalScope('translate')->findOrFail($id);
         return view('admin-views.project.edit', compact('project', 'services'));
     }

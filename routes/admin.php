@@ -20,7 +20,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('update-landing-setup', 'SystemSettingsController@landing_page_settings_update')->name('system-setup.update-landing-setup');
             Route::delete('delete-custom-landing-page', 'SystemSettingsController@delete_custom_landing_page')->name('system-setup.delete-custom-landing-page');
 
-            Route::get('system-setup/{tab?}', 'SystemSettingsController@business_index')->name('system-setup');
+            Route::get('system-setup/{tab?}', 'SystemSettingsController@system_index')->name('system-setup');
             Route::post('update-dm', 'SystemSettingsController@update_dm')->name('update-dm');
             Route::post('update-order', 'SystemSettingsController@update_order')->name('update-order');
             Route::post('update-priority', 'SystemSettingsController@update_priority')->name('update-priority');
@@ -54,6 +54,9 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('social-media/fetch', 'SocialMediaController@fetch')->name('social-media.fetch');
             Route::get('social-media/status-update', 'SocialMediaController@social_media_status_update')->name('social-media.status-update');
             Route::resource('social-media', 'SocialMediaController');
+            
+            Route::get('pages/about', 'SystemSettingsController@about')->name('about');
+            Route::post('pages/about', 'SystemSettingsController@about_update');
         });
 
         Route::group(['prefix' => 'projects', 'as' => 'project.'], function () {

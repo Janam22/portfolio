@@ -365,7 +365,7 @@
                                             </label>
                                             <div class="text-center">
                                                     <img class="img--vertical onerror-image"   id="viewer"
-                                                    src="{{\App\CentralLogics\Helpers::get_full_url('business', $logo?->value?? '', $logo?->storage[0]?->value ?? 'public','upload_image')}}" alt="image">
+                                                    src="{{\App\CentralLogics\Helpers::get_full_url('system', $logo?->value?? '', $logo?->storage[0]?->value ?? 'public','upload_image')}}" alt="image">
 
                                             </div>
                                             <input type="file" name="logo" id="customFileEg1" class="custom-file-input"
@@ -379,7 +379,7 @@
                                             </label>
                                             <div class="text-center">
                                                     <img class="img--110 onerror-image"   id="iconViewer"
-                                                    src="{{\App\CentralLogics\Helpers::get_full_url('business', $icon?->value?? '', $icon?->storage[0]?->value ?? 'public','upload_image')}}"
+                                                    src="{{\App\CentralLogics\Helpers::get_full_url('system', $icon?->value?? '', $icon?->storage[0]?->value ?? 'public','upload_image')}}"
                                                     data-onerror-image="{{ dynamicAsset('public/assets/admin/img/upload-img.png') }}" alt="Fav icon">
                                             </div>
                                             <input type="file" name="icon" id="favIconUpload" class="custom-file-input"

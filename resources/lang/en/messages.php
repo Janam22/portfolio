@@ -7080,4 +7080,6 @@
   'Service_Analytics' => 'Service Analytics',
   'Created_date' => 'Created date',
   'Projects_Analytics' => 'Projects Analytics',
+  'service_status_updated' => 'Service status updated',
+  'about_updated' => 'About updated',
 );
