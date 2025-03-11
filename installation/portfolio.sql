@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2025 at 01:16 PM
+-- Generation Time: Mar 11, 2025 at 01:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -95,7 +95,8 @@ CREATE TABLE `data_settings` (
 --
 
 INSERT INTO `data_settings` (`id`, `key`, `value`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51');
+(1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51'),
+(111, 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', 'admin_landing_page', '2025-03-11 06:18:33', '2025-03-11 06:18:33');
 
 -- --------------------------------------------------------
 
@@ -195,6 +196,83 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `service_id` bigint(20) NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `image` varchar(191) NOT NULL DEFAULT 'def.png',
+  `description` varchar(255) NOT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `priority` int(11) NOT NULL DEFAULT 0,
+  `slug` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `service_id`, `name`, `image`, `description`, `link`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
+(71, 1, 'Cleaning', '2025-03-11-67cff746f0744.png', 'testing', 'www.testing.com', 1, '2025-01-13 06:08:33', '2025-03-11 03:38:26', 0, 'cleaning');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `image` varchar(191) NOT NULL DEFAULT 'def.png',
+  `description` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `priority` int(11) NOT NULL DEFAULT 0,
+  `slug` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
+(1, 'Website Development', '2025-03-11-67cfee8d01fda.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-11 05:58:22', 0, 'website-development');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_media`
+--
+
+CREATE TABLE `social_media` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `social_media`
+--
+
+INSERT INTO `social_media` (`id`, `name`, `link`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'facebook', 'https://www.facebook.com/janampandey12', 1, NULL, '2025-03-11 04:14:02'),
+(2, 'linkedin', 'https://np.linkedin.com/in/janam-pandey-6bb571199', 1, NULL, '2025-03-11 04:14:53'),
+(3, 'twitter', 'https://twitter.com/bhojmandu', 1, NULL, NULL),
+(4, 'instagram', 'https://www.instagram.com/bhojmandu_official', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `storages`
 --
 
@@ -227,7 +305,10 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (30, 'App\\Models\\DataSetting', '110', NULL, 'public', '2025-01-07 06:07:10', '2025-01-07 06:07:10'),
 (32, 'App\\Models\\Admin', '1', 'image', 'public', '2025-02-11 11:10:59', '2025-02-11 11:10:59'),
 (33, 'App\\Models\\Admin', '5', 'image', 'public', '2025-01-10 05:38:10', '2025-01-10 05:38:10'),
-(42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53');
+(42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53'),
+(43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-11 02:19:29', '2025-03-11 02:19:29'),
+(44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
+(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-11 06:18:33', '2025-03-11 06:18:33');
 
 -- --------------------------------------------------------
 
@@ -257,7 +338,7 @@ INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`)
 (22, 'footer_text', 'All Right Reserved', NULL, NULL),
 (23, 'customer_verification', '1', NULL, NULL),
 (37, 'timezone', 'Asia/Katmandu', NULL, NULL),
-(44, 'country', 'AF', NULL, NULL),
+(44, 'country', 'NP', NULL, NULL),
 (78, 'recaptcha', '{\"status\":\"1\",\"site_key\":\"6Lf8pr0qAAAAABgqOAwm5wLrXmBdr__BFJS2Y6Zu\",\"secret_key\":\"6Lf8pr0qAAAAAEYX6SgutPJ-B3W0L9UnoHIqN3j1\"}', '2025-01-20 16:49:04', '2025-01-20 16:49:04'),
 (79, 'language', '[\"en\"]', NULL, '2025-01-05 06:06:19'),
 (82, 'icon', '2025-03-10-67ce8be99ab6d.png', NULL, NULL),
@@ -307,7 +388,10 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (158, 'App\\Models\\EmailTemplate', 28, 'en', 'button_name', '', NULL, NULL),
 (159, 'App\\Models\\EmailTemplate', 28, 'en', 'footer_text', 'Please contact us for any queries; we’re always happy to help.', NULL, NULL),
 (160, 'App\\Models\\EmailTemplate', 28, 'en', 'copyright_text', '© 2024 Knockdoor. All rights reserved.', NULL, NULL),
-(3921, 'App\\Models\\AdminRole', 5, 'en', 'name', 'Staff', NULL, NULL);
+(3921, 'App\\Models\\AdminRole', 5, 'en', 'name', 'Staff', NULL, NULL),
+(3928, 'App\\Models\\Service', 1, 'en', 'name', 'Website Development', NULL, NULL),
+(3929, 'App\\Models\\Project', 71, 'en', 'name', 'Cleaning', NULL, NULL),
+(3930, 'App\\Models\\DataSetting', 111, 'en', 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -358,6 +442,24 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `social_media`
+--
+ALTER TABLE `social_media`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `storages`
 --
 ALTER TABLE `storages`
@@ -399,7 +501,7 @@ ALTER TABLE `admin_roles`
 -- AUTO_INCREMENT for table `data_settings`
 --
 ALTER TABLE `data_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
@@ -420,22 +522,40 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
 
 --
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `social_media`
+--
+ALTER TABLE `social_media`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
 --
 ALTER TABLE `system_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3928;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3931;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
