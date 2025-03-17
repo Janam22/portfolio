@@ -7097,4 +7097,6 @@
   'Blog_Lists' => 'Blog Lists',
   'Ex:_Search_by_title' => 'Ex: Search by title',
   'author_name' => 'Author name',
+  'author name' => 'Author name',
+  'Blog image' => 'Blog image',
 );
