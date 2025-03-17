@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2025 at 01:16 PM
+-- Generation Time: Mar 17, 2025 at 01:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -78,6 +78,24 @@ INSERT INTO `admin_roles` (`id`, `name`, `modules`, `status`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint(20) NOT NULL,
+  `author_name` varchar(255) NOT NULL,
+  `blog_image` varchar(255) NOT NULL,
+  `blog_title` varchar(255) NOT NULL,
+  `blog_details` varchar(500) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `slug` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data_settings`
 --
 
@@ -96,7 +114,8 @@ CREATE TABLE `data_settings` (
 
 INSERT INTO `data_settings` (`id`, `key`, `value`, `type`, `created_at`, `updated_at`) VALUES
 (1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51'),
-(111, 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', 'admin_landing_page', '2025-03-11 06:18:33', '2025-03-11 06:18:33');
+(111, 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', 'admin_landing_page', '2025-03-11 06:18:33', '2025-03-11 06:18:33'),
+(112, 'about_image', '2025-03-17-67d7ff4373fb0.png', 'admin_landing_page', '2025-03-17 05:05:03', '2025-03-17 05:05:03');
 
 -- --------------------------------------------------------
 
@@ -218,7 +237,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `service_id`, `name`, `image`, `description`, `link`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
-(71, 1, 'Cleaning', '2025-03-11-67cff746f0744.png', 'testing', 'www.testing.com', 1, '2025-01-13 06:08:33', '2025-03-11 03:38:26', 0, 'cleaning');
+(71, 1, 'Cleaning', '2025-03-11-67cff746f0744.png', 'testing', 'www.testing.com', 1, '2025-01-13 06:08:33', '2025-03-15 23:28:05', 0, 'cleaning');
 
 -- --------------------------------------------------------
 
@@ -308,7 +327,8 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53'),
 (43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-11 02:19:29', '2025-03-11 02:19:29'),
 (44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
-(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-11 06:18:33', '2025-03-11 06:18:33');
+(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-17 05:08:55', '2025-03-17 05:08:55'),
+(46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03');
 
 -- --------------------------------------------------------
 
@@ -411,6 +431,12 @@ ALTER TABLE `admin_roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `data_settings`
 --
 ALTER TABLE `data_settings`
@@ -498,10 +524,16 @@ ALTER TABLE `admin_roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `data_settings`
 --
 ALTER TABLE `data_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
@@ -543,7 +575,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `system_settings`

@@ -549,12 +549,12 @@ class SystemSettingsController extends Controller
 
     public function remove_image(Request $request){
 
-        $request->validate([
-            'model_name' => 'required',
-            'id' => 'required',
-            'image_path' => 'required',
-            'field_name' => 'required',
-        ]);
+    $request->validate([
+        'model_name' => 'required',
+        'id' => 'required',
+        'image_path' => 'required',
+        'field_name' => 'required',
+    ]);
     try {
 
         $model_name = $request->model_name;
@@ -588,13 +588,31 @@ class SystemSettingsController extends Controller
 
     public function about()
     {
-        $about =DataSetting::withoutGlobalScope('translate')->where('type', 'admin_landing_page')->where('key', 'about')->first();
-        return view('admin-views.system-settings.about', compact('about'));
+        $about = DataSetting::withoutGlobalScope('translate')->where('type', 'admin_landing_page')->where('key', 'about')->first();
+        $about_image = DataSetting::where('type', 'admin_landing_page')->where('key', 'about_image')->first();
+        return view('admin-views.system-settings.about', compact('about', 'about_image'));
     }
 
     public function about_update(Request $request)
-    {
-        $this->update_data($request , 'about');
+    {        
+        $request->validate([
+            'about_image' => 'nullable|max:60000'
+        ]);
+
+        $old_image = DataSetting::withoutGlobalScope('translate')->where('type', 'admin_landing_page')->where('key', 'about_image')->first();
+        if($request->hasFile('about_image')){
+            if(!empty($old_image)){
+                Helpers::check_and_delete('about/', $old_image);
+            }
+            $image_name = Helpers::update(dir: 'about/', old_image: null, format: 'png', image: $request->file('about_image'));
+
+            DataSetting::query()->updateOrInsert(['key' => 'about_image'], [
+                'value' => $image_name
+            ]);
+        } else {
+            $image_name = $old_image;
+        }
+        $this->update_data($request, 'about');
         Toastr::success(translate('messages.about_updated'));
         return back();
     }

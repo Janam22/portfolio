@@ -137,14 +137,38 @@
                         </li>
                         
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') ? 'active' : '' }}">
-                            <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog*') ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
                                 title="{{ translate('messages.blog') }}">
-                                <i class="tio-edit nav-icon"></i>
+                                <i class="tio-email nav-icon"></i>
                                 <span
-                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Blogs') }}</span>
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.Blog') }}
+                                </span>
                             </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{ Request::is('admin/blog*') ? 'block' : 'none' }}">
+                                <li
+                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blog-new') ? 'active' : '' }}">
+                                    <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                        href="{{ route('admin.blog.new') }}"
+                                        title="{{ translate('messages.blog') }}">
+                                        <i class="tio-incognito nav-icon"></i>
+                                        <span
+                                            class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('add_new_blog') }}</span>
+                                    </a>
+                                </li>
+                                
+                                <li
+                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') ? 'active' : '' }}">
+                                    <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                        href="{{ route('admin.blog.list') }}"
+                                        title="{{ translate('messages.blog') }}">
+                                        <i class="tio-incognito nav-icon"></i>
+                                        <span
+                                            class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('blog_lists') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <!-- External Management -->

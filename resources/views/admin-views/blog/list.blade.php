@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', translate('Travel_Order_Request_list'))
+@section('title', translate('Blog_list'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,7 +14,7 @@
                 <div class="col-sm">
                     <h1 class="page-header-title">
                         <span class="page-header-icon"><i class="tio-group-equal"></i></span>
-                        {{ translate('messages.Travel_Order_Request_logs') }}
+                        {{ translate('messages.Blog_lists') }}
                     </h1>
                 </div>
             </div>
@@ -28,11 +28,11 @@
                 <form>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label class="form-label">{{ translate('Travel_Order_Request_Date') }}</label>
+                            <label class="form-label">{{ translate('Blog Date') }}</label>
                             <div class="position-relative">
                                 <span class="tio-calendar icon-absolute-on-right"></span>
-                                <input type="text" readonly name="travel_order_request_date"
-                                    value="{{ request()->get('travel_order_request_date') ?? null }}"
+                                <input type="text" readonly name="blog_date"
+                                    value="{{ request()->get('blog_date') ?? null }}"
                                     class="date-range-picker form-control">
                             </div>
                         </div>
@@ -58,8 +58,8 @@
             <!-- Header -->
             <div class="card-header gap-2 flex-wrap pt-3 border-0">
                 <h3 class="m-0">
-                    {{ translate('messages.Travel_Order_Request_logs') }} <span class="badge badge-soft-dark ml-2"
-                        id="count">{{ $travel_order_request_logs->total() }}</span>
+                    {{ translate('messages.Blog_Lists') }} <span class="badge badge-soft-dark ml-2"
+                        id="count">{{ $blog_lists->total() }}</span>
                 </h3>
                 <div class="search--button-wrapper justify-content-end">
                     <form>
@@ -67,7 +67,7 @@
                         <div class="input--group input-group input-group-merge input-group-flush">
                             <input id="datatableSearch_" type="search" name="search" class="form-control"
                                 value="{{ request()?->search ?? null }}"
-                                placeholder="{{ translate('Ex:_Search_by_name') }}" aria-label="Search" required>
+                                placeholder="{{ translate('Ex:_Search_by_title') }}" aria-label="Search" required>
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -91,14 +91,14 @@
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
                                 <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
                                 <a id="export-excel" class="dropdown-item"
-                                    href="{{ route('admin.travel-order-request.export', ['type' => 'excel', request()->getQueryString()]) }}">
+                                    href="{{ route('admin.blog.export', ['type' => 'excel', request()->getQueryString()]) }}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{ dynamicAsset('public/assets/admin') }}/svg/components/excel.svg"
                                         alt="Image Description">
                                     {{ translate('messages.excel') }}
                                 </a>
                                 <a id="export-csv" class="dropdown-item"
-                                    href="{{ route('admin.travel-order-request.export', ['type' => 'csv', request()->getQueryString()]) }}">
+                                    href="{{ route('admin.blog.export', ['type' => 'csv', request()->getQueryString()]) }}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{ dynamicAsset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
@@ -138,12 +138,11 @@
                             <th class="border-0">
                                 {{ translate('sl') }}
                             </th>
-                            <th class="table-column-pl-0 border-0">{{ translate('messages.staff_name') }}</th>
-                            <th class="border-0">{{ translate('messages.start_date') }}</th>
-                            <th class="border-0">{{ translate('messages.end_date') }}</th>
-                            <th class="border-0">{{ translate('messages.travel_place') }}</th>
-                            <th class="border-0">{{ translate('messages.travel_mode') }}</th>
+                            <th class="table-column-pl-0 border-0">{{ translate('messages.author_name') }}</th>
+                            <th class="border-0">{{ translate('messages.title') }}</th>
+                            <th class="border-0">{{ translate('messages.image') }}</th>
                             <th class="border-0">{{ translate('messages.status') }}</th>
+                            <th class="border-0">{{ translate('messages.created_date') }}</th>
                             <th class="border-0">{{ translate('messages.action') }}</th>
                         </tr>
                     </thead>
@@ -151,70 +150,66 @@
                         $count = 0;
                     @endphp
                     <tbody id="set-rows">
-                        @foreach ($travel_order_request_logs as $key => $travel_order_request_log)
+                        @foreach ($blog_lists as $key => $blog_list)
                             <tr class="">
                                 <td class="">
-                                    {{ (request()->get('show_limit') ? $count++ : $key) + $travel_order_request_logs->firstItem() }}
+                                    {{ (request()->get('show_limit') ? $count++ : $key) + $blog_lists->firstItem() }}
                                 </td>
                                 <td class="table-column-pl-0">
                                     <div class="d-flex align-items-center gap-2">
                                         <span class="text-body text-hover-primary">
-                                            {{  $travel_order_request_log->employee->f_name?  $travel_order_request_log->employee->f_name . ' ' . $travel_order_request_log->employee->l_name : translate('Staff_not_found') }}
+                                            {{  $blog_list->author_name?  $blog_list->author_name : translate('Author_not_found') }}
                                         </span>
                                     </div>
                                 </td>
                                 <td>
-                                    <label class="badge">
-                                        {{ \App\CentralLogics\Helpers::date_format($travel_order_request_log->from_date) }}
+                                    {{ $blog_list->blog_title }}
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <img class="avatar border"
+
+                                        src="{{ $blog_list['image_full_url'] }}"
+
+
+                                    alt="{{Str::limit($blog_list['blog_title'], 20,'...')}}">
+                                    </div>
+                                </td>                            
+                                <td>
+                                    <label class="toggle-switch toggle-switch-sm ml-2" for="stocksCheckbox{{$blog_list->id}}">
+                                    <input type="checkbox" data-url="{{route('admin.blog.status',[$blog_list['id'],$blog_list->status?0:1])}}" class="toggle-switch-input redirect-url" id="stocksCheckbox{{$blog_list->id}}" {{$blog_list->status?'checked':''}}>
+                                        <span class="toggle-switch-label">
+                                            <span class="toggle-switch-indicator"></span>
+                                        </span>
                                     </label>
                                 </td>
+
                                 <td>
                                     <label class="badge">
-                                    {{ \App\CentralLogics\Helpers::date_format($travel_order_request_log->to_date) }}
+                                    {{ \App\CentralLogics\Helpers::date_format($blog_list->created_at) }}
                                     </label>
-                                </td>                
+                                </td>  
                                 <td>
-                                    {{ $travel_order_request_log->travel_place }}
-                                </td>            
-                                <td style="white-space: normal; word-wrap: break-word; max-width: 200px;">
-                                    {{ $travel_order_request_log->travel_mode }}
-                                </td>     
-                                <td class="
-                                    @if($travel_order_request_log->travel_order_status == 'pending') text-secondary
-                                    @elseif($travel_order_request_log->travel_order_status == 'approved') text-success
-                                    @elseif($travel_order_request_log->travel_order_status == 'rejected') text-danger
-                                    @endif
-                                ">
-                                    {{ ucfirst($travel_order_request_log->travel_order_status) }}
-                                </td>
-                                <td>
-                                @if(($travel_order_request_log->travel_order_status == 'pending') || ($travel_order_request_log->travel_order_status == 'rejected'))
-                                    <!-- Approve Button -->
-                                    <form action="{{ route('admin.travel-order-request.status', ['id' => $travel_order_request_log->id, 'travel_order_status' => 'approved']) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-success">
-                                            Approve
-                                        </button>
+                                    <div class="btn--container">
+                                        <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
+                                            href="{{route('admin.blog.edit',[$blog_list['id']])}}" title="{{translate('messages.edit_blog')}}"><i class="tio-edit"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn--danger btn-outline-danger action-btn form-alert" href="javascript:"
+                                        data-id="category-{{$blog_list['id']}}" data-message="{{ translate('Want_to_delete_this_blog_?') }}" title="{{translate('messages.delete_blog')}}"><i class="tio-delete-outlined"></i>
+                                        </a>
+                                    </div>
+
+                                    <form action="{{route('admin.blog.delete',[$blog_list['id']])}}" method="post" id="service-{{$blog_list['id']}}">
+                                        @csrf @method('delete')
                                     </form>
-                                @endif
-                                @if(($travel_order_request_log->travel_order_status == 'pending') || ($travel_order_request_log->travel_order_status == 'approved'))
-                                    <!-- Reject Button -->
-                                    <form action="{{ route('admin.travel-order-request.status', ['id' => $travel_order_request_log->id, 'travel_order_status' => 'rejected']) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-danger">
-                                            Reject
-                                        </button>
-                                    </form>
-                                @endif
                                 </td>
+   
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            @if($travel_order_request_logs->total() === 0)
+            @if($blog_lists->total() === 0)
                 <div class="empty--data">
                     <img src="{{ dynamicAsset('/public/assets/admin/img/empty.png') }}" alt="public">
                     <h5>
@@ -226,7 +221,7 @@
             <div class="page-area px-4 pb-3">
                 <div class="d-flex align-items-center justify-content-end">
                     <div>
-                        {!! $travel_order_request_logs->withQueryString()->links() !!}
+                        {!! $blog_lists->withQueryString()->links() !!}
                     </div>
                 </div>
             </div>
