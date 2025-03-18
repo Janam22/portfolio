@@ -195,7 +195,7 @@
                                             href="{{route('admin.blog.edit',[$blog_list['id']])}}" title="{{translate('messages.edit_blog')}}"><i class="tio-edit"></i>
                                         </a>
                                         <a class="btn btn-sm btn--danger btn-outline-danger action-btn form-alert" href="javascript:"
-                                        data-id="category-{{$blog_list['id']}}" data-message="{{ translate('Want_to_delete_this_blog_?') }}" title="{{translate('messages.delete_blog')}}"><i class="tio-delete-outlined"></i>
+                                        data-id="service-{{$blog_list['id']}}" data-message="{{ translate('messages.Want_to_delete_this_blog_?') }}" title="{{translate('messages.delete_blog')}}"><i class="tio-delete-outlined"></i>
                                         </a>
                                     </div>
 

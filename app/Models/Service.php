@@ -31,6 +31,7 @@ class Service extends Model
 
         return Helpers::get_full_url('service',$value,'public');
     }
+
     public function storage()
     {
         return $this->morphMany(Storage::class, 'data');
@@ -47,7 +48,7 @@ class Service extends Model
     }
 
     public function getNameAttribute($value){
-        if (count($this->translations) > 0) {
+        if (count($this->translations) > 0) {   
             foreach ($this->translations as $translation) {
                 if ($translation['key'] == 'name') {
                     return $translation['value'];

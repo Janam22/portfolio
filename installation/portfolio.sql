@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2025 at 01:11 PM
+-- Generation Time: Mar 18, 2025 at 01:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,12 +86,19 @@ CREATE TABLE `blogs` (
   `author_name` varchar(255) NOT NULL,
   `blog_image` varchar(255) NOT NULL,
   `blog_title` varchar(255) NOT NULL,
-  `blog_details` varchar(500) NOT NULL,
+  `blog_details` varchar(1000) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `slug` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `author_name`, `blog_image`, `blog_title`, `blog_details`, `status`, `slug`, `created_at`, `updated_at`) VALUES
+(6, 'Janam Pandey', '2025-03-18-67d95e8729684.png', 'Latest Tech in Nepal', '<p>Testing Blog</p>', 1, 'latest-tech-in-nepal', '2025-03-18 06:07:39', '2025-03-18 06:07:39');
 
 -- --------------------------------------------------------
 
@@ -411,7 +418,8 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (3921, 'App\\Models\\AdminRole', 5, 'en', 'name', 'Staff', NULL, NULL),
 (3928, 'App\\Models\\Service', 1, 'en', 'name', 'Website Development', NULL, NULL),
 (3929, 'App\\Models\\Project', 71, 'en', 'name', 'Cleaning', NULL, NULL),
-(3930, 'App\\Models\\DataSetting', 111, 'en', 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', NULL, NULL);
+(3930, 'App\\Models\\DataSetting', 111, 'en', 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', NULL, NULL),
+(3936, 'App\\Models\\Blog', 6, 'en', 'author_name', 'Janam Pandey', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -527,7 +535,7 @@ ALTER TABLE `admin_roles`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `data_settings`
@@ -587,7 +595,7 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3931;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3937;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

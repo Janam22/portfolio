@@ -184,6 +184,7 @@ class Helpers
     }
 
     public static function get_full_url($path,$data,$type,$placeholder = null){
+        
         $place_holders = [
             'default' => dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'),
             'admin' => dynamicAsset('public/assets/admin/img/160x160/img1.jpg'),

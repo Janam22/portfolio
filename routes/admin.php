@@ -76,7 +76,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('blog-store', 'BlogController@store')->name('store');  
             Route::get('edit/{id}', 'BlogController@edit')->name('edit');
             Route::post('update/{id}', 'BlogController@update')->name('update');
-            Route::post('status/{id}/{blog_status}', 'BlogController@status')->name('status');
+            Route::get('status/{id}/{status}', 'BlogController@status')->name('status');
             Route::delete('delete/{id}', 'BlogController@delete')->name('delete');
             Route::get('export', 'BlogController@export')->name('export');
         });

@@ -20,7 +20,7 @@
 
         <div class="card resturant--cate-form">
             <div class="card-body">
-                <form action="{{route('admin.blog.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.blog.update',[$blog['id']])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @php($language=\App\Models\SystemSetting::where('key','language')->first())
                     @php($language = $language->value ?? null)
@@ -41,7 +41,7 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             @if ($language)
                             <div class="lang_form" id="default-form">
 
@@ -54,18 +54,28 @@
                                         </span>
                                     </label>
                                     <input type="text" name="author_name[]"
-                                        class="form-control"
+                                        class="form-control" value="{{$blog?->getRawOriginal('author_name')}}"
                                         placeholder="{{ translate('messages.author_name') }}">
                                 </div>
-                                <input type="hidden" name="lang[]" value="default">
                                 <div class="form-group mb-0">
                                     <label class="input-label"
-                                        for="exampleFormControlInput1">{{ translate('messages.title') }}
+                                        for="exampleFormControlInput1">{{ translate('messages.blog_title') }}
                                         ({{ translate('Default') }}) <span class="form-label-secondary text-danger"
                                         data-toggle="tooltip" data-placement="right"
                                         data-original-title="{{ translate('messages.Required.')}}"> *
                                         </span></label>
-                                    <textarea type="text" name="blog_title[]" class="form-control ckeditor min-height-154px"></textarea>
+                                    <input type="text" name="blog_title[]" value="{{$blog?->getRawOriginal('blog_title')}}" class="form-control" placeholder="{{ translate('messages.blog_title')}}">
+                                </div>
+                                <input type="hidden" name="lang[]" value="default">
+                                <br>
+                                <div class="form-group lang-form" id="default-form">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">{{ translate('messages.blog_details') }}
+                                        ({{ translate('Default') }}) <span class="form-label-secondary text-danger"
+                                        data-toggle="tooltip" data-placement="right"
+                                        data-original-title="{{ translate('messages.Required.')}}"> *
+                                        </span></label>
+                                    <textarea name="blog_details[]" class="ckeditor form-control">{{$blog?->getRawOriginal('blog_details')}}</textarea>
                                 </div>
                             </div>
                                 @foreach(json_decode($language) as $lang)
@@ -73,7 +83,7 @@
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
-                                                for="{{ $lang }}_name">{{ translate('messages.author name') }}
+                                                for="{{ $lang }}_name">{{ translate('messages.author_name') }}
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="author_name[]"
@@ -81,12 +91,23 @@
                                                 placeholder="{{ translate('messages.author_name') }}"
                                                  >
                                         </div>
-                                        <input type="hidden" name="lang[]" value="{{ $lang }}">
                                         <div class="form-group mb-0">
                                             <label class="input-label"
-                                                for="exampleFormControlInput1">{{ translate('messages.title') }}
+                                                for="exampleFormControlInput1">{{ translate('messages.blog_title') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <textarea type="text" name="blog_title[]" class="form-control ckeditor min-height-154px"></textarea>
+                                            <input type="text" name="blog_title[]" class="form-control" placeholder="{{ translate('messages.blog_title')}}">
+                                        </div>
+                                        <input type="hidden" name="lang[]" value="{{ $lang }}">
+                                        
+                                        <br>
+                                        <div class="form-group lang-form" id="default-form">
+                                            <label class="input-label"
+                                                for="exampleFormControlInput1">{{ translate('messages.blog_details') }}
+                                                ({{ translate('Default') }}) <span class="form-label-secondary text-danger"
+                                                data-toggle="tooltip" data-placement="right"
+                                                data-original-title="{{ translate('messages.Required.')}}"> *
+                                                </span></label>
+                                            <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
                                         </div>
                                     </div>
                                 @endforeach
@@ -95,30 +116,37 @@
                             <div class="card-body">
                                 <div id="default-form">
                                     <div class="form-group">
-                                        <label class="input-label"
-                                            for="exampleFormControlInput1">{{ translate('messages.author_name') }}
-                                            ({{ translate('Default') }})</label>
-                                        <input type="text" name="author_name[]" class="form-control"
-                                            placeholder="{{ translate('messages.author_name') }}" >
+                                        <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.author_name') }} ({{ translate('Default') }})</label>
+                                        <input type="text" name="author_name[]" class="form-control" placeholder="{{ translate('messages.author_name') }}" >
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.blog_title') }}</label>
+                                        <input type="text" name="blog_title[]" class="form-control" placeholder="{{ translate('messages.blog_title')}}">
                                     </div>
                                     <input type="hidden" name="lang[]" value="default">
-                                    <div class="form-group mb-0">
+                                    
+                                    <br>
+                                    <div class="form-group lang-form" id="default-form">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ translate('messages.title') }}</label>
-                                        <textarea type="text" name="blog_title[]" class="form-control ckeditor min-height-154px"></textarea>
+                                            for="exampleFormControlInput1">{{ translate('messages.blog_details') }}
+                                            ({{ translate('Default') }}) <span class="form-label-secondary text-danger"
+                                            data-toggle="tooltip" data-placement="right"
+                                            data-original-title="{{ translate('messages.Required.')}}"> *
+                                            </span></label>
+                                        <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
                                     </div>
                                 </div>
                             </div>
                             @endif
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="d-flex flex-column align-items-center gap-3">
                                 <p class="mb-0">{{ translate('Blog image') }}</p>
 
                                 <div class="image-box">
                                     <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
                                         <img class="upload-icon initial-10"
-                                        src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                        src="{{$blog['image_full_url'] }}" alt="Upload Icon">
                                         <span class="upload-text">{{ translate('Upload Image')}}</span>
                                         <img src="#" alt="Preview Image" class="preview-image">
                                     </label>
@@ -152,6 +180,7 @@
 @endsection
 
 @push('script_2')
+    <script src="{{dynamicAsset('public/assets/admin/ckeditor/ckeditor.js')}}"></script>
     <script>
         "use strict";
         function readURL(input) {

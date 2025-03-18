@@ -145,8 +145,7 @@
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.Blog') }}
                                 </span>
                             </a>
-                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{ Request::is('admin/blog*') ? 'block' : 'none' }}">
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                 <li
                                     class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blog-new') ? 'active' : '' }}">
                                     <a class="js-navbar-vertical-aside-menu-link nav-link"
@@ -159,7 +158,7 @@
                                 </li>
                                 
                                 <li
-                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') ? 'active' : '' }}">
+                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') || Request::is('admin/blog/edit/') ? 'active' : '' }}">
                                     <a class="js-navbar-vertical-aside-menu-link nav-link"
                                         href="{{ route('admin.blog.list') }}"
                                         title="{{ translate('messages.blog') }}">
@@ -228,10 +227,7 @@
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.email_template') }}
                                 </span>
                             </a>
-                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{ Request::is('admin/system-settings/email-setup*') ? 'block' : 'none' }}">
-
-
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                 <li
                                     class="navbar-vertical-aside-has-menu {{ Request::is('admin/system-settings/email-setup/admin*') ? 'active' : '' }}">
                                     <a class="nav-link " href="{{ route('admin.system-settings.email-setup', ['admin','forgot-password']) }}"
@@ -259,8 +255,7 @@
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.3rd_Party_&_Configurations') }}</span>
                             </a>
-                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{ Request::is('admin/system-settings/mail-config') || Request::is('admin/system-settings/storage-connection') || Request::is('admin/system-settings/recaptcha*') ? 'block' : 'none' }}  ">
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
 
                                 <li
                                     class="nav-item {{ Request::is('admin/system-settings/mail-config') || Request::is('admin/system-settings/storage-connection') || Request::is('admin/system-settings/recaptcha*') ? 'active' : '' }}">

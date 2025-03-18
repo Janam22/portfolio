@@ -2,141 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Str;
-use App\CentralLogics\Helpers;
 use App\Models\Translation;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\CentralLogics\Helpers;
+use App\Exports\BlogExport;
+use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class BlogController extends Controller
 {
-    public function new()
-    {
-        return view('admin-views.blog.new');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'author_name' => 'required',
-            'blog_image' => 'nullable|max:60000',
-            'blog_title' => 'required',
-            'blog_details' => 'required',
-        ]);
-
-        $blog = new Blog();
-        $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
-        $blog->author_name = $request->author_name[array_search('default', $request->lang)];
-        $blog->blog_image = $request->has('blog_image') ? Helpers::upload(dir:'blog/',format: 'png',image: $request->file('blog_image')) : 'def.png';
-        $blog->blog_title = $request->blog_title;
-        $blog->blog_details = $request->blog_details;
-        $blog->slug = $slug;
-        $blog->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
-
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->blog_title[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'blog_title',
-                            'value' => $blog->blog_title,
-                        ));
-                    }
-                }else{
-                    if ($request->blog_title[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'blog_title',
-                            'value' => $request->blog_title[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
-
-        Toastr::success(translate('messages.blog_added_successfully'));
-        return redirect()->route('admin.blog.blogs');
-    }
-
-    public function edit($id)
-    {
-        $blog = Blog::withoutGlobalScope('translate')->findOrFail($id);
-        return view('admin-views.blog.edit', compact('blog'));
-    }
-
-    public function update(Request $request)
-    {
-        $request->validate([
-            'author_name' => 'required',
-            'blog_image' => 'nullable|max:60000',
-            'blog_title' => 'required',
-            'blog_details' => 'required',
-        ]);
-
-        $blog = new Blog();
-        $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
-        $blog->author_name = $request->author_name[array_search('default', $request->lang)];
-        $blog->blog_image = $request->has('blog_image') ? Helpers::update(dir:'blog/', old_image:$blog->blog_image,format: 'png', image:$request->file('blog_image')) : $blog->blog_image;
-        $blog->blog_title = $request->blog_title;
-        $blog->blog_details = $request->blog_details;
-        $blog->slug = $slug;
-        $blog->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
-
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->blog_title[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'blog_title',
-                            'value' => $blog->blog_title,
-                        ));
-                    }
-                }else{
-                    if ($request->blog_title[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'blog_title',
-                            'value' => $request->blog_title[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
-
-        Toastr::success(translate('messages.blog_added_successfully'));
-        return redirect()->route('admin.blog.blogs');
-    }
-
     public function list(Request $request)
     {        
         $show_limit = $request->show_limit ?? null;
-        $blog_lists = $this->getBlogListData($request);
+        $blog_lists = $this->getBlogData($request);
     
         $perPage = $show_limit && $show_limit > 0 ? $show_limit : config('default_pagination');
     
@@ -146,7 +28,7 @@ class BlogController extends Controller
         return view('admin-views.blog.list', compact('blog_lists'));
     }
     
-    private function getBlogListData($request)
+    private function getBlogData($request)
     {
         $key = [];
         if ($request->search) {
@@ -175,13 +57,132 @@ class BlogController extends Controller
         return $blog_lists;
     }
 
+    public function new()
+    {
+        return view('admin-views.blog.new');
+    }
+
+    function store(Request $request)
+    {
+        $request->validate([
+            'author_name' => 'required|max:100',
+            'blog_title' => 'required|max:200',
+            'blog_image' => 'nullable|max:60000',
+            'blog_details' => 'nullable'
+        ]);
+
+        $blog = new Blog();
+        $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
+        $blog->author_name = $request->author_name[array_search('default', $request->lang)];
+        $blog->blog_title = $request->blog_title[array_search('default', $request->lang)];
+        $blog->blog_image = $request->has('blog_image') ? Helpers::upload(dir:'blog/',format: 'png',image: $request->file('blog_image')) : 'def.png';
+        $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
+        $blog->slug = $slug;
+        $blog->save();
+        $data = [];
+        $default_lang = str_replace('_', '-', app()->getLocale());
+
+        foreach($request->lang as $index=>$key)
+        {
+                if($default_lang == $key && !($request->author_name[$index])){
+                    if ($key != 'default') {
+                        array_push($data, array(
+                            'translationable_type' => 'App\Models\Blog',
+                            'translationable_id' => $blog->id,
+                            'locale' => $key,
+                            'key' => 'author_name',
+                            'value' => $blog->author_name,
+                        ));
+                    }
+                }else{
+                    if ($request->author_name[$index] && $key != 'default') {
+                        array_push($data, array(
+                            'translationable_type' => 'App\Models\Blog',
+                            'translationable_id' => $blog->id,
+                            'locale' => $key,
+                            'key' => 'author_name',
+                            'value' => $request->author_name[$index],
+                        ));
+                    }
+                }
+        }
+        if(count($data))
+        {
+            Translation::insert($data);
+        }
+
+        Toastr::success(translate('messages.blog_added_successfully'));
+
+        return back();
+    }
+
+    public function edit($id)
+    {
+        $blog = Blog::withoutGlobalScope('translate')->findOrFail($id);
+        return view('admin-views.blog.edit', compact('blog'));
+    }
+
     public function status(Request $request)
     {
         $blog = Blog::find($request->id);
         $blog->status = $request->status;
         $blog->save();
+        Toastr::success(translate('messages.blog_status_updated'));
+        return back();
+    }
 
-        Toastr::success(translate('messages.blog_status_updated_successfully'));
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'author_name' => 'required|max:100',
+            'blog_title' => 'required|max:200',
+            'blog_image' => 'nullable|max:60000',
+            'blog_details' => 'required',
+        ]);
+
+        $blog = Blog::find($id);
+        $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
+        $blog->slug = $blog->slug? $blog->slug :"{$slug}{$blog->id}";
+        $blog->author_name = $request->author_name[array_search('default', $request->lang)];
+        $blog->blog_title = $request->blog_title[array_search('default', $request->lang)];
+        $blog->blog_image = $request->has('blog_image') ? Helpers::update(dir:'blog/', old_image:$blog->blog_image,format: 'png', image:$request->file('blog_image')) : $blog->blog_image;
+        $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
+        $blog->save();
+        $default_lang = str_replace('_', '-', app()->getLocale());
+
+        foreach($request->lang as $index=>$key)
+        {
+
+            if($default_lang == $key && !($request->author_name[$index])){
+                if (isset($blog->author_name) && $key != 'default') {
+                    Translation::updateOrInsert(
+                        [
+                            'translationable_type' => 'App\Models\Blog',
+                            'translationable_id' => $blog->id,
+                            'locale' => $key,
+                            'key' => 'author_name'
+                        ],
+                        ['value' => $blog->author_name]
+                    );
+                }
+
+            }else{
+
+                if ($request->author_name[$index] && $key != 'default') {
+                    Translation::updateOrInsert(
+                        [
+                            'translationable_type' => 'App\Models\Blog',
+                            'translationable_id' => $blog->id,
+                            'locale' => $key,
+                            'key' => 'author_name'
+                        ],
+                        ['value' => $request->author_name[$index]]
+                    );
+                }
+            }
+        }
+        Toastr::success(translate('messages.blog_updated_successfully'));
+
         return back();
     }
 
@@ -194,29 +195,29 @@ class BlogController extends Controller
         return back();
     }
 
-    public function export(Request $request)
-    {
-        $show_limit =  $request->show_limit ?? null;
-        $blogs = $this->getBlogListData($request);
-        if (isset($show_limit) && $show_limit > 0) {
-            $blogs = $blogs->take($show_limit)->get();
-        } else {
-            $blogs = $blogs->get();
-        }
-
-        $data = [
-            'blogs' => $blogs,
-            'filter' => $request->filter ?? null,
-            'show_limit' => $request->show_limit ?? null,
-            'blog_date' => $request?->blog_date,
-            'search' => $request->search ?? null,
-        ];
-
-        if ($request->type == 'excel') {
-            return Excel::download(new BlogListExport($data), 'Blogs.xlsx');
-        } else if ($request->type == 'csv') {
-            return Excel::download(new BlogListExport($data), 'Blogs.csv');
-        }
+    public function export(Request $request){
+        try{
+                $key = explode(' ', $request['search']);
+                $blogs = Blog::when(isset($key) , function ($q) use($key){
+                    $q->where(function ($q) use ($key) {
+                        foreach ($key as $value) {
+                            $q->orWhere('blog_title', 'like', "%{$value}%");
+                        }
+                    });
+                })
+                ->orderBy('id','desc')->get();
+                $data=[
+                    'blogs' =>$blogs,
+                    'search' =>$request['search'] ?? null,
+                ];
+                if($request->type == 'csv'){
+                    return Excel::download(new BlogExport($data), 'Blogs.csv');
+                }
+                return Excel::download(new BlogExport($data), 'Blogs.xlsx');
+            } catch(\Exception $e) {
+                Toastr::error("line___{$e->getLine()}",$e->getMessage());
+                info(["line___{$e->getLine()}",$e->getMessage()]);
+                return back();
+            }
     }
-
 }
