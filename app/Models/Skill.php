@@ -70,10 +70,6 @@ class Skill extends Model
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($category) {
-            $category->slug = $category->generateSlug($category->name);
-            $category->save();
-        });
         static::saved(function ($model) {
             if($model->isDirty('image')){
                 $value = Helpers::getDisk();
@@ -90,6 +86,7 @@ class Skill extends Model
             }
         });
     }
+    
     private function generateSlug($name)
     {
         $slug = Str::slug($name);

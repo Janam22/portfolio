@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\BusinessSetting;
+use App\Models\SystemSetting;
 use Illuminate\Support\Facades\App;
 
 class Localization
@@ -23,7 +23,7 @@ class Localization
 
 
         try {
-            $language = BusinessSetting::where('key', 'system_language')->first();
+            $language = SystemSetting::where('key', 'system_language')->first();
             if($language){
                 foreach (json_decode($language->value, true) as $key => $data) {
                     if ($data['default'] == true) {

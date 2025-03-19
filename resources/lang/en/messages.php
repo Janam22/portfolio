@@ -7189,4 +7189,8 @@
   'resume_details_Update' => 'Resume details Update',
   'resumedetail_updated_successfully' => 'Resumedetail updated successfully',
   'resumedetail removed!' => 'Resumedetail removed!',
+  'submission successful' => 'Submission successful',
+  'Want_to_delete_this_inquiry_?' => 'Want to delete this inquiry ?',
+  'delete_inquiry' => 'Delete inquiry',
+  'inquiry removed!' => 'Inquiry removed!',
 );
