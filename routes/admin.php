@@ -52,6 +52,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             
             Route::get('social-media/fetch', 'SocialMediaController@fetch')->name('social-media.fetch');
             Route::get('social-media/status-update', 'SocialMediaController@social_media_status_update')->name('social-media.status-update');
+            Route::post('social-media/destroy/{id}', 'SocialMediaController@destroy')->name('social-media.destroy');
             Route::resource('social-media', 'SocialMediaController');
             
             Route::get('pages/about', 'SystemSettingsController@about')->name('about');
@@ -96,6 +97,15 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('export-inquiries', 'InquiryController@export_inquirires')->name('export-inquiries');
         });
         
+        Route::group(['prefix' => 'resumedetails', 'as' => 'resumedetail.'], function () {
+            Route::get('add', 'ResumedetailController@index')->name('add');
+            Route::post('store', 'ResumedetailController@store')->name('store');
+            Route::get('edit/{id}', 'ResumedetailController@edit')->name('edit');
+            Route::post('update/{id}', 'ResumedetailController@update')->name('update');
+            Route::get('status/{id}/{status}', 'ResumedetailController@status')->name('status');
+            Route::delete('delete/{id}', 'ResumedetailController@delete')->name('delete');
+        });
+
         Route::group(['prefix' => 'services', 'as' => 'service.'], function () {
             Route::get('add', 'ServiceController@index')->name('add');
             Route::post('store', 'ServiceController@store')->name('store');

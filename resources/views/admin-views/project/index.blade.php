@@ -21,9 +21,6 @@
                         </span>
                     </h2>
                 </div>
-                @if(isset($category))
-                <a href="{{route('admin.project.add')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{translate('messages.Add_New_Project')}}</a>
-                @endif
             </div>
         </div>
         <!-- End Page Header -->

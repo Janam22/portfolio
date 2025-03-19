@@ -21,9 +21,6 @@
                         </span>
                     </h2>
                 </div>
-                @if(isset($testimonial))
-                <a href="{{route('admin.testimonial.add')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{translate('messages.Add_New_Testimonial')}}</a>
-                @endif
             </div>
         </div>
         <!-- End Page Header -->

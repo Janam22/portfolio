@@ -21,9 +21,6 @@
                         </span>
                     </h2>
                 </div>
-                @if(isset($service))
-                <a href="{{route('admin.skill.add')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{translate('messages.Add_New_skill')}}</a>
-                @endif
             </div>
         </div>
         <!-- End Page Header -->

@@ -138,9 +138,9 @@
                                 </label>
                                 <form action="{{route('admin.system-settings.social-media.status-update')}}" method="get" id="${data[count].id}_form">
                                     <input type="hidden" name="id" value="${data[count].id}">
-                                            </form>
+                                </form>
                             </td>`;
-                            html += '<td> <div class="btn--container justify-content-center"><a type="button" class="btn btn-outline-primary btn--primary action-btn edit" id="' + data[count].id + '"><i class="tio-edit"></i></a></div> </td></tr>';
+                            html += '<td> <div class="btn--container justify-content-center"><a type="button" class="btn btn-outline-primary btn--primary action-btn edit" id="' + data[count].id + '"><i class="tio-edit"></i></a><a type="button" class="btn btn-outline-danger btn--danger action-btn delete" id="' + data[count].id + '"><i class="tio-delete-outlined"></i></a></div> </td></tr>';
                         }
                         $('tbody').html(html);
                     }

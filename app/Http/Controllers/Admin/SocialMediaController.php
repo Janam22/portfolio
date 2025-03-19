@@ -55,6 +55,13 @@ class SocialMediaController extends Controller
         $social_media->save();
         return response()->json();
     }
+    
+    public function destroy(Request $request, $socialMedia)
+    {
+        $social_media = SocialMedia::find($socialMedia);
+        $social_media->delete();
+        return response()->json();
+    }
 
     public function fetch(Request $request)
     {

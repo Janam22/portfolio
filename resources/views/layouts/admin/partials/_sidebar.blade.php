@@ -93,9 +93,9 @@
                         </li>
 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/resumedetails/add') || Request::is('admin/resumedetails/edit/*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.resumedetail.add') }}"
                                 title="{{ translate('messages.resume') }}">
                                 <i class="tio-file-outlined nav-icon"></i>
                                 <span
