@@ -10,7 +10,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::post('settings', 'SystemController@settings_update');
         Route::post('settings-password', 'SystemController@settings_password_update')->name('settings-password');
 
-        //dashboard
         Route::get('/', 'DashboardController@dashboard')->name('dashboard');
         Route::get('landing-page', 'SystemController@landing_page')->name('landing-page');
 
@@ -81,6 +80,22 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('export', 'BlogController@export')->name('export');
         });
         
+        Route::group(['prefix' => 'skills', 'as' => 'skill.'], function () {
+            Route::get('add', 'SkillController@index')->name('add');
+            Route::post('store', 'SkillController@store')->name('store');
+            Route::get('edit/{id}', 'SkillController@edit')->name('edit');
+            Route::post('update/{id}', 'SkillController@update')->name('update');
+            Route::get('status/{id}/{status}', 'SkillController@status')->name('status');
+            Route::delete('delete/{id}', 'SkillController@delete')->name('delete');
+            Route::get('export-skills', 'SkillController@export_skills')->name('export-skills');
+        });
+        
+        Route::group(['prefix' => 'inquiries', 'as' => 'inquiry.'], function () {
+            Route::get('lists', 'InquiryController@list')->name('list');
+            Route::delete('delete/{id}', 'InquiryController@delete')->name('delete');
+            Route::get('export-inquiries', 'InquiryController@export_inquirires')->name('export-inquiries');
+        });
+        
         Route::group(['prefix' => 'services', 'as' => 'service.'], function () {
             Route::get('add', 'ServiceController@index')->name('add');
             Route::post('store', 'ServiceController@store')->name('store');
@@ -90,6 +105,16 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('status/{id}/{status}', 'ServiceController@status')->name('status');
             Route::delete('delete/{id}', 'ServiceController@delete')->name('delete');
             Route::get('export-services', 'ServiceController@export_services')->name('export-services');
+        });
+        
+        Route::group(['prefix' => 'testimonials', 'as' => 'testimonial.'], function () {
+            Route::get('add', 'TestimonialController@index')->name('add');
+            Route::post('store', 'TestimonialController@store')->name('store');
+            Route::get('edit/{id}', 'TestimonialController@edit')->name('edit');
+            Route::post('update/{id}', 'TestimonialController@update')->name('update');
+            Route::get('status/{id}/{status}', 'TestimonialController@status')->name('status');
+            Route::delete('delete/{id}', 'TestimonialController@delete')->name('delete');
+            Route::get('export-testimonials', 'TestimonialController@export_testimonials')->name('export-testimonials');
         });
 
         Route::group(['prefix' => 'system-settings', 'as' => 'language.'], function () {

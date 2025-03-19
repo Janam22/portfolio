@@ -390,6 +390,7 @@
                             </div>
                         </div>
                     </div>
+
                     <h4 class="card-title mb-3 pt-2">
                         <span class="card-header-icon mr-2">
                             <i class="tio-settings-outlined"></i>
@@ -529,6 +530,41 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <h4 class="card-title mb-3 pt-2">
+                        <span class="card-header-icon mr-2">
+                            <i class="tio-settings-outlined"></i>
+                        </span>
+                        <span>{{ translate('Count_Settings') }}</span>
+                    </h4>
+
+                    <div class="card mb-3">
+                        <div class="card-body pb-0">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3">
+                                    @php($client_count = \App\Models\SystemSetting::where('key', 'client_count')->first())
+                                    <div class="form-group">
+                                        <label class="input-label">{{ translate('client_count') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('showing_my_total_clients') }}" data-toggle="tooltip" alt=""> </label>
+                                        <input type="text" name="client_count" class="form-control" value="{{ $client_count->value ?? '' }}" placeholder="{{ translate('messages.client_count') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    @php($project_count = \App\Models\SystemSetting::where('key', 'project_count')->first())
+                                    <div class="form-group">
+                                        <label class="input-label">{{ translate('project_count') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('showing_my_total_projects') }}" data-toggle="tooltip" alt=""> </label>
+                                        <input type="text" name="project_count" class="form-control" value="{{ $project_count->value ?? '' }}" placeholder="{{ translate('messages.project_count') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    @php($service_count = \App\Models\SystemSetting::where('key', 'service_count')->first())
+                                    <div class="form-group">
+                                        <label class="input-label">{{ translate('service_count') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('showing_my_total_services') }}" data-toggle="tooltip" alt=""> </label>
+                                        <input type="text" name="service_count" class="form-control" value="{{ $service_count->value ?? '' }}" placeholder="{{ translate('messages.service_count') }}" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="btn--container justify-content-end">
                                 <button type="reset" id="reset_btn" class="btn btn--reset location-reload">{{ translate('messages.Reset') }} </button>
                                 <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}"
@@ -536,7 +572,6 @@
                             </div>
                         </div>
                     </div>
-
 
                 </form>
 

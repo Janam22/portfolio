@@ -106,6 +106,18 @@ class SystemSettingsController extends Controller
         SystemSetting::query()->updateOrInsert(['key' => 'timeformat'], [
             'value' => $request['time_format']
         ]);
+        
+        SystemSetting::query()->updateOrInsert(['key' => 'client_count'], [
+            'value' => $request['client_count']
+        ]);
+        
+        SystemSetting::query()->updateOrInsert(['key' => 'project_count'], [
+            'value' => $request['project_count']
+        ]);
+        
+        SystemSetting::query()->updateOrInsert(['key' => 'service_count'], [
+            'value' => $request['service_count']
+        ]);
 
         Toastr::success( translate('Successfully updated. To see the changes in app restart the app.'));
         return back();

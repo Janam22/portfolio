@@ -82,9 +82,9 @@
                         </li>
                         
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/my-timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/skills/add') || Request::is('admin/skills/edit/*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.skill.add') }}"
                                 title="{{ translate('messages.skills') }}">
                                 <i class="tio-brain nav-icon"></i>
                                 <span
@@ -140,7 +140,7 @@
                             class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
                                 title="{{ translate('messages.blog') }}">
-                                <i class="tio-email nav-icon"></i>
+                                <i class="tio-pen nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.Blog') }}
                                 </span>
@@ -151,18 +151,18 @@
                                     <a class="js-navbar-vertical-aside-menu-link nav-link"
                                         href="{{ route('admin.blog.new') }}"
                                         title="{{ translate('messages.blog') }}">
-                                        <i class="tio-incognito nav-icon"></i>
+                                        <i class="tio-new-release nav-icon"></i>
                                         <span
                                             class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('add_new_blog') }}</span>
                                     </a>
                                 </li>
                                 
                                 <li
-                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') || Request::is('admin/blog/edit/') ? 'active' : '' }}">
+                                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/blog/blogs') || Request::is('admin/blog/edit/*') ? 'active' : '' }}">
                                     <a class="js-navbar-vertical-aside-menu-link nav-link"
                                         href="{{ route('admin.blog.list') }}"
                                         title="{{ translate('messages.blog') }}">
-                                        <i class="tio-incognito nav-icon"></i>
+                                        <i class="tio-filter-list nav-icon"></i>
                                         <span
                                             class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('blog_lists') }}</span>
                                     </a>
@@ -178,20 +178,20 @@
                         </li>
 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/add-timesheet') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/inquiries/list') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.inquiry.list') }}"
                                 title="{{ translate('messages.users') }}">
                                 <i class="tio-send nav-icon"></i>
                                 <span
-                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Service_Requests') }}</span>
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('Inquiries') }}</span>
                             </a>
                         </li>
 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/timesheet/timesheets') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/testimonails/add') || Request::is('admin/testimonials/edit/*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href=""
+                                href="{{ route('admin.testimonial.add') }}"
                                 title="{{ translate('messages.testimonials') }}">
                                 <i class="tio-quotes nav-icon"></i>
                                 <span
