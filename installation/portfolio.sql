@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 11:52 AM
+-- Generation Time: Mar 19, 2025 at 01:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -189,6 +189,13 @@ CREATE TABLE `inquiries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inquiries`
+--
+
+INSERT INTO `inquiries` (`id`, `name`, `subject`, `email`, `contact`, `message`, `created_at`, `updated_at`) VALUES
+(4, 'Janam Pandey', 'Website', 'janampandey2@gmail.com', '9813074888', 'I want website for my business.', '2025-03-19 05:50:44', '2025-03-19 05:50:44');
 
 -- --------------------------------------------------------
 
@@ -677,7 +684,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
