@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 01:08 PM
+-- Generation Time: Mar 19, 2025 at 11:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -176,6 +176,23 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inquiries`
+--
+
+CREATE TABLE `inquiries` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -249,6 +266,31 @@ INSERT INTO `projects` (`id`, `service_id`, `name`, `image`, `description`, `lin
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resume_details`
+--
+
+CREATE TABLE `resume_details` (
+  `id` bigint(20) NOT NULL,
+  `resume_type` varchar(255) NOT NULL COMMENT 'ed - Education\r\nex - Experience',
+  `title` varchar(255) NOT NULL COMMENT 'Degree Name / Designation',
+  `date_range` varchar(255) NOT NULL,
+  `name_address` varchar(255) NOT NULL COMMENT 'Name (College, Company) / Address',
+  `details` varchar(500) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resume_details`
+--
+
+INSERT INTO `resume_details` (`id`, `resume_type`, `title`, `date_range`, `name_address`, `details`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'ed', 'SEE', '2016-2017', 'Munal Academy, Gajuri Dhading', '<p>I completed with 3.75 GPA.</p>', 1, '2025-03-19 04:48:36', '2025-03-19 04:48:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -274,6 +316,29 @@ INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `rate` bigint(20) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `name`, `image`, `rate`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'PHP-Laravel', '2025-03-19-67da58d0777a5.png', 80, 1, '2025-03-18 23:55:32', '2025-03-19 00:02:18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `social_media`
 --
 
@@ -293,8 +358,7 @@ CREATE TABLE `social_media` (
 INSERT INTO `social_media` (`id`, `name`, `link`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'facebook', 'https://www.facebook.com/janampandey12', 1, NULL, '2025-03-11 04:14:02'),
 (2, 'linkedin', 'https://np.linkedin.com/in/janam-pandey-6bb571199', 1, NULL, '2025-03-11 04:14:53'),
-(3, 'twitter', 'https://twitter.com/bhojmandu', 1, NULL, NULL),
-(4, 'instagram', 'https://www.instagram.com/bhojmandu_official', 1, NULL, NULL);
+(6, 'github', 'https://github.com/Janam22', 1, NULL, '2025-03-19 03:06:49');
 
 -- --------------------------------------------------------
 
@@ -381,7 +445,34 @@ INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`)
 (212, 'digit_after_decimal_point', NULL, NULL, NULL),
 (213, 'push_notification_service_file_content', '{\n  \"type\": \"service_account\",\n  \"project_id\": \"janam-70bc3\",\n  \"private_key_id\": \"5de4441ad35cf390430265858abfc34e3f907f58\",\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDHi2jjnQgy6bJH\\nOxEGNqVkneF3PztB+Vqan33M1cYMZ4cRZzYpoVwfxjQuk7jLZu8dxCGE2iSr4SoM\\nirFceh/ky48fmBZeJWhywXYIcU4WOknQ17gmyyBn1+QtytoQk3Q33gLAlR7dZAQa\\nzMmN3QRJg+DpkwXPuzDDPe1RVCnY0HqSmiGfudKt+vkmCkBN5sv/Gq19p1CHuoNr\\ngBQwBq1WFDVNMGBfCUeXJ6UR0l3idmxocL1Zg0NKC4qdDfElBqDhLAf2k3RYwZOu\\n7QUaRkh2VSbvof8FyD49Aya68zPMU+5Ta5ZizLlFgTiOFOEtPOQyZZvV2pg2q2ky\\nufA4DPzfAgMBAAECggEAN92D5BWWsgpTazXSMlciPuUktmnxgSr6fsegRLSk2dwy\\nKGEo/Ma8L/khqtiYp/mNgFvktnkMQ0KqrxA1T5qxSzDiRQojWQBIGbin/v0Zy4dO\\nGzYJzHKaA/ihXWCpZHKj2vBA/QHCvmC99XLYCuuRw7M0SLBstBfIMyEnS9mwTY6x\\nJhBZqV+qUpYiXusRWV/ufjIvLSZavRtiH895+KPciyojjxGEGeS6nsAtIpI1+Ei9\\nZ5AIa3GUCgADF6NXWDR8/cBk0C9fHV+RmBVSYJSLbJolvXvBpDl4TVpw8Ts7t4so\\npawnGPRTpuafg1NApDYuNz8thGxwgvlYF54wbWFLQQKBgQD8/yxQMw3o21WzP2ID\\na6qGM1n5Tcob8r3OoG1L1N51BzEsORBi037JLh0vOrHXGAb3BuGmMxNH2MseUWQ+\\nsyFQqkUBZlcV63TKP2Uw8eg3Njf3+GztSz/tUUUqDrpz08MbxBDCcZw2los2HhhT\\nE5tCcLO46q2xHNHI3hbdhfo3aQKBgQDJ6c1Bvuq0KHmPf+QePOidjiERgqokEdwu\\nBgrG50UrNNeOcopR4c+/KDTgn0U97I2gzAYwYi6UiOoR426NgU029QcGVQTZB+ln\\nYe2Xdz3ruu39zWKCvnOacF0uPIsq+cDfReXW8MBEsH3twrbLDVBWumuOJiOgECtK\\nCPuWPtuRBwKBgAGkAfyPKDLvYTHlYlRVWWi/YoD8YSgnPdXeMndAbSTjJA1+XT3W\\n00aotuW8grS7Yigt8j6qrCBWJpMOwhCqBrhIMmRc7omk2kAJgzV7DB93iYthIAu1\\n5jc6xLEOIWVo5SYD8nvgUrwD4+k47r1zLhmTM4cqdm/kmPOthQZwvPupAoGAJWYs\\nAbCGMqaIlZ7ftwYbJAvObjrgntu8B75QwrTVqAIapyTqH+6Ol16wJKb7oVOujAke\\nYFnfPN37VSLmOEmp7rMGARNAWZ7Qibim1HZevsoaCPfA9mymZwXHDKhkMqqeIf0F\\nbIGda1uxh5eYWhX2Ooo/H85KrPwxuH3fc93it4MCgYBBAVX4vgschHb+Ydj8rOFX\\nzYnVywjtFzStfO5NnGcCW2LSoZi9P85feU96+NLj+6viIJpVcEASMflfzgHG0CXP\\n9ukfy6pJBkj2p+0iH6hrWQ8PDtcLVWwtM8KpLzjldKVzK/NgKQCKlJHA9zsd7KWZ\\noduMgbyopSNHJFCZFD42Mg==\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\": \"firebase-adminsdk-fbsvc@janam-70bc3.iam.gserviceaccount.com\",\n  \"client_id\": \"105140497374677914505\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40janam-70bc3.iam.gserviceaccount.com\",\n  \"universe_domain\": \"googleapis.com\"\n}', NULL, NULL),
 (214, 'fcm_project_id', 'janam-70bc3', NULL, NULL),
-(215, 'fcm_credentials', '{\"apiKey\":\"AIzaSyCEFDZRDS95ct94KIX5ylmDoa8NEY3ZQEI\",\"authDomain\":\"janam-70bc3.firebaseapp.com\",\"projectId\":\"janam-70bc3\",\"storageBucket\":\"janam-70bc3.firebasestorage.app\",\"messagingSenderId\":\"430545914406\",\"appId\":\"1:430545914406:web:e0fd2298ba372136a4f4e7\",\"measurementId\":\"G-ZWHHS5BBCC\"}', NULL, NULL);
+(215, 'fcm_credentials', '{\"apiKey\":\"AIzaSyCEFDZRDS95ct94KIX5ylmDoa8NEY3ZQEI\",\"authDomain\":\"janam-70bc3.firebaseapp.com\",\"projectId\":\"janam-70bc3\",\"storageBucket\":\"janam-70bc3.firebasestorage.app\",\"messagingSenderId\":\"430545914406\",\"appId\":\"1:430545914406:web:e0fd2298ba372136a4f4e7\",\"measurementId\":\"G-ZWHHS5BBCC\"}', NULL, NULL),
+(217, 'client_count', '10', NULL, NULL),
+(218, 'project_count', '20', NULL, NULL),
+(219, 'service_count', '5', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `designation` varchar(255) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `name`, `image`, `designation`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'Janam Pandey', '2025-03-19-67da73f91198a.png', 'Developer, Global Tech', 'Very good.', 1, '2025-03-19 01:51:25', '2025-03-19 01:57:58');
 
 -- --------------------------------------------------------
 
@@ -419,7 +510,10 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (3928, 'App\\Models\\Service', 1, 'en', 'name', 'Website Development', NULL, NULL),
 (3929, 'App\\Models\\Project', 71, 'en', 'name', 'Cleaning', NULL, NULL),
 (3930, 'App\\Models\\DataSetting', 111, 'en', 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', NULL, NULL),
-(3936, 'App\\Models\\Blog', 6, 'en', 'author_name', 'Janam Pandey', NULL, NULL);
+(3936, 'App\\Models\\Blog', 6, 'en', 'author_name', 'Janam Pandey', NULL, NULL),
+(3937, 'App\\Models\\Skill', 1, 'en', 'name', 'PHP-Laravel', NULL, NULL),
+(3938, 'App\\Models\\Testimonial', 3, 'en', 'name', 'Janam Pandey', NULL, NULL),
+(3941, 'App\\Models\\ResumeDetail', 1, 'en', 'title', 'SEE', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -464,6 +558,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `inquiries`
+--
+ALTER TABLE `inquiries`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -482,9 +582,21 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `resume_details`
+--
+ALTER TABLE `resume_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -505,6 +617,12 @@ ALTER TABLE `storages`
 -- Indexes for table `system_settings`
 --
 ALTER TABLE `system_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -556,6 +674,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `inquiries`
+--
+ALTER TABLE `inquiries`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -568,16 +692,28 @@ ALTER TABLE `projects`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
+-- AUTO_INCREMENT for table `resume_details`
+--
+ALTER TABLE `resume_details`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `social_media`
 --
 ALTER TABLE `social_media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `storages`
@@ -589,13 +725,19 @@ ALTER TABLE `storages`
 -- AUTO_INCREMENT for table `system_settings`
 --
 ALTER TABLE `system_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3937;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3943;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
