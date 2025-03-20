@@ -47,5 +47,9 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization']], function
     Route::group(['prefix' => 'testimonials'], function () {
         Route::get('list', 'TestimonialController@get_testimonials');
     });
+    
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('get-settings-data', 'SettingController@get_settings_data');
+    });
 
 });

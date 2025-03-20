@@ -178,7 +178,7 @@
                         </li>
 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/inquiries/list') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/inquiries/lists') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href="{{ route('admin.inquiry.list') }}"
                                 title="{{ translate('messages.users') }}">
@@ -189,7 +189,7 @@
                         </li>
 
                         <li
-                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/testimonails/add') || Request::is('admin/testimonials/edit/*') ? 'active' : '' }}">
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/testimonials/add') || Request::is('admin/testimonials/edit/*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href="{{ route('admin.testimonial.add') }}"
                                 title="{{ translate('messages.testimonials') }}">
