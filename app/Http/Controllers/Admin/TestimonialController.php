@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Testimonial;
-use App\Models\Translation;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use App\Exports\TestimonialExport;
@@ -48,38 +47,10 @@ class TestimonialController extends Controller
         $testimonial->message = $request->message[array_search('default', $request->lang)];
         $testimonial->image = $request->has('image') ? Helpers::upload(dir:'testimonial/',format: 'png',image: $request->file('image')) : 'def.png';
         $testimonial->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->name[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Testimonial',
-                            'translationable_id' => $testimonial->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $testimonial->name,
-                        ));
-                    }
-                }else{
-                    if ($request->name[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Testimonial',
-                            'translationable_id' => $testimonial->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $request->name[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'designation' , name_field:'designation' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->designation);
+        Helpers::add_or_update_translations(request: $request, key_data:'message' , name_field:'message' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->message);
 
         Toastr::success(translate('messages.testimonial_added_successfully'));
 
@@ -121,39 +92,11 @@ class TestimonialController extends Controller
         $testimonial->message = $request->message[array_search('default', $request->lang)];
         $testimonial->image = $request->has('image') ? Helpers::update(dir:'testimonial/', old_image:$testimonial->image,format: 'png', image:$request->file('image')) : $testimonial->image;
         $testimonial->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'designation' , name_field:'designation' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->designation);
+        Helpers::add_or_update_translations(request: $request, key_data:'message' , name_field:'message' , model_name: 'Testimonial' ,data_id: $testimonial->id,data_value: $testimonial->message);
 
-            if($default_lang == $key && !($request->name[$index])){
-                if (isset($testimonial->name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Testimonial',
-                            'translationable_id' => $testimonial->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $testimonial->name]
-                    );
-                }
-
-            }else{
-
-                if ($request->name[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Testimonial',
-                            'translationable_id' => $testimonial->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $request->name[$index]]
-                    );
-                }
-            }
-        }
         Toastr::success(translate('messages.testimonial_updated_successfully'));
 
         return back();

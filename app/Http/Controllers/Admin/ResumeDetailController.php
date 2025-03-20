@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\ResumeDetail;
-use App\Models\Translation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use App\CentralLogics\Helpers;
 
 class ResumeDetailController extends Controller
 {
@@ -42,38 +42,11 @@ class ResumeDetailController extends Controller
         $resumedetail->name_address = $request->name_address[array_search('default', $request->lang)];
         $resumedetail->details = $request->details[array_search('default', $request->lang)];
         $resumedetail->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->title[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\ResumeDetail',
-                            'translationable_id' => $resumedetail->id,
-                            'locale' => $key,
-                            'key' => 'title',
-                            'value' => $resumedetail->title,
-                        ));
-                    }
-                }else{
-                    if ($request->title[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\ResumeDetail',
-                            'translationable_id' => $resumedetail->id,
-                            'locale' => $key,
-                            'key' => 'title',
-                            'value' => $request->title[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'title' , name_field:'title' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->title);
+        Helpers::add_or_update_translations(request: $request, key_data:'date_range' , name_field:'date_range' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->date_range);
+        Helpers::add_or_update_translations(request: $request, key_data:'name_address' , name_field:'name_address' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->name_address);
+        Helpers::add_or_update_translations(request: $request, key_data:'details' , name_field:'details' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->details);
 
         Toastr::success(translate('messages.resumedetail_added_successfully'));
 
@@ -112,39 +85,12 @@ class ResumeDetailController extends Controller
         $resumedetail->name_address = $request->name_address[array_search('default', $request->lang)];
         $resumedetail->details = $request->details[array_search('default', $request->lang)];
         $resumedetail->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
+        Helpers::add_or_update_translations(request: $request, key_data:'title' , name_field:'title' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->title);
+        Helpers::add_or_update_translations(request: $request, key_data:'date_range' , name_field:'date_range' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->date_range);
+        Helpers::add_or_update_translations(request: $request, key_data:'name_address' , name_field:'name_address' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->name_address);
+        Helpers::add_or_update_translations(request: $request, key_data:'details' , name_field:'details' , model_name: 'ResumeDetail' ,data_id: $resumedetail->id,data_value: $resumedetail->details);
 
-            if($default_lang == $key && !($request->title[$index])){
-                if (isset($resumedetail->name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\ResumeDetail',
-                            'translationable_id' => $resumedetail->id,
-                            'locale' => $key,
-                            'key' => 'title'
-                        ],
-                        ['value' => $resumedetail->title]
-                    );
-                }
-
-            }else{
-
-                if ($request->title[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\ResumeDetail',
-                            'translationable_id' => $resumedetail->id,
-                            'locale' => $key,
-                            'key' => 'title'
-                        ],
-                        ['value' => $request->title[$index]]
-                    );
-                }
-            }
-        }
         Toastr::success(translate('messages.resumedetail_updated_successfully'));
 
         return back();

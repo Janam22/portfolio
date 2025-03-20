@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Service;
-use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
@@ -47,38 +46,9 @@ class ServiceController extends Controller
         $service->description = $request->description[array_search('default', $request->lang)];
         $service->image = $request->has('image') ? Helpers::upload(dir:'service/',format: 'png',image: $request->file('image')) : 'def.png';
         $service->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->name[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Service',
-                            'translationable_id' => $service->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $service->name,
-                        ));
-                    }
-                }else{
-                    if ($request->name[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Service',
-                            'translationable_id' => $service->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $request->name[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Service' ,data_id: $service->id,data_value: $service->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Service' ,data_id: $service->id,data_value: $service->description);
 
         Toastr::success(translate('messages.service_added_successfully'));
 
@@ -118,39 +88,10 @@ class ServiceController extends Controller
         $service->description = $request->description[array_search('default', $request->lang)];
         $service->image = $request->has('image') ? Helpers::update(dir:'service/', old_image:$service->image,format: 'png', image:$request->file('image')) : $service->image;
         $service->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
+        
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Service' ,data_id: $service->id,data_value: $service->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Service' ,data_id: $service->id,data_value: $service->description);
 
-        foreach($request->lang as $index=>$key)
-        {
-
-            if($default_lang == $key && !($request->name[$index])){
-                if (isset($service->name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Service',
-                            'translationable_id' => $service->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $service->name]
-                    );
-                }
-
-            }else{
-
-                if ($request->name[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Service',
-                            'translationable_id' => $service->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $request->name[$index]]
-                    );
-                }
-            }
-        }
         Toastr::success(translate('messages.service_updated_successfully'));
 
         return back();

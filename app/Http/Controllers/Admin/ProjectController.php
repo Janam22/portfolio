@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
@@ -39,7 +38,6 @@ class ProjectController extends Controller
             'description' => 'required|max:200',
             'image' => 'nullable|max:60000',
             'name.0' => 'required',
-
         ], [
             'name.required' => translate('messages.Name is required!'),
             'name.0.required'=>translate('default_name_is_required'),
@@ -52,38 +50,9 @@ class ProjectController extends Controller
         $project->image = $request->has('image') ? Helpers::upload(dir:'project/',format: 'png',image: $request->file('image')) : 'def.png';
         $project->link = $request->link;
         $project->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->name[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Project',
-                            'translationable_id' => $project->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $project->name,
-                        ));
-                    }
-                }else{
-                    if ($request->name[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Project',
-                            'translationable_id' => $project->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $request->name[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Project' ,data_id: $project->id,data_value: $project->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Project' ,data_id: $project->id,data_value: $project->description);
 
         Toastr::success(translate('messages.project_added_successfully'));
 
@@ -127,39 +96,10 @@ class ProjectController extends Controller
         $project->image = $request->has('image') ? Helpers::update(dir:'project/', old_image:$project->image,format: 'png', image:$request->file('image')) : $project->image;
         $project->link = $request->link;
         $project->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Project' ,data_id: $project->id,data_value: $project->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Project' ,data_id: $project->id,data_value: $project->description);
 
-            if($default_lang == $key && !($request->name[$index])){
-                if (isset($project->name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Project',
-                            'translationable_id' => $project->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $project->name]
-                    );
-                }
-
-            }else{
-
-                if ($request->name[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Project',
-                            'translationable_id' => $project->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $request->name[$index]]
-                    );
-                }
-            }
-        }
         Toastr::success(translate('messages.project_updated_successfully'));
 
         return back();

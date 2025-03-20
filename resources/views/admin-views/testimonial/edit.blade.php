@@ -86,6 +86,23 @@
                             </div>
                                 @foreach(json_decode($language) as $lang)
                                 
+                                <?php
+                                        if (count($testimonial['translations'])) {
+                                            $translate = [];
+                                            foreach ($testimonial['translations'] as $t) {
+                                                if ($t->locale == $lang && $t->key == 'name') {
+                                                    $translate[$lang]['name'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'designation') {
+                                                    $translate[$lang]['designation'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'message') {
+                                                    $translate[$lang]['message'] = $t->value;
+                                                }
+                                            }
+                                        }
+                                ?>
+
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -93,7 +110,7 @@
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="name[]" id="{{ $lang }}_name"
-                                                class="form-control" value="{{$testimonial?->getRawOriginal('name')}}"
+                                                class="form-control" value="{{$translate[$lang]['name'] ?? null}}"
                                                 placeholder="{{ translate('messages.name') }}">
                                         </div>
                                         <input type="hidden" name="lang[]" value="{{ $lang }}">
@@ -101,14 +118,14 @@
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('designation') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <input type="text" name="designation[]" class="form-control" placeholder="{{ translate('designation') }}" value="{{$testimonial?->getRawOriginal('designation')}}">
+                                            <input type="text" name="designation[]" class="form-control" placeholder="{{ translate('designation') }}" value="{{ $translate[$lang]['designation'] ?? null}}">
                                         </div>
                                         <br>
                                         <div class="form-group mb-0">
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('messages.message') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <textarea type="text" name="message[]" class="form-control ckeditor min-height-154px">{!! $message?->getRawOriginal('message') ?? '' !!}</textarea>
+                                            <textarea type="text" name="message[]" class="form-control ckeditor min-height-154px">{!! $translate[$lang]['message'] ?? '' !!}</textarea>
                                         </div>
                                     </div>
                                 @endforeach

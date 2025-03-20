@@ -76,6 +76,19 @@
                             </div>
                                 @foreach(json_decode($language) as $lang)
                                 
+                                <?php
+                                        if (count($service['translations'])) {
+                                            $translate = [];
+                                            foreach ($service['translations'] as $t) {
+                                                if ($t->locale == $lang && $t->key == 'name') {
+                                                    $translate[$lang]['name'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'description') {
+                                                    $translate[$lang]['description'] = $t->value;
+                                                }
+                                            }
+                                        }
+                                ?>
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -83,16 +96,15 @@
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="name[]" id="{{ $lang }}_name"
-                                                class="form-control" value="{{$service?->getRawOriginal('name')}}"
-                                                placeholder="{{ translate('messages.new_service') }}"
-                                                 >
+                                                class="form-control" value="{{$translate[$lang]['name'] ?? null}}"
+                                                placeholder="{{ translate('messages.new_service') }}">
                                         </div>
                                         <input type="hidden" name="lang[]" value="{{ $lang }}">
                                         <div class="form-group mb-0">
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('messages.description') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px">{!! $service?->getRawOriginal('description') ?? '' !!}</textarea>
+                                            <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px">{!! $translate[$lang]['description'] ?? '' !!}</textarea>
                                         </div>
                                     </div>
                                 @endforeach

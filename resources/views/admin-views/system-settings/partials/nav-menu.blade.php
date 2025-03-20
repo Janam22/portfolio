@@ -5,6 +5,10 @@
             <li class="nav-item">
                 <a class="nav-link  {{ Request::is('admin/system-settings/system-setup') ?'active':'' }}" href="{{ route('admin.system-settings.system-setup') }}"   aria-disabled="true">{{translate('messages.system_settings')}}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('admin/system-settings/language*') ? 'active' : '' }}"
+                href="{{ route('admin.language.index') }}">{{translate('messages.Language')}}</a>
+            </li>
         </ul>
         <!-- End Nav -->
     </div>

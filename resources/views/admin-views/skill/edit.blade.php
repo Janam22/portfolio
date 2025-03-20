@@ -76,6 +76,20 @@
                             </div>
                                 @foreach(json_decode($language) as $lang)
                                 
+                                <?php
+                                        if (count($skill['translations'])) {
+                                            $translate = [];
+                                            foreach ($skill['translations'] as $t) {
+                                                if ($t->locale == $lang && $t->key == 'name') {
+                                                    $translate[$lang]['name'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'rate') {
+                                                    $translate[$lang]['rate'] = $t->value;
+                                                }
+                                            }
+                                        }
+                                ?>
+
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -83,7 +97,7 @@
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="name[]" id="{{ $lang }}_name"
-                                                class="form-control" value="{{$skill?->getRawOriginal('name')}}"
+                                                class="form-control" value="{{ $translate[$lang]['name'] ?? null}}"
                                                 placeholder="{{ translate('messages.new_skill') }}">
                                         </div>
                                         <input type="hidden" name="lang[]" value="{{ $lang }}">
@@ -91,7 +105,7 @@
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('messages.rate') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <input type="text" name="rate[]" class="form-control" placeholder="{{ translate('messages.rate_out_of_100') }}" value="{{ $skill?->getRawOriginal('rate') }}">
+                                            <input type="text" name="rate[]" class="form-control" placeholder="{{ translate('messages.rate_out_of_100') }}" value="{{ $translate[$lang]['rate'] ?? null }}">
                                         </div>
                                     </div>
                                 @endforeach

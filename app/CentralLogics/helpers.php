@@ -1,15 +1,12 @@
 <?php
 namespace App\CentralLogics;
 
-use App\Models\User;
-use App\Models\Log;
 use App\Models\DataSetting;
 use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\SystemSetting;
 use Illuminate\Support\Facades\DB;
-use App\Models\NotificationSetting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -262,7 +259,7 @@ class Helpers
     public static function get_settings($name)
     {
         $config = null;
-        $data = BusinessSetting::where(['key' => $name])->first();
+        $data = SystemSetting::where(['key' => $name])->first();
         if (isset($data)) {
             $config = json_decode($data['value'], true);
             if (is_null($config)) {
@@ -274,7 +271,7 @@ class Helpers
     public static function get_settings_storage($name)
     {
         $config = 'public';
-        $data = BusinessSetting::where(['key' => $name])->first();
+        $data = SystemSetting::where(['key' => $name])->first();
         if(isset($data) && count($data->storage)>0){
             $config = $data->storage[0]['value'];
         }
@@ -307,7 +304,7 @@ class Helpers
 
     public static function insert_business_settings_key($key, $value = null)
     {
-        $data =  BusinessSetting::where('key', $key)->first();
+        $data =  SystemSetting::where('key', $key)->first();
         if (!$data) {
             DB::table('business_settings')->updateOrInsert(['key' => $key], [
                 'value' => $value,
@@ -522,7 +519,7 @@ class Helpers
 
     public static function system_default_language()
     {
-        $languages = json_decode(\App\Models\BusinessSetting::where('key', 'system_language')->first()?->value);
+        $languages = json_decode(\App\Models\SystemSetting::where('key', 'system_language')->first()?->value);
         $lang = 'en';
 
         foreach ($languages as $key => $language) {
@@ -534,7 +531,7 @@ class Helpers
     }
     public static function system_default_direction()
     {
-        $languages = json_decode(\App\Models\BusinessSetting::where('key', 'system_language')->first()?->value);
+        $languages = json_decode(\App\Models\SystemSetting::where('key', 'system_language')->first()?->value);
         $lang = 'en';
 
         foreach ($languages as $key => $language) {
@@ -544,19 +541,6 @@ class Helpers
         }
         return $lang;
     }
-
-    public static function generate_referer_code() {
-        $ref_code = strtoupper(Str::random(10));
-        if (self::referer_code_exists($ref_code)) {
-            return self::generate_referer_code();
-        }
-        return $ref_code;
-    }
-
-    public static function referer_code_exists($ref_code) {
-        return User::where('ref_code', '=', $ref_code)->exists();
-    }
-
 
     public static function remove_invalid_charcaters($str)
     {
@@ -782,36 +766,16 @@ class Helpers
         $res = json_decode($res);
         return str_replace('_',' ',$res[0][0][0]);
     }
+
     public static function language_load()
     {
         if (\session()->has('language_settings')) {
             $language = \session('language_settings');
         } else {
-            $language = BusinessSetting::where('key', 'system_language')->first();
+            $language = SystemSetting::where('key', 'system_language')->first();
             \session()->put('language_settings', $language);
         }
         return $language;
-    }
-
-    public static function create_all_logs($object , $action_type, $model){
-        if ((auth('admin')->check())) {
-            if (auth('admin')->check()) {
-                $loable_type = 'App\Models\Admin';
-                $logable_id = auth('admin')->id();
-            }
-
-            $log = new Log();
-            $log->logable_type = $loable_type;
-            $log->logable_id = $logable_id;
-            $log->action_type = $action_type;
-            $log->model = $model;
-            $log->model_id = $object->id;
-            $log->ip_address = request()->ip();
-            $log->before_state = json_encode($object->getOriginal());
-            $log->after_state = json_encode($object->getDirty());
-            $log->save();
-        }
-        return true;
     }
 
     public static function landing_language_load()
@@ -819,7 +783,7 @@ class Helpers
         if (\session()->has('landing_language_settings')) {
             $language = \session('landing_language_settings');
         } else {
-            $language = BusinessSetting::where('key', 'system_language')->first();
+            $language = SystemSetting::where('key', 'system_language')->first();
             \session()->put('landing_language_settings', $language);
         }
         return $language;
@@ -846,7 +810,7 @@ class Helpers
 
     public static function get_mail_status($name)
     {
-        return BusinessSetting::where('key', $name)->first()?->value ?? 0;
+        return SystemSetting::where('key', $name)->first()?->value ?? 0;
     }
 
     public static function text_variable_data_format($value,$user_name=null)
@@ -887,7 +851,7 @@ class Helpers
 
         public static function get_business_data($name)
         {
-            $paymentmethod = BusinessSetting::where('key', $name)->first();
+            $paymentmethod = SystemSetting::where('key', $name)->first();
             return $paymentmethod?->value;
         }
 
@@ -935,17 +899,6 @@ class Helpers
             return $src;
         }
         return $error_src;
-    }
-
-    public static function notificationDataSetup(){
-        $data=self::getAdminNotificationSetupData();
-        $data = NotificationSetting::upsert($data,['key','type'],['title','mail_status','sms_status','sub_title']);
-        return true;
-    }
-
-    public static function getNotificationStatusData($user_type,$key){
-        $data= NotificationSetting::where('type',$user_type)->where('key',$key)->select(['mail_status','sms_status'])->first();
-        return $data ?? null ;
     }
 
     public static function updateStorageTable($dataType, $dataId, $image)

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Skill;
-use App\Models\Translation;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use App\Exports\SkillExport;
@@ -46,38 +44,9 @@ class SkillController extends Controller
         $skill->rate = $request->rate[array_search('default', $request->lang)];
         $skill->image = $request->has('image') ? Helpers::upload(dir:'skill/',format: 'png',image: $request->file('image')) : 'def.png';
         $skill->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->name[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Skill',
-                            'translationable_id' => $skill->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $skill->name,
-                        ));
-                    }
-                }else{
-                    if ($request->name[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Skill',
-                            'translationable_id' => $skill->id,
-                            'locale' => $key,
-                            'key' => 'name',
-                            'value' => $request->name[$index],
-                        ));
-                    }
-                }
-
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Skill' ,data_id: $skill->id,data_value: $skill->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'rate' , name_field:'rate' , model_name: 'Skill' ,data_id: $skill->id,data_value: $skill->rate);
 
         Toastr::success(translate('messages.skill_added_successfully'));
 
@@ -115,39 +84,10 @@ class SkillController extends Controller
         $skill->rate = $request->rate[array_search('default', $request->lang)];
         $skill->image = $request->has('image') ? Helpers::update(dir:'skill/', old_image:$skill->image,format: 'png', image:$request->file('image')) : $skill->image;
         $skill->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-
-            if($default_lang == $key && !($request->name[$index])){
-                if (isset($skill->name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Skill',
-                            'translationable_id' => $skill->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $skill->name]
-                    );
-                }
-
-            }else{
-
-                if ($request->name[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Skill',
-                            'translationable_id' => $skill->id,
-                            'locale' => $key,
-                            'key' => 'name'
-                        ],
-                        ['value' => $request->name[$index]]
-                    );
-                }
-            }
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Skill' ,data_id: $skill->id,data_value: $skill->name);
+        Helpers::add_or_update_translations(request: $request, key_data:'rate' , name_field:'rate' , model_name: 'Skill' ,data_id: $skill->id,data_value: $skill->rate);
+        
         Toastr::success(translate('messages.skill_updated_successfully'));
 
         return back();

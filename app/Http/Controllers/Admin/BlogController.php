@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
-use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
@@ -79,37 +78,10 @@ class BlogController extends Controller
         $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
         $blog->slug = $slug;
         $blog->save();
-        $data = [];
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
-                if($default_lang == $key && !($request->author_name[$index])){
-                    if ($key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'author_name',
-                            'value' => $blog->author_name,
-                        ));
-                    }
-                }else{
-                    if ($request->author_name[$index] && $key != 'default') {
-                        array_push($data, array(
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'author_name',
-                            'value' => $request->author_name[$index],
-                        ));
-                    }
-                }
-        }
-        if(count($data))
-        {
-            Translation::insert($data);
-        }
+        Helpers::add_or_update_translations(request: $request, key_data:'author_name' , name_field:'author_name' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->author_name);
+        Helpers::add_or_update_translations(request: $request, key_data:'blog_title' , name_field:'blog_title' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_title);
+        Helpers::add_or_update_translations(request: $request, key_data:'blog_details' , name_field:'blog_details' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_details);
 
         Toastr::success(translate('messages.blog_added_successfully'));
 
@@ -148,39 +120,11 @@ class BlogController extends Controller
         $blog->blog_image = $request->has('blog_image') ? Helpers::update(dir:'blog/', old_image:$blog->blog_image,format: 'png', image:$request->file('blog_image')) : $blog->blog_image;
         $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
         $blog->save();
-        $default_lang = str_replace('_', '-', app()->getLocale());
 
-        foreach($request->lang as $index=>$key)
-        {
+        Helpers::add_or_update_translations(request: $request, key_data:'author_name' , name_field:'author_name' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->author_name);
+        Helpers::add_or_update_translations(request: $request, key_data:'blog_title' , name_field:'blog_title' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_title);
+        Helpers::add_or_update_translations(request: $request, key_data:'blog_details' , name_field:'blog_details' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_details);
 
-            if($default_lang == $key && !($request->author_name[$index])){
-                if (isset($blog->author_name) && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'author_name'
-                        ],
-                        ['value' => $blog->author_name]
-                    );
-                }
-
-            }else{
-
-                if ($request->author_name[$index] && $key != 'default') {
-                    Translation::updateOrInsert(
-                        [
-                            'translationable_type' => 'App\Models\Blog',
-                            'translationable_id' => $blog->id,
-                            'locale' => $key,
-                            'key' => 'author_name'
-                        ],
-                        ['value' => $request->author_name[$index]]
-                    );
-                }
-            }
-        }
         Toastr::success(translate('messages.blog_updated_successfully'));
 
         return back();

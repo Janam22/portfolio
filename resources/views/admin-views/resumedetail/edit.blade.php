@@ -111,6 +111,26 @@
                             </div>
                                 @foreach(json_decode($language) as $lang)
                                 
+                                <?php
+                                        if (count($resumedetail['translations'])) {
+                                            $translate = [];
+                                            foreach ($resumedetail['translations'] as $t) {
+                                                if ($t->locale == $lang && $t->key == 'title') {
+                                                    $translate[$lang]['title'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'date_range') {
+                                                    $translate[$lang]['date_range'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'name_address') {
+                                                    $translate[$lang]['name_address'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'details') {
+                                                    $translate[$lang]['details'] = $t->value;
+                                                }
+                                            }
+                                        }
+                                ?>
+
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -118,14 +138,14 @@
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="title[]"
-                                                class="form-control" value="{{$resumedetail?->getRawOriginal('title')}}"
+                                                class="form-control" value="{{ $translate[$lang]['title'] ?? null }}"
                                                 placeholder="{{ translate('messages.SEE_/_Web_Developer') }}">
                                         </div>
                                         <div class="form-group mb-0">
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('messages.date_range') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <input type="text" name="date_range[]" class="form-control" value="{{$resumedetail?->getRawOriginal('date_range')}}" placeholder="{{ translate('messages.date_range')}}">
+                                            <input type="text" name="date_range[]" class="form-control" value="{{ $translate[$lang]['date_range'] ?? null }}" placeholder="{{ translate('messages.date_range')}}">
                                         </div>
     `                                   <br>
                                         <div class="form-group mb-0">
@@ -135,7 +155,7 @@
                                                 data-toggle="tooltip" data-placement="right"
                                                 data-original-title="{{ translate('messages.Required.')}}"> *
                                                 </span></label>
-                                            <input type="text" name="name_address[]" class="form-control" value="{{$resumedetail?->getRawOriginal('name_address')}}" placeholder="{{ translate('messages.kmc_college,_bagbazar_kathmandu')}}">
+                                            <input type="text" name="name_address[]" class="form-control" value="{{ $translate[$lang]['name_address'] ?? null }}" placeholder="{{ translate('messages.kmc_college,_bagbazar_kathmandu')}}">
                                         </div>`
                                         <input type="hidden" name="lang[]" value="{{ $lang }}">
                                         
@@ -147,7 +167,7 @@
                                                 data-toggle="tooltip" data-placement="right"
                                                 data-original-title="{{ translate('messages.Required.')}}"> *
                                                 </span></label>
-                                            <textarea name="details[]" class="ckeditor form-control">{{$resumedetail?->getRawOriginal('details')}}</textarea>
+                                            <textarea name="details[]" class="ckeditor form-control">{{$translate[$lang]['details'] ?? '' }}</textarea>
                                         </div>
                                     </div>
                                 @endforeach

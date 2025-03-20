@@ -7193,6 +7193,4 @@
   'Want_to_delete_this_inquiry_?' => 'Want to delete this inquiry ?',
   'delete_inquiry' => 'Delete inquiry',
   'inquiry removed!' => 'Inquiry removed!',
-  'service_updated_successfully' => 'Service updated successfully',
-  'skill_added_successfully' => 'Skill added successfully',
 );

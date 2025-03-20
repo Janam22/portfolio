@@ -80,6 +80,23 @@
                             </div>
                                 @foreach(json_decode($language) as $lang)
                                 
+                                <?php
+                                        if (count($blog['translations'])) {
+                                            $translate = [];
+                                            foreach ($blog['translations'] as $t) {
+                                                if ($t->locale == $lang && $t->key == 'author_name') {
+                                                    $translate[$lang]['author_name'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'blog_title') {
+                                                    $translate[$lang]['blog_title'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'blog_details') {
+                                                    $translate[$lang]['blog_details'] = $t->value;
+                                                }
+                                            }
+                                        }
+                                ?>
+
                                 <div class="d-none lang_form" id="{{ $lang }}-form">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -87,7 +104,7 @@
                                                 ({{ strtoupper($lang) }})
                                             </label>
                                             <input type="text" name="author_name[]"
-                                                class="form-control"
+                                                class="form-control" value="{{ $translate[$lang]['author_name'] ?? null }}"
                                                 placeholder="{{ translate('messages.author_name') }}"
                                                  >
                                         </div>
@@ -95,7 +112,7 @@
                                             <label class="input-label"
                                                 for="exampleFormControlInput1">{{ translate('messages.blog_title') }}
                                                 ({{ strtoupper($lang) }})</label>
-                                            <input type="text" name="blog_title[]" class="form-control" placeholder="{{ translate('messages.blog_title')}}">
+                                            <input type="text" name="blog_title[]" class="form-control" value="{{ $translate[$lang]['blog_title'] ?? null }}" placeholder="{{ translate('messages.blog_title')}}">
                                         </div>
                                         <input type="hidden" name="lang[]" value="{{ $lang }}">
                                         
@@ -107,7 +124,7 @@
                                                 data-toggle="tooltip" data-placement="right"
                                                 data-original-title="{{ translate('messages.Required.')}}"> *
                                                 </span></label>
-                                            <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
+                                            <textarea name="blog_details[]" class="ckeditor form-control">{{ $translate[$lang]['blog_details'] ?? '' }}</textarea>
                                         </div>
                                     </div>
                                 @endforeach
