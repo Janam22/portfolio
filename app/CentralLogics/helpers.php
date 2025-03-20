@@ -199,9 +199,6 @@ class Helpers
         try {
             if ($data && $type == 's3' && Storage::disk('s3')->exists($path .'/'. $data)) {
                 return Storage::disk('s3')->url($path .'/'. $data);
-//                $awsUrl = config('filesystems.disks.s3.url');
-//                $awsBucket = config('filesystems.disks.s3.bucket');
-//                return rtrim($awsUrl, '/') . '/' . ltrim($awsBucket . '/' . $path . '/' . $data, '/');
             }
         } catch (\Exception $e){
         }
@@ -301,7 +298,6 @@ class Helpers
         return json_decode($response->getContent(), true);
     }
 
-
     public static function insert_business_settings_key($key, $value = null)
     {
         $data =  SystemSetting::where('key', $key)->first();
@@ -314,6 +310,7 @@ class Helpers
         }
         return true;
     }
+
     public static function insert_data_settings_key($key,$type, $value = null)
     {
         $data =  DataSetting::where('key', $key)->where('type', $type)->first();
@@ -529,6 +526,7 @@ class Helpers
         }
         return $lang;
     }
+    
     public static function system_default_direction()
     {
         $languages = json_decode(\App\Models\SystemSetting::where('key', 'system_language')->first()?->value);
@@ -845,18 +843,18 @@ class Helpers
     }
 
     public static function time_format($data){
-            $time=config('timeformat') ?? 'H:i';
+        $time=config('timeformat') ?? 'H:i';
         return  Carbon::parse($data)->locale(app()->getLocale())->translatedFormat($time);
     }
 
-        public static function get_business_data($name)
+    public static function get_business_data($name)
         {
             $paymentmethod = SystemSetting::where('key', $name)->first();
             return $paymentmethod?->value;
         }
 
-        public static function add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value ){
-            try{
+    public static function add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value ){
+        try{
                 $model = 'App\\Models\\'.$model_name;
                 $default_lang = str_replace('_', '-', app()->getLocale());
                 foreach ($request->lang as $index => $key) {

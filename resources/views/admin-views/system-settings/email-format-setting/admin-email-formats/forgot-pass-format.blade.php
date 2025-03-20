@@ -274,8 +274,8 @@
                                                         </div>
                                                     @foreach(json_decode($language) as $lang)
                                                     <?php
-                                           $translate = [];
-                                           if($data && count($data['translations'])){
+                                                        $translate = [];
+                                                        if($data && count($data['translations'])){
                                                         foreach($data['translations'] as $t)
                                                         {
                                                             if($t->locale == $lang && $t->key=="copyright_text"){
