@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 01:13 PM
+-- Generation Time: Mar 20, 2025 at 01:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -318,7 +318,8 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
-(1, 'Website Development', '2025-03-11-67cfee8d01fda.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-11 05:58:22', 0, 'website-development');
+(1, 'Website Development', '2025-03-11-67cfee8d01fda.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-11 05:58:22', 0, 'website-development'),
+(2, 'App Development', '2025-03-20-67dbc4fc0daab.png', 'testing', 1, '2025-03-20 01:49:20', '2025-03-20 02:14:40', 0, 'app-development2');
 
 -- --------------------------------------------------------
 
@@ -341,7 +342,8 @@ CREATE TABLE `skills` (
 --
 
 INSERT INTO `skills` (`id`, `name`, `image`, `rate`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PHP-Laravel', '2025-03-19-67da58d0777a5.png', 80, 1, '2025-03-18 23:55:32', '2025-03-19 00:02:18');
+(1, 'PHP-Laravel', '2025-03-19-67da58d0777a5.png', 80, 1, '2025-03-18 23:55:32', '2025-03-19 00:02:18'),
+(2, 'sdaf', 'def.png', 80, 1, '2025-03-20 02:28:34', '2025-03-20 02:28:34');
 
 -- --------------------------------------------------------
 
@@ -406,7 +408,11 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-11 02:19:29', '2025-03-11 02:19:29'),
 (44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
 (45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-17 05:08:55', '2025-03-17 05:08:55'),
-(46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03');
+(46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03'),
+(47, 'App\\Models\\SystemSetting', '100', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
+(48, 'App\\Models\\SystemSetting', '79', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
+(49, 'App\\Models\\Service', '2', 'image', 'public', '2025-03-20 01:49:20', '2025-03-20 01:49:20'),
+(50, 'App\\Models\\Skill', '2', 'image', 'public', '2025-03-20 02:28:34', '2025-03-20 02:28:34');
 
 -- --------------------------------------------------------
 
@@ -438,10 +444,10 @@ INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`)
 (37, 'timezone', 'Asia/Katmandu', NULL, NULL),
 (44, 'country', 'NP', NULL, NULL),
 (78, 'recaptcha', '{\"status\":\"1\",\"site_key\":\"6Lf8pr0qAAAAABgqOAwm5wLrXmBdr__BFJS2Y6Zu\",\"secret_key\":\"6Lf8pr0qAAAAAEYX6SgutPJ-B3W0L9UnoHIqN3j1\"}', '2025-01-20 16:49:04', '2025-01-20 16:49:04'),
-(79, 'language', '[\"en\"]', NULL, '2025-01-05 06:06:19'),
+(79, 'language', '[\"en\",\"ne\"]', NULL, '2025-03-20 01:46:50'),
 (82, 'icon', '2025-03-10-67ce8be99ab6d.png', NULL, NULL),
 (97, 'feature', '[]', NULL, NULL),
-(100, 'system_language', '[{\"id\":1,\"direction\":\"ltr\",\"code\":\"en\",\"status\":1,\"default\":true}]', '2023-07-10 00:56:39', '2025-01-05 06:06:19'),
+(100, 'system_language', '[{\"id\":1,\"direction\":\"ltr\",\"code\":\"en\",\"status\":1,\"default\":true},{\"id\":2,\"direction\":\"ltr\",\"code\":\"ne\",\"status\":1,\"default\":false}]', '2023-07-10 00:56:39', '2025-03-20 01:46:56'),
 (134, 'forget_password_mail_status_admin', '1', NULL, NULL),
 (153, 'system_php_path', '/usr/bin/php', NULL, NULL),
 (193, 'country_picker_status', '0', '2024-07-09 13:53:09', '2024-07-09 13:53:09'),
@@ -520,7 +526,20 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (3936, 'App\\Models\\Blog', 6, 'en', 'author_name', 'Janam Pandey', NULL, NULL),
 (3937, 'App\\Models\\Skill', 1, 'en', 'name', 'PHP-Laravel', NULL, NULL),
 (3938, 'App\\Models\\Testimonial', 3, 'en', 'name', 'Janam Pandey', NULL, NULL),
-(3941, 'App\\Models\\ResumeDetail', 1, 'en', 'title', 'SEE', NULL, NULL);
+(3941, 'App\\Models\\ResumeDetail', 1, 'en', 'title', 'SEE', NULL, NULL),
+(3943, 'App\\Models\\Service', 2, 'en', 'name', 'App Development', NULL, NULL),
+(3944, 'App\\Models\\Service', 2, 'ne', 'name', 'मोबाइल', NULL, NULL),
+(3945, 'App\\Models\\Service', 2, 'en', 'description', 'testing', NULL, NULL),
+(3946, 'App\\Models\\Service', 2, 'ne', 'description', 'परीक्षण', NULL, NULL),
+(3947, 'App\\Models\\Skill', 2, 'en', 'name', 'sdaf', NULL, NULL),
+(3948, 'App\\Models\\Skill', 2, 'ne', 'name', 'कौशल', NULL, NULL),
+(3949, 'App\\Models\\Skill', 2, 'en', 'rate', '80', NULL, NULL),
+(3950, 'App\\Models\\Skill', 2, 'ne', 'rate', '८०', NULL, NULL),
+(3951, 'App\\Models\\Blog', 6, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(3952, 'App\\Models\\Blog', 6, 'en', 'blog_title', 'Latest Tech in Nepal', NULL, NULL),
+(3953, 'App\\Models\\Blog', 6, 'ne', 'blog_title', 'नेपालको नवीनतम प्रविधि', NULL, NULL),
+(3954, 'App\\Models\\Blog', 6, 'en', 'blog_details', '<p>Testing Blog</p>', NULL, NULL),
+(3955, 'App\\Models\\Blog', 6, 'ne', 'blog_details', '<div>\r\n<pre>\r\nपरीक्षण ब्लग</pre>\r\n</div>', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -708,13 +727,13 @@ ALTER TABLE `resume_details`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `social_media`
@@ -726,7 +745,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -744,7 +763,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3943;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3956;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
