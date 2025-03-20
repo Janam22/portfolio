@@ -7,7 +7,6 @@
 
 @section('content')
     <div class="content container-fluid">
-        @if(auth('admin')->user()->role_id == 1)
         <!-- Page Header -->
         <div class="page-header">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -18,17 +17,15 @@
             </div>
         </div>
         <!-- End Page Header -->
-        @else
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{translate('messages.welcome')}}, {{auth('admin')->user()->f_name}}.</h1>
-                    <p class="page-header-text">{{translate('messages.Hello,_here_you_can_manage_your_roles.')}}</p>
-                </div>                
+         
+        <!-- Stats -->
+        <div class="card mb-3">
+            <div class="card-body pt-0">
+                <div id="order_stats_top">
+                    @include('admin-views.partials._dashboard-statics')
+                </div>
             </div>
         </div>
-        <!-- End Page Header -->
-        @endif
+
     </div>
 @endsection

@@ -7195,4 +7195,7 @@
   'inquiry removed!' => 'Inquiry removed!',
   'service_updated_successfully' => 'Service updated successfully',
   'skill_added_successfully' => 'Skill added successfully',
+  'System_statistics' => 'System statistics',
+  'inquiries' => 'Inquiries',
+  'blogs' => 'Blogs',
 );
