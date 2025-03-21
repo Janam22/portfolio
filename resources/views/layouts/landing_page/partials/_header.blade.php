@@ -29,6 +29,15 @@
             </ul>
           </li>
           <li><a href="{{ route('contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">Contact</a></li>
+          
+          <li class="dropdown">
+              <a href="#"><span>{{ strtoupper(app()->getLocale()) }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="{{ url('lang/en') }}">🇬🇧 English</a></li>
+                  <li><a href="{{ url('lang/np') }}">🇳🇵 नेपाली</a></li>
+              </ul>
+          </li>
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
