@@ -367,16 +367,6 @@
 <script>
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{dynamicAsset('public//assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 </script>
-<script>
-    window.onload = function() {
-        var userAgent = navigator.userAgent;
 
-        if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1) {
-            // Redirect or show a message
-            alert("This application does not support Chrome. Please use firefox or brave for smooth functionality");
-            window.location.href = "https://www.google.com"; // Redirect
-        }
-    };
-</script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
     <?php
-            $site_direction = session()->get('site_direction');
-            $country=\App\Models\SystemSetting::where('key','country')->first();
-            $countryCode= strtolower($country?$country->value:'auto');
+        $site_direction = session()->get('site_direction');
+        $country=\App\Models\SystemSetting::where('key','country')->first();
+        $countryCode= strtolower($country?$country->value:'auto');
     ?>
 
 <html dir="{{ $site_direction }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ $site_direction === 'rtl'?'active':'' }}">

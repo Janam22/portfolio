@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>{{translate('messages.error')}} 404 | {{\App\Models\SystemSetting::where(['key'=>'business_name'])->first()->value??"Janam Pandey's Portfolio"}}</title>
+    <title>{{translate('messages.error')}} 404 | {{\App\Models\SystemSetting::where(['key'=>'system_name'])->first()->value??"Janam Pandey's Portfolio"}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -39,7 +39,7 @@
             <div class="col-sm-6 col-md-4 text-center text-sm-left">
                 <h1 class="display-1 mb-0">404</h1>
                 <p class="lead">{{translate('messages.404_warning_message')}}.</p>
-                    <a class="btn btn-primary" href="{{route('admin.dashboard')}}">{{translate('messages.dashboard')}}</a>
+                    <a class="btn btn-primary" href="{{route('admin.dashboard')}}">{{translate('messages.Back')}}</a>
             </div>
         </div>
         <!-- End Row -->
@@ -51,7 +51,7 @@
 <div class="footer text-center">
     <ul class="list-inline list-separator">
         <li class="list-inline-item">
-            <a class="list-separator-link" target="_blank" href="{{route('home')}}">{{\App\Models\SystemSetting::where(['key'=>'system_name'])->first()->value??"Janam Pandey's Portfolio"}} {{translate('messages.support')}}</a>
+            <a class="list-separator-link" target="_blank" href="{{route('contact')}}">{{\App\Models\SystemSetting::where(['key'=>'system_name'])->first()->value??"Janam Pandey's Portfolio"}} {{translate('messages.support')}}</a>
         </li>
     </ul>
 </div>
