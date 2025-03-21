@@ -50,10 +50,20 @@
       <h4>Follow Me</h4>
       <p>I am available on most of the social media.</p>
       <div class="social-links d-flex">
-        <a href=""><i class="bi bi-github"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
+        @foreach ($social_media as $social_media)
+        @if($social_media->name == 'github')
+        <a href="{{ $social_media->link }}" target="_new"><i class="bi bi-github"></i></a>
+        @endif
+        @if($social_media->name == 'linkedin')
+        <a href="{{ $social_media->link }}" target="_new"><i class="bi bi-linkedin"></i></a>
+        @endif
+        @if($social_media->name == 'facebook')
+        <a href="$social_media->link" target="_new"><i class="bi bi-facebook"></i></a>
+        @endif
+        @if($social_media->name == 'instagram')
+        <a href="$social_media->link" target="_new"><i class="bi bi-instagram"></i></a>
+        @endif
+        @endforeach
         <!-- <a href=""><i class="bi bi-twitter-x"></i></a> -->
       </div>
     </div>

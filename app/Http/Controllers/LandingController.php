@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CentralLogics\Helpers;
 use App\Models\Inquiry;
 use App\Models\Service;
+use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -16,36 +17,41 @@ class LandingController extends Controller
     public function home()
     {   
         $services = Service::Active()->get();
+        $social_media = SocialMedia::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('home', compact('landing_data', 'services'));
+        return view('home', compact('landing_data', 'services', 'social_media'));
     }
     
     public function about()
     {
         $services = Service::Active()->get();
+        $social_media = SocialMedia::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('about', compact('landing_data', 'services'));
+        return view('about', compact('landing_data', 'services', 'social_media'));
     }
 
     public function blog()
     {
         $services = Service::Active()->get();
+        $social_media = SocialMedia::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('blog', compact('landing_data', 'services'));
+        return view('blog', compact('landing_data', 'services', 'social_media'));
     }
     
     public function blog_detail()
     {
         $services = Service::Active()->get();
+        $social_media = SocialMedia::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('blog-detail', compact('landing_data', 'services'));
+        return view('blog-detail', compact('landing_data', 'services', 'social_media'));
     }
 
     public function contact()
     {
         $services = Service::Active()->get();
+        $social_media = SocialMedia::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('contact', compact('landing_data', 'services'));
+        return view('contact', compact('landing_data', 'services', 'social_media'));
     }
     
     function inquiry_store(Request $request)
