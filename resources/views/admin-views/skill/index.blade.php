@@ -261,7 +261,7 @@
                                         href="{{route('admin.skill.edit',[$skill['id']])}}" title="{{translate('messages.edit_skill')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn btn-sm btn--danger btn-outline-danger action-btn form-alert" href="javascript:"
-                                    data-id="category-{{$skill['id']}}" data-message="{{ translate('messages.Want_to_delete_this_skill_?') }}" title="{{translate('messages.delete_skill')}}"><i class="tio-delete-outlined"></i>
+                                    data-id="skill-{{$skill['id']}}" data-message="{{ translate('messages.Want_to_delete_this_skill_?') }}" title="{{translate('messages.delete_skill')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
 

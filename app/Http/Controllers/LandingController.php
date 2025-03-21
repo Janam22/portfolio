@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CentralLogics\Helpers;
 use App\Models\Inquiry;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -13,33 +14,38 @@ class LandingController extends Controller
      * Display a listing of the resource.
      */
     public function home()
-    {        
+    {   
+        $services = Service::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('home', compact('landing_data'));
+        return view('home', compact('landing_data', 'services'));
     }
     
     public function about()
     {
+        $services = Service::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('about', compact('landing_data'));
+        return view('about', compact('landing_data', 'services'));
     }
 
     public function blog()
     {
+        $services = Service::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('blog', compact('landing_data'));
+        return view('blog', compact('landing_data', 'services'));
     }
     
     public function blog_detail()
     {
+        $services = Service::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('blog-detail', compact('landing_data'));
+        return view('blog-detail', compact('landing_data', 'services'));
     }
 
     public function contact()
     {
+        $services = Service::Active()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('contact', compact('landing_data'));
+        return view('contact', compact('landing_data', 'services'));
     }
     
     function inquiry_store(Request $request)

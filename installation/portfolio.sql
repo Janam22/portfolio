@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2025 at 11:58 AM
+-- Generation Time: Mar 21, 2025 at 01:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -263,13 +263,6 @@ CREATE TABLE `projects` (
   `slug` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`id`, `service_id`, `name`, `image`, `description`, `link`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
-(71, 1, 'Cleaning', '2025-03-11-67cff746f0744.png', 'testing', 'www.testing.com', 1, '2025-01-13 06:08:33', '2025-03-15 23:28:05', 0, 'cleaning');
-
 -- --------------------------------------------------------
 
 --
@@ -293,7 +286,9 @@ CREATE TABLE `resume_details` (
 --
 
 INSERT INTO `resume_details` (`id`, `resume_type`, `title`, `date_range`, `name_address`, `details`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'ed', 'SEE', '2016-2017', 'Munal Academy, Gajuri Dhading', '<p>I completed with 3.75 GPA.</p>', 1, '2025-03-19 04:48:36', '2025-03-19 04:48:36');
+(1, 'ed', 'SEE', '2016-2017', 'Munal Academy, Gajuri Dhading', '<p>I completed with 3.75 GPA.</p>', 1, '2025-03-19 04:48:36', '2025-03-19 04:48:36'),
+(3, 'ed', 'High School (+2)', '2017-2019', 'Kathmandu Model College, Bagbazar, Kathmandu', '<p>I completed my high school in Science Stream with overall GPA of 3.16.</p>', 1, '2025-03-21 05:52:08', '2025-03-21 05:52:08'),
+(4, 'ed', 'Bachelor of Science in Information Technology (Bsc. IT)', '2019-2023', 'Lord Buddha Education Foundation (LBEF) in academic collaboration with Asia Pacific University of Technology & Innovation, Malaysia', '<p>I completed my bachelor degree with overall GPA of 3.38.</p>', 1, '2025-03-21 05:54:24', '2025-03-21 05:54:24');
 
 -- --------------------------------------------------------
 
@@ -318,8 +313,10 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
-(1, 'Website Development', '2025-03-11-67cfee8d01fda.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-11 05:58:22', 0, 'website-development'),
-(2, 'App Development', '2025-03-20-67dbc4fc0daab.png', 'testing', 1, '2025-03-20 01:49:20', '2025-03-20 02:14:40', 0, 'app-development2');
+(1, 'Web Development', '2025-03-21-67dd5072eec98.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-21 05:56:38', 0, 'website-development'),
+(2, 'Mobile Application Development', '2025-03-21-67dd504350621.png', 'testing', 1, '2025-03-20 01:49:20', '2025-03-21 05:55:51', 0, 'app-development2'),
+(3, 'Software Development', '2025-03-21-67dd50dd4be3b.png', 'Best software development with clean and reusable code for best performance.', 1, '2025-03-21 05:58:25', '2025-03-21 05:58:25', 0, NULL),
+(4, 'Digital Marketing', '2025-03-21-67dd512249ba5.png', 'For SEO', 1, '2025-03-21 05:59:34', '2025-03-21 05:59:34', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -343,7 +340,12 @@ CREATE TABLE `skills` (
 
 INSERT INTO `skills` (`id`, `name`, `image`, `rate`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'PHP-Laravel', '2025-03-19-67da58d0777a5.png', 80, 1, '2025-03-18 23:55:32', '2025-03-19 00:02:18'),
-(2, 'sdaf', 'def.png', 80, 1, '2025-03-20 02:28:34', '2025-03-20 02:28:34');
+(3, 'jQuery', '2025-03-21-67dd4dd30ad1e.png', 60, 1, '2025-03-21 05:45:27', '2025-03-21 05:45:27'),
+(4, 'HTML', '2025-03-21-67dd4e17913d6.png', 100, 1, '2025-03-21 05:46:35', '2025-03-21 05:46:35'),
+(5, 'CSS', '2025-03-21-67dd4e52d24d1.png', 100, 1, '2025-03-21 05:47:34', '2025-03-21 05:47:34'),
+(6, 'Core PHP', '2025-03-21-67dd4eae452bb.png', 80, 1, '2025-03-21 05:49:06', '2025-03-21 05:49:06'),
+(7, 'Javascript', '2025-03-21-67dd4ed968f3d.png', 60, 1, '2025-03-21 05:49:49', '2025-03-21 05:49:49'),
+(8, 'mySQL', '2025-03-21-67dd4effe72e2.png', 70, 1, '2025-03-21 05:50:27', '2025-03-21 05:50:27');
 
 -- --------------------------------------------------------
 
@@ -405,14 +407,22 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (32, 'App\\Models\\Admin', '1', 'image', 'public', '2025-02-11 11:10:59', '2025-02-11 11:10:59'),
 (33, 'App\\Models\\Admin', '5', 'image', 'public', '2025-01-10 05:38:10', '2025-01-10 05:38:10'),
 (42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53'),
-(43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-11 02:19:29', '2025-03-11 02:19:29'),
+(43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-21 05:56:38', '2025-03-21 05:56:38'),
 (44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
 (45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-17 05:08:55', '2025-03-17 05:08:55'),
 (46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03'),
 (47, 'App\\Models\\SystemSetting', '100', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
 (48, 'App\\Models\\SystemSetting', '79', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
-(49, 'App\\Models\\Service', '2', 'image', 'public', '2025-03-20 01:49:20', '2025-03-20 01:49:20'),
-(50, 'App\\Models\\Skill', '2', 'image', 'public', '2025-03-20 02:28:34', '2025-03-20 02:28:34');
+(49, 'App\\Models\\Service', '2', 'image', 'public', '2025-03-21 05:55:51', '2025-03-21 05:55:51'),
+(50, 'App\\Models\\Skill', '2', 'image', 'public', '2025-03-20 02:28:34', '2025-03-20 02:28:34'),
+(51, 'App\\Models\\Skill', '3', 'image', 'public', '2025-03-21 05:45:27', '2025-03-21 05:45:27'),
+(52, 'App\\Models\\Skill', '4', 'image', 'public', '2025-03-21 05:46:35', '2025-03-21 05:46:35'),
+(53, 'App\\Models\\Skill', '5', 'image', 'public', '2025-03-21 05:47:34', '2025-03-21 05:47:34'),
+(54, 'App\\Models\\Skill', '6', 'image', 'public', '2025-03-21 05:49:06', '2025-03-21 05:49:06'),
+(55, 'App\\Models\\Skill', '7', 'image', 'public', '2025-03-21 05:49:49', '2025-03-21 05:49:49'),
+(56, 'App\\Models\\Skill', '8', 'image', 'public', '2025-03-21 05:50:27', '2025-03-21 05:50:27'),
+(57, 'App\\Models\\Service', '3', 'image', 'public', '2025-03-21 05:58:25', '2025-03-21 05:58:25'),
+(58, 'App\\Models\\Service', '4', 'image', 'public', '2025-03-21 05:59:34', '2025-03-21 05:59:34');
 
 -- --------------------------------------------------------
 
@@ -520,26 +530,46 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (159, 'App\\Models\\EmailTemplate', 28, 'en', 'footer_text', 'Please contact us for any queries; we’re always happy to help.', NULL, NULL),
 (160, 'App\\Models\\EmailTemplate', 28, 'en', 'copyright_text', '© 2024 Knockdoor. All rights reserved.', NULL, NULL),
 (3921, 'App\\Models\\AdminRole', 5, 'en', 'name', 'Staff', NULL, NULL),
-(3928, 'App\\Models\\Service', 1, 'en', 'name', 'Website Development', NULL, NULL),
-(3929, 'App\\Models\\Project', 71, 'en', 'name', 'Cleaning', NULL, NULL),
+(3928, 'App\\Models\\Service', 1, 'en', 'name', 'Web Development', NULL, NULL),
 (3930, 'App\\Models\\DataSetting', 111, 'en', 'about', '<p>Hello Testing</p>\r\n\r\n<p>&nbsp;</p>', NULL, NULL),
 (3936, 'App\\Models\\Blog', 6, 'en', 'author_name', 'Janam Pandey', NULL, NULL),
 (3937, 'App\\Models\\Skill', 1, 'en', 'name', 'PHP-Laravel', NULL, NULL),
 (3938, 'App\\Models\\Testimonial', 3, 'en', 'name', 'Janam Pandey', NULL, NULL),
 (3941, 'App\\Models\\ResumeDetail', 1, 'en', 'title', 'SEE', NULL, NULL),
-(3943, 'App\\Models\\Service', 2, 'en', 'name', 'App Development', NULL, NULL),
+(3943, 'App\\Models\\Service', 2, 'en', 'name', 'Mobile Application Development', NULL, NULL),
 (3944, 'App\\Models\\Service', 2, 'ne', 'name', 'मोबाइल', NULL, NULL),
 (3945, 'App\\Models\\Service', 2, 'en', 'description', 'testing', NULL, NULL),
 (3946, 'App\\Models\\Service', 2, 'ne', 'description', 'परीक्षण', NULL, NULL),
-(3947, 'App\\Models\\Skill', 2, 'en', 'name', 'sdaf', NULL, NULL),
-(3948, 'App\\Models\\Skill', 2, 'ne', 'name', 'कौशल', NULL, NULL),
-(3949, 'App\\Models\\Skill', 2, 'en', 'rate', '80', NULL, NULL),
-(3950, 'App\\Models\\Skill', 2, 'ne', 'rate', '८०', NULL, NULL),
 (3951, 'App\\Models\\Blog', 6, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
 (3952, 'App\\Models\\Blog', 6, 'en', 'blog_title', 'Latest Tech in Nepal', NULL, NULL),
 (3953, 'App\\Models\\Blog', 6, 'ne', 'blog_title', 'नेपालको नवीनतम प्रविधि', NULL, NULL),
 (3954, 'App\\Models\\Blog', 6, 'en', 'blog_details', '<p>Testing Blog</p>', NULL, NULL),
-(3955, 'App\\Models\\Blog', 6, 'ne', 'blog_details', '<div>\r\n<pre>\r\nपरीक्षण ब्लग</pre>\r\n</div>', NULL, NULL);
+(3955, 'App\\Models\\Blog', 6, 'ne', 'blog_details', '<div>\r\n<pre>\r\nपरीक्षण ब्लग</pre>\r\n</div>', NULL, NULL),
+(3956, 'App\\Models\\Skill', 3, 'en', 'name', 'jQuery', NULL, NULL),
+(3957, 'App\\Models\\Skill', 3, 'en', 'rate', '60', NULL, NULL),
+(3958, 'App\\Models\\Skill', 4, 'en', 'name', 'HTML', NULL, NULL),
+(3959, 'App\\Models\\Skill', 4, 'en', 'rate', '100', NULL, NULL),
+(3960, 'App\\Models\\Skill', 5, 'en', 'name', 'CSS', NULL, NULL),
+(3961, 'App\\Models\\Skill', 5, 'en', 'rate', '100', NULL, NULL),
+(3962, 'App\\Models\\Skill', 6, 'en', 'name', 'Core PHP', NULL, NULL),
+(3963, 'App\\Models\\Skill', 6, 'en', 'rate', '80', NULL, NULL),
+(3964, 'App\\Models\\Skill', 7, 'en', 'name', 'Javascript', NULL, NULL),
+(3965, 'App\\Models\\Skill', 7, 'en', 'rate', '60', NULL, NULL),
+(3966, 'App\\Models\\Skill', 8, 'en', 'name', 'mySQL', NULL, NULL),
+(3967, 'App\\Models\\Skill', 8, 'en', 'rate', '70', NULL, NULL),
+(3968, 'App\\Models\\ResumeDetail', 3, 'en', 'title', 'High School (+2)', NULL, NULL),
+(3969, 'App\\Models\\ResumeDetail', 3, 'en', 'date_range', '2017-2019', NULL, NULL),
+(3970, 'App\\Models\\ResumeDetail', 3, 'en', 'name_address', 'Kathmandu Model College, Bagbazar, Kathmandu', NULL, NULL),
+(3971, 'App\\Models\\ResumeDetail', 3, 'en', 'details', '<p>I completed my high school in Science Stream with overall GPA of 3.16.</p>', NULL, NULL),
+(3972, 'App\\Models\\ResumeDetail', 4, 'en', 'title', 'Bachelor of Science in Information Technology (Bsc. IT)', NULL, NULL),
+(3973, 'App\\Models\\ResumeDetail', 4, 'en', 'date_range', '2019-2023', NULL, NULL),
+(3974, 'App\\Models\\ResumeDetail', 4, 'en', 'name_address', 'Lord Buddha Education Foundation (LBEF) in academic collaboration with Asia Pacific University of Technology & Innovation, Malaysia', NULL, NULL),
+(3975, 'App\\Models\\ResumeDetail', 4, 'en', 'details', '<p>I completed my bachelor degree with overall GPA of 3.38.</p>', NULL, NULL),
+(3976, 'App\\Models\\Service', 1, 'en', 'description', 'Build your website with most experienced developer.', NULL, NULL),
+(3977, 'App\\Models\\Service', 3, 'en', 'name', 'Software Development', NULL, NULL),
+(3978, 'App\\Models\\Service', 3, 'en', 'description', 'Best software development with clean and reusable code for best performance.', NULL, NULL),
+(3979, 'App\\Models\\Service', 4, 'en', 'name', 'Digital Marketing', NULL, NULL),
+(3980, 'App\\Models\\Service', 4, 'en', 'description', 'For SEO', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -721,19 +751,19 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `resume_details`
 --
 ALTER TABLE `resume_details`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `social_media`
@@ -745,7 +775,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -763,7 +793,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3956;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3981;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

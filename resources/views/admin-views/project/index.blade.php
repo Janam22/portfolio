@@ -332,7 +332,7 @@
                                         href="{{route('admin.project.edit',[$project['id']])}}" title="{{translate('messages.edit_project')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn btn-sm btn--danger btn-outline-danger action-btn form-alert" href="javascript:"
-                                    data-id="category-{{$project['id']}}" data-message="{{ translate('Want_to_delete_this_project_?') }}" title="{{translate('messages.delete_project')}}"><i class="tio-delete-outlined"></i>
+                                    data-id="project-{{$project['id']}}" data-message="{{ translate('Want_to_delete_this_project_?') }}" title="{{translate('messages.delete_project')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
 

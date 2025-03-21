@@ -14,18 +14,9 @@
           <li><a href="{{ route('blog') }}" class="{{ Request::is('blogs') || Request::is('blogs/*') ? 'active' : '' }}">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Service 1</a></li>
-              <li><a href="#">Service 2</a></li>
-              <li><a href="#">Service 3</a></li>
-              <li><a href="#">Service 4</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Projects</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Project 1</a></li>
-              <li><a href="#">Project 2</a></li>
-              <li><a href="#">Project 3</a></li>
-              <li><a href="#">Project 4</a></li>
+              @foreach ($services as $service)
+              <li><a href="#">{{ $service->name }} </a></li>
+              @endforeach
             </ul>
           </li>
           <li><a href="{{ route('contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">Contact</a></li>
