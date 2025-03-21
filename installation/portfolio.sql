@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2025 at 01:11 PM
+-- Generation Time: Mar 21, 2025 at 11:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -195,7 +195,7 @@ CREATE TABLE `inquiries` (
 --
 
 INSERT INTO `inquiries` (`id`, `name`, `subject`, `email`, `contact`, `message`, `created_at`, `updated_at`) VALUES
-(4, 'Janam Pandey', 'Website', 'janampandey2@gmail.com', '9813074888', 'I want website for my business.', '2025-03-19 05:50:44', '2025-03-19 05:50:44');
+(1, 'Janam Pandey', 'Testing', 'janampandey2@gmail.com', '9866077949', 'Testing', '2025-03-21 05:03:23', '2025-03-21 05:03:23');
 
 -- --------------------------------------------------------
 
@@ -434,9 +434,9 @@ CREATE TABLE `system_settings` (
 
 INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 (4, 'mail_config', '{\"status\":\"1\",\"name\":\"Janam Pandey\",\"host\":\"mail.thinktankinfotech.com\",\"driver\":\"smtp\",\"port\":\"465\",\"username\":\"info@thinktankinfotech.com\",\"email_id\":\"info@thinktankinfotech.com\",\"encryption\":\"ssl\",\"password\":\"ThinkTankInfoTech#@21^^??\"}', NULL, '2025-03-10 07:17:54'),
-(16, 'system_name', 'Janam Pandey\'s Portfolio', NULL, NULL),
+(16, 'system_name', 'Janam Pandey', NULL, NULL),
 (18, 'logo', '2025-03-10-67ce8be992d07.png', NULL, NULL),
-(19, 'phone', '9866077949', NULL, NULL),
+(19, 'phone', '+977-9866077949, +977-9813074888', NULL, NULL),
 (20, 'email_address', 'jananpandey1995@gmail.com', NULL, NULL),
 (21, 'address', 'Kathmandu Metro 16, Balaju, Kathmandu, Nepal', NULL, NULL),
 (22, 'footer_text', 'All Right Reserved', NULL, NULL),
@@ -703,7 +703,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
