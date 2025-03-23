@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2025 at 01:11 PM
+-- Generation Time: Mar 23, 2025 at 07:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -129,7 +129,7 @@ CREATE TABLE `data_settings` (
 INSERT INTO `data_settings` (`id`, `key`, `value`, `type`, `created_at`, `updated_at`) VALUES
 (1, 'admin_login_url', 'admin', 'login_admin', '2023-06-20 16:55:51', '2023-06-20 16:55:51'),
 (111, 'about', '<p>I am passionate about personal and professional growth and seek an organization that values continuous learning. My goal is to contribute to the organization&#39;s success by leveraging my skills and knowledge. With a collaborative mindset and dedication, I aim to work alongside the team to achieve common objectives and exceed expectations. I thrive on challenges and am eager to adapt to evolving landscapes, making a meaningful impact while enriching my own skill set. I am excited to be part of a growth-focused organization, applying this mindset to both company projects and personal projects provided to me.</p>\r\n\r\n<p>&nbsp;</p>', 'admin_landing_page', '2025-03-11 06:18:33', '2025-03-23 03:41:36'),
-(112, 'about_image', '2025-03-17-67d7ff4373fb0.png', 'admin_landing_page', '2025-03-17 05:05:03', '2025-03-17 05:05:03');
+(112, 'about_image', '2025-03-23-67e03b0201ea6.png', 'admin_landing_page', '2025-03-17 05:05:03', '2025-03-17 05:05:03');
 
 -- --------------------------------------------------------
 
@@ -321,9 +321,10 @@ CREATE TABLE `services` (
 
 INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
 (1, 'Web Development', '2025-03-21-67dd5072eec98.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-21 05:56:38', 0, 'website-development'),
-(2, 'Mobile Application Development', '2025-03-21-67dd504350621.png', 'testing', 1, '2025-03-20 01:49:20', '2025-03-21 05:55:51', 0, 'app-development2'),
+(2, 'Mobile Application Development', '2025-03-21-67dd504350621.png', 'testing', 0, '2025-03-20 01:49:20', '2025-03-23 16:50:14', 0, 'app-development2'),
 (3, 'Software Development', '2025-03-21-67dd50dd4be3b.png', 'Best software development with clean and reusable code for best performance.', 1, '2025-03-21 05:58:25', '2025-03-21 05:58:25', 0, NULL),
-(4, 'Digital Marketing', '2025-03-21-67dd512249ba5.png', 'For SEO', 1, '2025-03-21 05:59:34', '2025-03-21 05:59:34', 0, NULL);
+(4, 'Digital Marketing', '2025-03-21-67dd512249ba5.png', 'For SEO', 1, '2025-03-21 05:59:34', '2025-03-21 05:59:34', 0, NULL),
+(5, 'Website Development', '2025-03-23-67e03982ba322.png', 'Get Customized website for your business at very low cost.', 1, '2025-03-23 16:40:34', '2025-03-23 16:40:34', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -416,7 +417,7 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53'),
 (43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-21 05:56:38', '2025-03-21 05:56:38'),
 (44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
-(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-23 03:43:36', '2025-03-23 03:43:36'),
+(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-23 16:46:58', '2025-03-23 16:46:58'),
 (46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03'),
 (47, 'App\\Models\\SystemSetting', '100', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
 (48, 'App\\Models\\SystemSetting', '79', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
@@ -430,10 +431,11 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (56, 'App\\Models\\Skill', '8', 'image', 'public', '2025-03-21 05:50:27', '2025-03-21 05:50:27'),
 (57, 'App\\Models\\Service', '3', 'image', 'public', '2025-03-21 05:58:25', '2025-03-21 05:58:25'),
 (58, 'App\\Models\\Service', '4', 'image', 'public', '2025-03-21 05:59:34', '2025-03-21 05:59:34'),
-(59, 'App\\Models\\Testimonial', '4', 'image', 'public', '2025-03-23 05:30:53', '2025-03-23 05:30:53'),
-(60, 'App\\Models\\Testimonial', '5', 'image', 'public', '2025-03-23 05:31:59', '2025-03-23 05:31:59'),
-(61, 'App\\Models\\Testimonial', '6', 'image', 'public', '2025-03-23 05:33:50', '2025-03-23 05:33:50'),
-(62, 'App\\Models\\Testimonial', '7', 'image', 'public', '2025-03-23 05:36:30', '2025-03-23 05:36:30');
+(59, 'App\\Models\\Testimonial', '4', 'image', 'public', '2025-03-23 16:23:16', '2025-03-23 16:23:16'),
+(60, 'App\\Models\\Testimonial', '5', 'image', 'public', '2025-03-23 16:18:37', '2025-03-23 16:18:37'),
+(61, 'App\\Models\\Testimonial', '6', 'image', 'public', '2025-03-23 16:17:44', '2025-03-23 16:17:44'),
+(62, 'App\\Models\\Testimonial', '7', 'image', 'public', '2025-03-23 16:20:32', '2025-03-23 16:20:32'),
+(63, 'App\\Models\\Service', '5', 'image', 'public', '2025-03-23 16:40:34', '2025-03-23 16:40:34');
 
 -- --------------------------------------------------------
 
@@ -480,7 +482,7 @@ INSERT INTO `system_settings` (`id`, `key`, `value`, `created_at`, `updated_at`)
 (213, 'push_notification_service_file_content', '{\n  \"type\": \"service_account\",\n  \"project_id\": \"janam-70bc3\",\n  \"private_key_id\": \"5de4441ad35cf390430265858abfc34e3f907f58\",\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDHi2jjnQgy6bJH\\nOxEGNqVkneF3PztB+Vqan33M1cYMZ4cRZzYpoVwfxjQuk7jLZu8dxCGE2iSr4SoM\\nirFceh/ky48fmBZeJWhywXYIcU4WOknQ17gmyyBn1+QtytoQk3Q33gLAlR7dZAQa\\nzMmN3QRJg+DpkwXPuzDDPe1RVCnY0HqSmiGfudKt+vkmCkBN5sv/Gq19p1CHuoNr\\ngBQwBq1WFDVNMGBfCUeXJ6UR0l3idmxocL1Zg0NKC4qdDfElBqDhLAf2k3RYwZOu\\n7QUaRkh2VSbvof8FyD49Aya68zPMU+5Ta5ZizLlFgTiOFOEtPOQyZZvV2pg2q2ky\\nufA4DPzfAgMBAAECggEAN92D5BWWsgpTazXSMlciPuUktmnxgSr6fsegRLSk2dwy\\nKGEo/Ma8L/khqtiYp/mNgFvktnkMQ0KqrxA1T5qxSzDiRQojWQBIGbin/v0Zy4dO\\nGzYJzHKaA/ihXWCpZHKj2vBA/QHCvmC99XLYCuuRw7M0SLBstBfIMyEnS9mwTY6x\\nJhBZqV+qUpYiXusRWV/ufjIvLSZavRtiH895+KPciyojjxGEGeS6nsAtIpI1+Ei9\\nZ5AIa3GUCgADF6NXWDR8/cBk0C9fHV+RmBVSYJSLbJolvXvBpDl4TVpw8Ts7t4so\\npawnGPRTpuafg1NApDYuNz8thGxwgvlYF54wbWFLQQKBgQD8/yxQMw3o21WzP2ID\\na6qGM1n5Tcob8r3OoG1L1N51BzEsORBi037JLh0vOrHXGAb3BuGmMxNH2MseUWQ+\\nsyFQqkUBZlcV63TKP2Uw8eg3Njf3+GztSz/tUUUqDrpz08MbxBDCcZw2los2HhhT\\nE5tCcLO46q2xHNHI3hbdhfo3aQKBgQDJ6c1Bvuq0KHmPf+QePOidjiERgqokEdwu\\nBgrG50UrNNeOcopR4c+/KDTgn0U97I2gzAYwYi6UiOoR426NgU029QcGVQTZB+ln\\nYe2Xdz3ruu39zWKCvnOacF0uPIsq+cDfReXW8MBEsH3twrbLDVBWumuOJiOgECtK\\nCPuWPtuRBwKBgAGkAfyPKDLvYTHlYlRVWWi/YoD8YSgnPdXeMndAbSTjJA1+XT3W\\n00aotuW8grS7Yigt8j6qrCBWJpMOwhCqBrhIMmRc7omk2kAJgzV7DB93iYthIAu1\\n5jc6xLEOIWVo5SYD8nvgUrwD4+k47r1zLhmTM4cqdm/kmPOthQZwvPupAoGAJWYs\\nAbCGMqaIlZ7ftwYbJAvObjrgntu8B75QwrTVqAIapyTqH+6Ol16wJKb7oVOujAke\\nYFnfPN37VSLmOEmp7rMGARNAWZ7Qibim1HZevsoaCPfA9mymZwXHDKhkMqqeIf0F\\nbIGda1uxh5eYWhX2Ooo/H85KrPwxuH3fc93it4MCgYBBAVX4vgschHb+Ydj8rOFX\\nzYnVywjtFzStfO5NnGcCW2LSoZi9P85feU96+NLj+6viIJpVcEASMflfzgHG0CXP\\n9ukfy6pJBkj2p+0iH6hrWQ8PDtcLVWwtM8KpLzjldKVzK/NgKQCKlJHA9zsd7KWZ\\noduMgbyopSNHJFCZFD42Mg==\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\": \"firebase-adminsdk-fbsvc@janam-70bc3.iam.gserviceaccount.com\",\n  \"client_id\": \"105140497374677914505\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40janam-70bc3.iam.gserviceaccount.com\",\n  \"universe_domain\": \"googleapis.com\"\n}', NULL, NULL),
 (214, 'fcm_project_id', 'janam-70bc3', NULL, NULL),
 (215, 'fcm_credentials', '{\"apiKey\":\"AIzaSyCEFDZRDS95ct94KIX5ylmDoa8NEY3ZQEI\",\"authDomain\":\"janam-70bc3.firebaseapp.com\",\"projectId\":\"janam-70bc3\",\"storageBucket\":\"janam-70bc3.firebasestorage.app\",\"messagingSenderId\":\"430545914406\",\"appId\":\"1:430545914406:web:e0fd2298ba372136a4f4e7\",\"measurementId\":\"G-ZWHHS5BBCC\"}', NULL, NULL),
-(217, 'client_count', '10', NULL, NULL),
+(217, 'client_count', '20', NULL, NULL),
 (218, 'project_count', '20', NULL, NULL),
 (219, 'service_count', '5', NULL, NULL),
 (220, 'team_count', '8', NULL, NULL);
@@ -507,10 +509,10 @@ CREATE TABLE `testimonials` (
 --
 
 INSERT INTO `testimonials` (`id`, `name`, `image`, `designation`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(4, 'Binod Kadel', 'def.png', 'Director, Sunrise Education Network Pvt. Ltd.', 'I needed a fast web application to manage our overall process, and Janam delivered beyond expectations. The site is beautiful, responsive, and easy to manage thanks to the custom web application he built. My readers love the new experience, and my traffic has doubled!', 1, '2025-03-23 05:30:53', '2025-03-23 05:30:53'),
-(5, 'Sanjay Rauniyar', 'def.png', 'Owner, Globaltech Nepal', 'We hired Janam to revamp our blog and content management system, and he exceeded expectations. His understanding of SEO, caching strategies, and Laravel’s dynamic routing improved both performance and visibility. Highly recommend him for any PHP-based project!', 1, '2025-03-23 05:31:59', '2025-03-23 05:31:59'),
-(6, 'Hotel Sunway', 'def.png', 'Hospitality Sector', 'The custom web application Janam developed for our team has saved us hours of manual work. From user authentication to real-time data updates, everything works flawlessly. He truly understands business needs and delivers solutions that make a difference!', 1, '2025-03-23 05:33:50', '2025-03-23 05:33:50'),
-(7, 'Ram Babu Deo', 'def.png', 'IT Head, AMDA Nepal', 'Janam played a crucial role in improving our existing Tender Management System and Academic Management System. His expertise in Laravel and MySQL helped optimize performance, fix bugs, and introduce new features seamlessly. His support has been invaluable, and I highly recommend him for any web development needs!', 1, '2025-03-23 05:36:30', '2025-03-23 05:36:30');
+(4, 'Binod Kadel', '2025-03-23-67e03574d1073.png', 'Director, Sunrise Education Network Pvt. Ltd.', 'I needed a fast web application to manage our overall process, and Janam delivered beyond expectations. The site is beautiful, responsive, and easy to manage thanks to the custom web application he built. My readers love the new experience, and my traffic has doubled!', 1, '2025-03-23 05:30:53', '2025-03-23 16:23:16'),
+(5, 'Sanjay Rauniyar', '2025-03-23-67e0345dc958a.png', 'Owner, Globaltech Nepal', 'We hired Janam to revamp our blog and content management system, and he exceeded expectations. His understanding of SEO, caching strategies, and Laravel’s dynamic routing improved both performance and visibility. Highly recommend him for any PHP-based project!', 1, '2025-03-23 05:31:59', '2025-03-23 16:18:37'),
+(6, 'Hotel Sunway', '2025-03-23-67e034287c5d7.png', 'Hospitality Sector', 'The custom web application Janam developed for our team has saved us hours of manual work. From user authentication to real-time data updates, everything works flawlessly. He truly understands business needs and delivers solutions that make a difference!', 1, '2025-03-23 05:33:50', '2025-03-23 16:17:44'),
+(7, 'Ram Babu Deo', '2025-03-23-67e034d073b4d.png', 'IT Head, AMDA Nepal', 'Janam played a crucial role in improving our existing Tender Management System and Academic Management System. His expertise in Laravel and MySQL helped optimize performance, fix bugs, and introduce new features seamlessly. His support has been invaluable, and I highly recommend him for any web development needs!', 1, '2025-03-23 05:36:30', '2025-03-23 16:20:32');
 
 -- --------------------------------------------------------
 
@@ -613,7 +615,9 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (4013, 'App\\Models\\Testimonial', 6, 'en', 'message', 'The custom web application Janam developed for our team has saved us hours of manual work. From user authentication to real-time data updates, everything works flawlessly. He truly understands business needs and delivers solutions that make a difference!', NULL, NULL),
 (4014, 'App\\Models\\Testimonial', 7, 'en', 'name', 'Ram Babu Deo', NULL, NULL),
 (4015, 'App\\Models\\Testimonial', 7, 'en', 'designation', 'IT Head, AMDA Nepal', NULL, NULL),
-(4016, 'App\\Models\\Testimonial', 7, 'en', 'message', 'Janam played a crucial role in improving our existing Tender Management System and Academic Management System. His expertise in Laravel and MySQL helped optimize performance, fix bugs, and introduce new features seamlessly. His support has been invaluable, and I highly recommend him for any web development needs!', NULL, NULL);
+(4016, 'App\\Models\\Testimonial', 7, 'en', 'message', 'Janam played a crucial role in improving our existing Tender Management System and Academic Management System. His expertise in Laravel and MySQL helped optimize performance, fix bugs, and introduce new features seamlessly. His support has been invaluable, and I highly recommend him for any web development needs!', NULL, NULL),
+(4017, 'App\\Models\\Service', 5, 'en', 'name', 'Website Development', NULL, NULL),
+(4018, 'App\\Models\\Service', 5, 'en', 'description', 'Get Customized website for your business at very low cost.', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -801,7 +805,7 @@ ALTER TABLE `resume_details`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `skills`
@@ -819,7 +823,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -837,7 +841,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4017;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4019;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
