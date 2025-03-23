@@ -4,7 +4,7 @@
     <div class="row justify-content-center text-center">
       <div class="col-lg-6">
         <h4>I'm Available for work</h4>
-        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+        <p>"I am available for PHP/Laravel development and web projects—let’s build something great together!"</p>
         <p class="mb-0"><a href="{{ route('contact') }}" class="btn btn-primary py-3 px-5">Hire me</a></p>
       </div>
     </div>
@@ -49,18 +49,18 @@
       <h4>Follow Me</h4>
       <p>I am available on most of the social media.</p>
       <div class="social-links d-flex">
-        @foreach ($social_media as $social_media)
-        @if($social_media->name == 'github')
-        <a href="{{ $social_media->link }}" target="_new"><i class="bi bi-github"></i></a>
+        @foreach ($social_media as $socialmedia)
+        @if($socialmedia->name == 'github')
+        <a href="{{ $socialmedia->link }}" target="_new"><i class="bi bi-github"></i></a>
         @endif
-        @if($social_media->name == 'linkedin')
-        <a href="{{ $social_media->link }}" target="_new"><i class="bi bi-linkedin"></i></a>
+        @if($socialmedia->name == 'linkedin')
+        <a href="{{ $socialmedia->link }}" target="_new"><i class="bi bi-linkedin"></i></a>
         @endif
-        @if($social_media->name == 'facebook')
-        <a href="$social_media->link" target="_new"><i class="bi bi-facebook"></i></a>
+        @if($socialmedia->name == 'facebook')
+        <a href="{{ $socialmedia->link }}" target="_new"><i class="bi bi-facebook"></i></a>
         @endif
-        @if($social_media->name == 'instagram')
-        <a href="$social_media->link" target="_new"><i class="bi bi-instagram"></i></a>
+        @if($socialmedia->name == 'instagram')
+        <a href="{{ $socialmedia->link }}" target="_new"><i class="bi bi-instagram"></i></a>
         @endif
         @endforeach
         <!-- <a href=""><i class="bi bi-twitter-x"></i></a> -->

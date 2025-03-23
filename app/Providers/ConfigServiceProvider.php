@@ -5,7 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use App\Models\Setting;
 use App\Models\DataSetting;
-use App\Models\BusinessSetting;
+use App\Models\SystemSetting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -34,7 +34,7 @@ class ConfigServiceProvider extends ServiceProvider
         $mode = env('APP_MODE');
 
         try {
-            $data = BusinessSetting::where(['key' => 'mail_config'])->first();
+            $data = SystemSetting::where(['key' => 'mail_config'])->first();
             $emailServices = json_decode($data['value'], true);
             if ($emailServices) {
                 $config = array(
@@ -52,27 +52,27 @@ class ConfigServiceProvider extends ServiceProvider
                 Config::set('mail', $config);
             }
 
-            $pagination = BusinessSetting::where(['key' => 'default_pagination'])->first();
+            $pagination = SystemSetting::where(['key' => 'default_pagination'])->first();
             if ($pagination) {
                 Config::set('default_pagination', $pagination->value);
             } else {
                 Config::set('default_pagination', 25);
             }
 
-            $round_up_to_digit = BusinessSetting::where(['key' => 'digit_after_decimal_point'])->first();
+            $round_up_to_digit = SystemSetting::where(['key' => 'digit_after_decimal_point'])->first();
             if ($round_up_to_digit) {
                 Config::set('round_up_to_digit', $round_up_to_digit->value);
             } else {
                 Config::set('round_up_to_digit', 2);
             }
 
-            $timezone = BusinessSetting::where(['key' => 'timezone'])->first();
+            $timezone = SystemSetting::where(['key' => 'timezone'])->first();
             if ($timezone) {
                 Config::set('timezone', $timezone->value);
                 date_default_timezone_set($timezone->value);
             }
 
-            $timeformat = BusinessSetting::where(['key' => 'timeformat'])->first();
+            $timeformat = SystemSetting::where(['key' => 'timeformat'])->first();
             if ($timeformat && $timeformat->value == '12') {
                 Config::set('timeformat', 'h:i a');
             }
@@ -80,14 +80,14 @@ class ConfigServiceProvider extends ServiceProvider
                 Config::set('timeformat', 'H:i');
             }
 
-            $data = BusinessSetting::where(['key' => 's3_credential'])->first();
+            $data = SystemSetting::where(['key' => 's3_credential'])->first();
 
             $credentials= null;
             if($data?->value){
                 $credentials = json_decode($data['value'], true);
             }
 
-            $config = (boolean)BusinessSetting::where(['key' => 'local_storage'])->first()?->value;
+            $config = (boolean)systemSetting::where(['key' => 'local_storage'])->first()?->value;
             if ($credentials) {
                 Config::set('filesystems.default', $config ? ($config == 0 ? 's3' : 'local') : 'local');
                 Config::set('filesystems.disks.s3.key', $credentials['key']);
@@ -106,7 +106,7 @@ class ConfigServiceProvider extends ServiceProvider
                         $today = Carbon::now();
                             if ($today->gt($end)) {
                                 Cache::forget('maintenance');
-                                $maintenance_mode = BusinessSetting::firstOrNew(['key' => 'maintenance_mode']);
+                                $maintenance_mode = SystemSetting::firstOrNew(['key' => 'maintenance_mode']);
                                 $maintenance_mode->value= 0;
                                 $maintenance_mode->save();
 

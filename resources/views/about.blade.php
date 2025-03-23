@@ -25,7 +25,7 @@
                             Introduce about <br>
                             myself</h1>
                             {!! $landing_data['about_me'] !!}
-                        <p class="mb-0"><a href="https://drive.google.com/file/d/1ROsGakdO8o6_22xmHIRsKvGa_G79pJoD/view?usp=sharing" target="_new" class="btn btn-primary py-3 px-5">Download CV</a></p>
+                        <p class="mb-0"><a href="https://drive.google.com/file/d/1cQaWFW5_7hMjv1o80jKg9ErIyDe6_7UD/view?usp=sharing" target="_new" class="btn btn-primary py-3 px-5">Download CV</a></p>
                     </div>
                 </div>
             </div>
