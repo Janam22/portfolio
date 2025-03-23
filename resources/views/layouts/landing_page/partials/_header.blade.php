@@ -33,7 +33,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted flex-md-shrink-0" href="{{ route('home') }}">Download CV</a>
+      <a class="btn-getstarted flex-md-shrink-0" href="https://drive.google.com/file/d/1ROsGakdO8o6_22xmHIRsKvGa_G79pJoD/view?usp=sharing" target="_new">Download CV</a>
 
     </div>
   </header>

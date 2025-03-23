@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row justify-content-center text-center">
       <div class="col-lg-6">
-        <h4>I'm Available for freelancing</h4>
+        <h4>I'm Available for work</h4>
         <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
         <p class="mb-0"><a href="{{ route('contact') }}" class="btn btn-primary py-3 px-5">Hire me</a></p>
       </div>
@@ -16,7 +16,7 @@
 <div class="container footer-top">
   <div class="row gy-4">
     <div class="col-lg-4 col-md-6 footer-about">
-      <a href="index.html" class="d-flex align-items-center">
+      <a href="{{ route('home') }}" class="d-flex align-items-center">
         <span class="sitename">{{ $landing_data['system_name'] }}</span>
       </a>
       <div class="footer-contact pt-3">
@@ -30,19 +30,18 @@
       <h4>Useful Links</h4>
       <ul>
         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home') }}">Home</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home') }}#about">About me</a></li>
+        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('about') }}">About me</a></li>
         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('blog') }}">Blogs</a></li>
         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('contact') }}">Contact me</a></li>
       </ul>
     </div>
 
     <div class="col-lg-2 col-md-3 footer-links">
-      <h4>Our Services</h4>
+      <h4>My Services</h4>
       <ul>
-        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+        @foreach ($services as $service)
+        <li><i class="bi bi-chevron-right"></i> <a href="#">{{ $service->name }}</a></li>
+        @endforeach
       </ul>
     </div>
 

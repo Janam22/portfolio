@@ -266,7 +266,7 @@ class Helpers
             }
         }
 
-        $key=['system_name', 'logo', 'phone', 'email_address', 'address', 'footer_text', 'icon', 'client_count', 'project_count', 'service_count'];
+        $key=['system_name', 'logo', 'phone', 'email_address', 'address', 'footer_text', 'icon', 'client_count', 'project_count', 'service_count', 'team_count'];
         $system_settings =  SystemSetting::whereIn('key', $key)->pluck('value','key')->toArray();
 
         $landing_data = [
@@ -280,9 +280,10 @@ class Helpers
             'address' =>  $system_settings['address'] ?? 'Kathmandu',
             'footer_text' =>  $system_settings['footer_text'] ?? 'All Right Reserved',
             'system_icon'=>   Helpers::get_full_url('system',$system_settings['icon'] ??  null,$system_settings['icon']),
-            'client_count' =>  $system_settings['client_count'] ?? '5',
-            'project_count' =>  $system_settings['project_count'] ?? '10',
-            'service_count' =>  $system_settings['service_count'] ?? '5',
+            'client_count' =>  $system_settings['client_count'] ?? '50',
+            'project_count' =>  $system_settings['project_count'] ?? '50',
+            'service_count' =>  $system_settings['service_count'] ?? '50',
+            'team_count' =>  $system_settings['team_count'] ?? '50',
         ];
 
         return $landing_data;

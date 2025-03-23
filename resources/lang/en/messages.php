@@ -7206,4 +7206,7 @@
   'creativity' => 'Creativity',
   'blog_category' => 'Blog category',
   'tech_news' => 'Tech news',
+  'team_count' => 'Team count',
+  'showing_my_team_members' => 'Showing my team members',
+  'general' => 'General',
 );

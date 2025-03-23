@@ -24,16 +24,8 @@
                         <h1>Let’s <br>
                             Introduce about <br>
                             myself</h1>
-                        <p>
-                            Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven 
-                            midst their. Beast creepeth. Fish days.
-                        </p>
-                        <p>
-                            Is give may shall likeness made yielding spirit a itself together created after sea 
-                            is in beast beginning signs open god you're gathering whose gathered cattle let. 
-                            Creature whales fruit unto meat the life beginning all in under give two.
-                        </p>
-                        <p class="mb-0"><a href="#" class="btn btn-primary py-3 px-5">Download CV</a></p>
+                            {!! $landing_data['about_me'] !!}
+                        <p class="mb-0"><a href="https://drive.google.com/file/d/1ROsGakdO8o6_22xmHIRsKvGa_G79pJoD/view?usp=sharing" target="_new" class="btn btn-primary py-3 px-5">Download CV</a></p>
                     </div>
                 </div>
             </div>
@@ -52,7 +44,7 @@
             <div class="stats-item d-flex align-items-center w-100 h-100">
                 <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
                 <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['client_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Happy Clients</p>
                 </div>
             </div>
@@ -62,7 +54,7 @@
             <div class="stats-item d-flex align-items-center w-100 h-100">
                 <i class="bi bi-journal-richtext color-orange flex-shrink-0" style="color: #ee6c20;"></i>
                 <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['project_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Projects</p>
                 </div>
             </div>
@@ -72,7 +64,7 @@
             <div class="stats-item d-flex align-items-center w-100 h-100">
                 <i class="bi bi-headset color-green flex-shrink-0" style="color: #15be56;"></i>
                 <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['service_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Services</p>
                 </div>
             </div>
@@ -82,8 +74,8 @@
             <div class="stats-item d-flex align-items-center w-100 h-100">
                 <i class="bi bi-people color-pink flex-shrink-0" style="color: #bb0852;"></i>
                 <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hard Workers</p>
+                <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['team_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Team Members</p>
                 </div>
             </div>
             </div><!-- End Stats Item -->
@@ -135,9 +127,6 @@
 
             <div class="swiper-slide">
                 <div class="testimonial-item">
-                <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
                 <p>
                     Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
                 </p>
@@ -151,9 +140,6 @@
 
             <div class="swiper-slide">
                 <div class="testimonial-item">
-                <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
                 <p>
                     Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
                 </p>
@@ -167,9 +153,6 @@
 
             <div class="swiper-slide">
                 <div class="testimonial-item">
-                <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
                 <p>
                     Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
                 </p>
@@ -183,9 +166,6 @@
 
             <div class="swiper-slide">
                 <div class="testimonial-item">
-                <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
                 <p>
                     Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
                 </p>
@@ -199,9 +179,6 @@
 
             <div class="swiper-slide">
                 <div class="testimonial-item">
-                <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
                 <p>
                     Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
                 </p>

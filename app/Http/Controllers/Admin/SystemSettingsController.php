@@ -119,6 +119,10 @@ class SystemSettingsController extends Controller
             'value' => $request['service_count']
         ]);
 
+        SystemSetting::query()->updateOrInsert(['key' => 'team_count'], [
+            'value' => $request['team_count']
+        ]);
+
         Toastr::success( translate('Successfully updated. To see the changes in app restart the app.'));
         return back();
     }

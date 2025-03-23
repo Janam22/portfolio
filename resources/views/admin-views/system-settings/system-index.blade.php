@@ -564,6 +564,13 @@
                                         <input type="text" name="service_count" class="form-control" value="{{ $service_count->value ?? '' }}" placeholder="{{ translate('messages.service_count') }}" required>
                                     </div>
                                 </div>
+                                <div class="col-sm-6 col-md-3">
+                                    @php($team_count = \App\Models\SystemSetting::where('key', 'team_count')->first())
+                                    <div class="form-group">
+                                        <label class="input-label">{{ translate('team_count') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('showing_my_team_members') }}" data-toggle="tooltip" alt=""> </label>
+                                        <input type="text" name="team_count" class="form-control" value="{{ $team_count->value ?? '' }}" placeholder="{{ translate('team_count') }}" required>
+                                    </div>
+                                </div>
                             </div>
                             <div class="btn--container justify-content-end">
                                 <button type="reset" id="reset_btn" class="btn btn--reset location-reload">{{ translate('messages.Reset') }} </button>
@@ -585,15 +592,6 @@
 @push('script_2')
     <script>
         "use strict";
-
-
-        $(document).on('click', '.demo_check', function (event) {
-            toastr.warning('{{ translate("Sorry! You can not enable maintenance mode in demo!") }}', {
-                CloseButton: true,
-                ProgressBar: true
-            });
-            event.preventDefault();
-        });
 
         $('#advanceFeatureToggle').click(function (event) {
                 event.preventDefault();
