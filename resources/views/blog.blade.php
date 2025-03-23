@@ -111,7 +111,7 @@
 
             </div><!--/Search Widget -->
 
-            @if (!empty($uniqueCategories->category))
+            @if (!empty($uniqueCategories))
             <!-- Categories Widget -->
             <div class="categories-widget widget-item">
 

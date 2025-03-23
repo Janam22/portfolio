@@ -7,6 +7,7 @@ use App\Models\Inquiry;
 use App\Models\Service;
 use App\Models\SocialMedia;
 use App\Models\Blog;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -19,17 +20,19 @@ class LandingController extends Controller
     {   
         $services = Service::Active()->get();
         $social_media = SocialMedia::Active()->get();
-        $blogs = Blog::Active()->get();
+        $blogs = Blog::Active()->latest()->take(3)->get();
+        $testimonials = Testimonial::Active()->latest()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('home', compact('landing_data', 'services', 'social_media', 'blogs'));
+        return view('home', compact('landing_data', 'services', 'social_media', 'blogs', 'testimonials'));
     }
     
     public function about()
     {
         $services = Service::Active()->get();
         $social_media = SocialMedia::Active()->get();
+        $testimonials = Testimonial::Active()->latest()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('about', compact('landing_data', 'services', 'social_media'));
+        return view('about', compact('landing_data', 'services', 'social_media', 'testimonials'));
     }
 
     public function blog(Request $request)
@@ -94,6 +97,7 @@ class LandingController extends Controller
             $allTags = array_merge($allTags, explode(',', $tagString));
         }
         $uniqueTags = array_unique(array_map('trim', $allTags));
+        $uniqueTags = array_slice($uniqueTags, 0, 15); 
         return $uniqueTags;
     }
 

@@ -292,7 +292,7 @@
                                         href="{{route('admin.testimonial.edit',[$testimonial['id']])}}" title="{{translate('messages.edit_testimonial')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn btn-sm btn--danger btn-outline-danger action-btn form-alert" href="javascript:"
-                                    data-id="category-{{$testimonial['id']}}" data-message="{{ translate('Want_to_delete_this_testimonial_?') }}" title="{{translate('messages.delete_testimonial')}}"><i class="tio-delete-outlined"></i>
+                                    data-id="testimonial-{{$testimonial['id']}}" data-message="{{ translate('Want_to_delete_this_testimonial_?') }}" title="{{translate('messages.delete_testimonial')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
 

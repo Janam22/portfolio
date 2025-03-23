@@ -7209,4 +7209,6 @@
   'team_count' => 'Team count',
   'showing_my_team_members' => 'Showing my team members',
   'general' => 'General',
+  'learning' => 'Learning',
+  'testimonial removed!' => 'Testimonial removed!',
 );

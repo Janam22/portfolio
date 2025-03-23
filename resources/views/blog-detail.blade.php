@@ -94,7 +94,7 @@
               <h3 class="widget-title">Categories</h3>
               <ul class="mt-3">
                 @foreach ($uniqueCategories as $uniqueCategory)
-                <li><a href="{{ route('blog', ['category' => $uniqueCategory->category ?? null, 'tag' => request('tag')]) }}">{{ translate($uniqueCategory->category) }} <span>({{ $uniqueCategory->count() }})</span></a></li>
+                <li><a href="{{ route('blog', ['category' => $uniqueCategory->category, 'tag' => request('tag')]) }}">{{ translate($uniqueCategory->category) }} <span>({{ $uniqueCategory->count }})</span></a></li>
                 @endforeach
               </ul>
 

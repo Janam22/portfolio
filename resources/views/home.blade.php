@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
+            <h1 data-aos="fade-up">Janam Pandey</h1>            
             <p data-aos="fade-up" data-aos-delay="100">We are team of talented designers making websites with Bootstrap</p>
             <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
               <a href="{{ route('contact') }}" class="btn-get-started">Hire Me <i class="bi bi-arrow-right"></i></a>
@@ -582,70 +582,20 @@
           </script>
           <div class="swiper-wrapper">
 
+          @foreach ($testimonials as $testimonial)
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  {{ $testimonial->message }}
                 </p>
                 <div class="profile mt-auto">
-                  <img src="{{ dynamicAsset('public/assets/landing/img/testimonials/testimonials-1.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
+                  <img src="{{ $testimonial['image_full_url'] }}" class="testimonial-img" alt="">
+                  <h3>{{ $testimonial->name }}</h3>
+                  <h4>{{ $testimonial->designation }}</h4>
                 </div>
               </div>
             </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ dynamicAsset('public/assets/landing/img/testimonials/testimonials-2.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-               <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ dynamicAsset('public/assets/landing/img/testimonials/testimonials-3.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ dynamicAsset('public/assets/landing/img/testimonials/testimonials-4.jpg') }}" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="{{ dynamicAsset('public/assets/landing/img/testimonials/testimonials-5.jpg') }}" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+          @endforeach
 
           </div>
           <div class="swiper-pagination"></div>
@@ -721,9 +671,12 @@
     <section id="recent-posts" class="recent-posts section">
 
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+      <div class="container d-flex justify-content-between align-items-center text-center section-title" data-aos="fade-up">
+        <div class="mx-auto">
         <h2>Recent Posts</h2>
         <p>Recent posts from my Blog</p>
+        </div>
+        <a href="{{ route('blog') }}">View All <i class="bi bi-arrow-right"></i></a>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -767,5 +720,4 @@
       </div>
 
     </section><!-- /Recent Posts Section -->
-
 @endsection

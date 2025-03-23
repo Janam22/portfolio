@@ -11,7 +11,7 @@
         <ul>
           <li><a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">Home<br></a></li>
           <li><a href="{{ route('about') }}" class="{{ Request::is('about') ? 'active' : '' }}">About</a></li>
-          <li><a href="{{ route('blog') }}" class="{{ Request::is('blogs') || Request::is('blogs/*') ? 'active' : '' }}">Blog</a></li>
+          <li><a href="{{ route('blog') }}" class="{{ Request::is('blogs') || Request::is('blog/*') ? 'active' : '' }}">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               @foreach ($services as $service)
