@@ -67,21 +67,25 @@ class BlogController extends Controller
             'author_name' => 'required|max:100',
             'blog_title' => 'required|max:200',
             'blog_image' => 'nullable|max:60000',
-            'blog_details' => 'nullable'
+            'blog_details' => 'required',
+            'tags' => 'nullable'
         ]);
 
         $blog = new Blog();
         $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
+        $blog->category = $request->blog_category;
         $blog->author_name = $request->author_name[array_search('default', $request->lang)];
         $blog->blog_title = $request->blog_title[array_search('default', $request->lang)];
         $blog->blog_image = $request->has('blog_image') ? Helpers::upload(dir:'blog/',format: 'png',image: $request->file('blog_image')) : 'def.png';
         $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
+        $blog->tags = $request->tags[array_search('default', $request->lang)];
         $blog->slug = $slug;
         $blog->save();
 
         Helpers::add_or_update_translations(request: $request, key_data:'author_name' , name_field:'author_name' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->author_name);
         Helpers::add_or_update_translations(request: $request, key_data:'blog_title' , name_field:'blog_title' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_title);
         Helpers::add_or_update_translations(request: $request, key_data:'blog_details' , name_field:'blog_details' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_details);
+        Helpers::add_or_update_translations(request: $request, key_data:'tags' , name_field:'tags' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->tags);
 
         Toastr::success(translate('messages.blog_added_successfully'));
 
@@ -110,20 +114,24 @@ class BlogController extends Controller
             'blog_title' => 'required|max:200',
             'blog_image' => 'nullable|max:60000',
             'blog_details' => 'required',
+            'tags' => 'nullable'
         ]);
 
         $blog = Blog::find($id);
         $slug = Str::slug($request->blog_title[array_search('default', $request->lang)]);
         $blog->slug = $blog->slug? $blog->slug :"{$slug}{$blog->id}";
+        $blog->category = $request->blog_category;
         $blog->author_name = $request->author_name[array_search('default', $request->lang)];
         $blog->blog_title = $request->blog_title[array_search('default', $request->lang)];
         $blog->blog_image = $request->has('blog_image') ? Helpers::update(dir:'blog/', old_image:$blog->blog_image,format: 'png', image:$request->file('blog_image')) : $blog->blog_image;
         $blog->blog_details = $request->blog_details[array_search('default', $request->lang)];
+        $blog->tags = $request->tags[array_search('default', $request->lang)];
         $blog->save();
 
         Helpers::add_or_update_translations(request: $request, key_data:'author_name' , name_field:'author_name' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->author_name);
         Helpers::add_or_update_translations(request: $request, key_data:'blog_title' , name_field:'blog_title' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_title);
         Helpers::add_or_update_translations(request: $request, key_data:'blog_details' , name_field:'blog_details' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->blog_details);
+        Helpers::add_or_update_translations(request: $request, key_data:'tags' , name_field:'tags' , model_name: 'Blog' ,data_id: $blog->id,data_value: $blog->tags);
 
         Toastr::success(translate('messages.blog_updated_successfully'));
 

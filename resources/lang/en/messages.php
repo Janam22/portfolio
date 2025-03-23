@@ -7202,4 +7202,8 @@
   'Thank_you_for_contacting_me._I_will_reach_you_shortly.' => 'Thank you for contacting me. I will reach you shortly.',
   'skill removed!' => 'Skill removed!',
   'Project removed!' => 'Project removed!',
+  'search_by_title' => 'Search by title',
+  'creativity' => 'Creativity',
+  'blog_category' => 'Blog category',
+  'tech_news' => 'Tech news',
 );

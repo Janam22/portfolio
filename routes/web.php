@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingController@home')->name('home');
 Route::get('/about', 'LandingController@about')->name('about');
 Route::get('/blogs', 'LandingController@blog')->name('blog');
-Route::get('/blogs/blog-detail', 'LandingController@blog_detail')->name('blog.detail');
+Route::get('/blog/{slug}', 'LandingController@blog_detail')->name('blog.detail');
 Route::get('/contact', 'LandingController@contact')->name('contact');
 Route::post('/contact', 'LandingController@inquiry_store')->name('inquiry.store');
 Route::get('maintenance-mode', 'HomeController@maintenanceMode')->name('maintenance_mode');

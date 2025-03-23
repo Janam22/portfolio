@@ -45,6 +45,22 @@
                             @if ($language)
                             <div class="lang_form" id="default-form">
 
+                                <div class="form-group mb-0">
+                                        <label class="input-label"
+                                            for="exampleFormControlSelect1">{{ translate('messages.blog_category') }}<span class="form-label-secondary text-danger"
+                                            data-toggle="tooltip" data-placement="right"
+                                            data-original-title="{{ translate('messages.Required.')}}"> *
+                                            </span></label>
+                                        <select name="blog_category" id="blog_category"
+                                            class="form-control js-select2-custom get-request"
+                                            oninvalid="this.setCustomValidity('Select Service')">
+                                            <option value="" selected disabled>{{ translate('Select_Category') }}</option>
+                                            <option value="general">General</option>
+                                            <option value="education">Learning</option>
+                                            <option value="tech_news">Tech News</option>
+                                        </select>
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <label class="input-label"
                                         for="default_name">{{ translate('messages.author_name') }}
@@ -76,6 +92,10 @@
                                         data-original-title="{{ translate('messages.Required.')}}"> *
                                         </span></label>
                                     <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.tags') }} ({{ translate('Default') }}) </label>
+                                    <input type="text" name="tags[]" class="form-control" placeholder="{{ translate('messages.creativity')}}">
                                 </div>
                             </div>
                                 @foreach(json_decode($language) as $lang)
@@ -109,12 +129,34 @@
                                                 </span></label>
                                             <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
                                         </div>
+                                        <div class="form-group mb-0">
+                                            <label class="input-label"
+                                                for="exampleFormControlInput1">{{ translate('messages.tags') }}
+                                                ({{ strtoupper($lang) }})</label>
+                                            <input type="text" name="tags[]" class="form-control" placeholder="{{ translate('messages.creativity')}}">
+                                        </div>
                                     </div>
                                 @endforeach
                             @else
                             
                             <div class="card-body">
                                 <div id="default-form">
+                                <div class="form-group mb-0">
+                                        <label class="input-label"
+                                            for="exampleFormControlSelect1">{{ translate('messages.blog_category') }}<span class="form-label-secondary text-danger"
+                                            data-toggle="tooltip" data-placement="right"
+                                            data-original-title="{{ translate('messages.Required.')}}"> *
+                                            </span></label>
+                                        <select name="blog_category" id="blog_category"
+                                            class="form-control js-select2-custom get-request"
+                                            oninvalid="this.setCustomValidity('Select Service')">
+                                            <option value="" selected disabled>{{ translate('Select_Category') }}</option>
+                                            <option value="general">General</option>
+                                            <option value="education">Learning</option>
+                                            <option value="tech_news">Tech News</option>
+                                        </select>
+                                </div>
+                                <br>
                                     <div class="form-group">
                                         <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.author_name') }} ({{ translate('Default') }})</label>
                                         <input type="text" name="author_name[]" class="form-control" placeholder="{{ translate('messages.author_name') }}" >
@@ -134,6 +176,10 @@
                                             data-original-title="{{ translate('messages.Required.')}}"> *
                                             </span></label>
                                         <textarea name="blog_details[]" class="ckeditor form-control"></textarea>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.tags') }}</label>
+                                        <input type="text" name="tags[]" class="form-control" placeholder="{{ translate('messages.creativity')}}">
                                     </div>
                                 </div>
                             </div>

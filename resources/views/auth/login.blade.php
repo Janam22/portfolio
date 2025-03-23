@@ -15,7 +15,7 @@
     <title>{{ translate('messages.login') }} | {{$app_name??translate("Janam Pandey's Portfolio")}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/system/'.$icon : 'public/favicon.ico')}}">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
                 @php($role = $role ?? null )
                 <a class="auth-logo mb-5" href="javascript:">
                     <img class="z-index-2 onerror-image"
-                    src="{{ \App\CentralLogics\Helpers::get_full_url('business',$systemlogo?->value,$systemlogo?->storage[0]?->value ?? 'public', 'authfav') }}"
+                    src="{{ \App\CentralLogics\Helpers::get_full_url('system',$systemlogo?->value,$systemlogo?->storage[0]?->value ?? 'public', 'authfav') }}"
                     data-onerror-image="{{ dynamicAsset('/public/assets/admin/img/auth-fav.png') }}" alt="image">
                 </a>
                 <div class="text-center">
