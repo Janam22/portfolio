@@ -7230,4 +7230,5 @@
   'email_me' => 'Email me',
   'open_hours' => 'Open hours',
   'Get_my_latest_blogs_here...' => 'Get my latest blogs here...',
+  'send_message' => 'Send message',
 );

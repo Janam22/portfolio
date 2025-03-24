@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2025 at 07:36 PM
+-- Generation Time: Mar 24, 2025 at 12:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -202,7 +202,8 @@ CREATE TABLE `inquiries` (
 --
 
 INSERT INTO `inquiries` (`id`, `name`, `subject`, `email`, `contact`, `message`, `created_at`, `updated_at`) VALUES
-(1, 'Janam Pandey', 'Testing', 'janampandey2@gmail.com', '9866077949', 'Testing', '2025-03-21 05:03:23', '2025-03-21 05:03:23');
+(1, 'Janam Pandey', 'Testing', 'janampandey2@gmail.com', '9866077949', 'Testing', '2025-03-21 05:03:23', '2025-03-21 05:03:23'),
+(2, 'dsfa', 'Testing', 'testing@gmail.com', '9866077949', 'sada', '2025-03-24 11:32:49', '2025-03-24 11:32:49');
 
 -- --------------------------------------------------------
 
@@ -270,6 +271,17 @@ CREATE TABLE `projects` (
   `slug` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `service_id`, `name`, `image`, `description`, `link`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
+(72, 3, 'Field Staff Management System', 'def.png', 'Tracking field staff', 'https://github.com/Janam22/field_staff_management_system', 1, '2025-03-24 04:48:58', '2025-03-24 04:48:58', 0, NULL),
+(73, 1, 'Ecommerce', 'def.png', 'Listing products', 'https://github.com/Janam22/omsok_ecommerce', 1, '2025-03-24 04:50:04', '2025-03-24 04:50:04', 0, NULL),
+(74, 5, 'Portfolio', 'def.png', 'Portfolio made for myself', 'https://github.com/Janam22/portfolio', 1, '2025-03-24 04:50:46', '2025-03-24 04:50:46', 0, NULL),
+(75, 1, 'Consultancy Management System', 'def.png', 'Manage internal process of consultancy', 'https://github.com/Janam22/Consultancy-System', 1, '2025-03-24 04:51:47', '2025-03-24 04:51:47', 0, NULL),
+(76, 1, 'Hotel Management System', 'def.png', 'Managing checkin and checkout of the customers', 'https://hotelsunway.com.np/booking/loginpage', 1, '2025-03-24 04:53:17', '2025-03-24 04:53:17', 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -322,9 +334,9 @@ CREATE TABLE `services` (
 INSERT INTO `services` (`id`, `name`, `image`, `description`, `status`, `created_at`, `updated_at`, `priority`, `slug`) VALUES
 (1, 'Web Development', '2025-03-21-67dd5072eec98.png', 'Build your website with most experienced developer.', 1, '2025-03-11 02:19:29', '2025-03-21 05:56:38', 0, 'website-development'),
 (2, 'Mobile Application Development', '2025-03-21-67dd504350621.png', 'testing', 0, '2025-03-20 01:49:20', '2025-03-23 16:50:14', 0, 'app-development2'),
-(3, 'Software Development', '2025-03-21-67dd50dd4be3b.png', 'Best software development with clean and reusable code for best performance.', 1, '2025-03-21 05:58:25', '2025-03-21 05:58:25', 0, NULL),
-(4, 'Digital Marketing', '2025-03-21-67dd512249ba5.png', 'For SEO', 1, '2025-03-21 05:59:34', '2025-03-21 05:59:34', 0, NULL),
-(5, 'Website Development', '2025-03-23-67e03982ba322.png', 'Get Customized website for your business at very low cost.', 1, '2025-03-23 16:40:34', '2025-03-23 16:40:34', 0, NULL);
+(3, 'Software Development', '2025-03-21-67dd50dd4be3b.png', 'Best software development with clean and reusable code for best performance.', 1, '2025-03-21 05:58:25', '2025-03-24 09:26:00', 0, 'software-development3'),
+(4, 'Digital Marketing', '2025-03-21-67dd512249ba5.png', 'For SEO', 1, '2025-03-21 05:59:34', '2025-03-24 09:25:31', 0, 'digital-marketing4'),
+(5, 'Website Development', '2025-03-23-67e03982ba322.png', 'Get Customized website for your business at very low cost.', 1, '2025-03-23 16:40:34', '2025-03-24 09:25:06', 0, 'website-development5');
 
 -- --------------------------------------------------------
 
@@ -417,7 +429,7 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (42, 'App\\Models\\EmailTemplate', '1', 'icon', 'public', '2025-02-27 08:53:53', '2025-02-27 08:53:53'),
 (43, 'App\\Models\\Service', '1', 'image', 'public', '2025-03-21 05:56:38', '2025-03-21 05:56:38'),
 (44, 'App\\Models\\Project', '71', 'image', 'public', '2025-03-11 02:56:43', '2025-03-11 02:56:43'),
-(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-23 16:46:58', '2025-03-23 16:46:58'),
+(45, 'App\\Models\\DataSetting', '111', NULL, 'public', '2025-03-24 07:49:34', '2025-03-24 07:49:34'),
 (46, 'App\\Models\\DataSetting', '112', NULL, 'public', '2025-03-17 05:05:03', '2025-03-17 05:05:03'),
 (47, 'App\\Models\\SystemSetting', '100', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
 (48, 'App\\Models\\SystemSetting', '79', NULL, 'public', '2025-03-20 01:46:50', '2025-03-20 01:46:50'),
@@ -435,7 +447,12 @@ INSERT INTO `storages` (`id`, `data_type`, `data_id`, `key`, `value`, `created_a
 (60, 'App\\Models\\Testimonial', '5', 'image', 'public', '2025-03-23 16:18:37', '2025-03-23 16:18:37'),
 (61, 'App\\Models\\Testimonial', '6', 'image', 'public', '2025-03-23 16:17:44', '2025-03-23 16:17:44'),
 (62, 'App\\Models\\Testimonial', '7', 'image', 'public', '2025-03-23 16:20:32', '2025-03-23 16:20:32'),
-(63, 'App\\Models\\Service', '5', 'image', 'public', '2025-03-23 16:40:34', '2025-03-23 16:40:34');
+(63, 'App\\Models\\Service', '5', 'image', 'public', '2025-03-23 16:40:34', '2025-03-23 16:40:34'),
+(64, 'App\\Models\\Project', '72', 'image', 'public', '2025-03-24 04:48:58', '2025-03-24 04:48:58'),
+(65, 'App\\Models\\Project', '73', 'image', 'public', '2025-03-24 04:50:04', '2025-03-24 04:50:04'),
+(66, 'App\\Models\\Project', '74', 'image', 'public', '2025-03-24 04:50:46', '2025-03-24 04:50:46'),
+(67, 'App\\Models\\Project', '75', 'image', 'public', '2025-03-24 04:51:47', '2025-03-24 04:51:47'),
+(68, 'App\\Models\\Project', '76', 'image', 'public', '2025-03-24 04:53:17', '2025-03-24 04:53:17');
 
 -- --------------------------------------------------------
 
@@ -552,7 +569,7 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (3937, 'App\\Models\\Skill', 1, 'en', 'name', 'PHP-Laravel', NULL, NULL),
 (3941, 'App\\Models\\ResumeDetail', 1, 'en', 'title', 'SEE', NULL, NULL),
 (3943, 'App\\Models\\Service', 2, 'en', 'name', 'Mobile Application Development', NULL, NULL),
-(3944, 'App\\Models\\Service', 2, 'ne', 'name', 'मोबाइल', NULL, NULL),
+(3944, 'App\\Models\\Service', 2, 'ne', 'name', 'मोबाइल अनुप्रयोग विकास', NULL, NULL),
 (3945, 'App\\Models\\Service', 2, 'en', 'description', 'testing', NULL, NULL),
 (3946, 'App\\Models\\Service', 2, 'ne', 'description', 'परीक्षण', NULL, NULL),
 (3956, 'App\\Models\\Skill', 3, 'en', 'name', 'jQuery', NULL, NULL),
@@ -617,7 +634,46 @@ INSERT INTO `translations` (`id`, `translationable_type`, `translationable_id`, 
 (4015, 'App\\Models\\Testimonial', 7, 'en', 'designation', 'IT Head, AMDA Nepal', NULL, NULL),
 (4016, 'App\\Models\\Testimonial', 7, 'en', 'message', 'Janam played a crucial role in improving our existing Tender Management System and Academic Management System. His expertise in Laravel and MySQL helped optimize performance, fix bugs, and introduce new features seamlessly. His support has been invaluable, and I highly recommend him for any web development needs!', NULL, NULL),
 (4017, 'App\\Models\\Service', 5, 'en', 'name', 'Website Development', NULL, NULL),
-(4018, 'App\\Models\\Service', 5, 'en', 'description', 'Get Customized website for your business at very low cost.', NULL, NULL);
+(4018, 'App\\Models\\Service', 5, 'en', 'description', 'Get Customized website for your business at very low cost.', NULL, NULL),
+(4019, 'App\\Models\\Project', 72, 'en', 'name', 'Field Staff Management System', NULL, NULL),
+(4020, 'App\\Models\\Project', 72, 'en', 'description', 'Tracking field staff', NULL, NULL),
+(4021, 'App\\Models\\Project', 73, 'en', 'name', 'Ecommerce', NULL, NULL),
+(4022, 'App\\Models\\Project', 73, 'en', 'description', 'Listing products', NULL, NULL),
+(4023, 'App\\Models\\Project', 74, 'en', 'name', 'Portfolio', NULL, NULL),
+(4024, 'App\\Models\\Project', 74, 'en', 'description', 'Portfolio made for myself', NULL, NULL),
+(4025, 'App\\Models\\Project', 75, 'en', 'name', 'Consultancy Management System', NULL, NULL),
+(4026, 'App\\Models\\Project', 75, 'en', 'description', 'Manage internal process of consultancy', NULL, NULL),
+(4027, 'App\\Models\\Project', 76, 'en', 'name', 'Hotel Management System', NULL, NULL),
+(4028, 'App\\Models\\Project', 76, 'en', 'description', 'Managing checkin and checkout of the customers', NULL, NULL),
+(4029, 'App\\Models\\DataSetting', 111, 'ne', 'about', '<pre>\r\nम व्यक्तिगत र व्यावसायिक विकासको बारेमा भावुक छु र \r\nनिरन्तर सिकाइलाई महत्व दिने संस्था खोज्छु। मेरो लक्ष्य भनेको \r\nमेरो सीप र ज्ञानको उपयोग गरेर संस्थाको सफलतामा योगदान \r\nपुर्&zwj;याउनु हो। सहयोगी मानसिकता र समर्पणका साथ, म साझा \r\nउद्देश्यहरू प्राप्त गर्न र अपेक्षाहरू पार गर्न टोलीसँगै काम गर्ने \r\nलक्ष्य राख्छु। म चुनौतीहरूमा फस्टाउँछु र विकसित परिदृश्यहरूमा \r\nअनुकूलन गर्न उत्सुक छु, मेरो आफ्नै सीप सेटलाई समृद्ध बनाउँदै \r\nअर्थपूर्ण प्रभाव पार्दै। म वृद्धि-केन्द्रित संस्थाको हिस्सा बन्न पाउँदा \r\nउत्साहित छु, यो मानसिकता कम्पनी परियोजनाहरू र मलाई \r\nप्रदान गरिएको व्यक्तिगत परियोजनाहरू दुवैमा लागू गर्दै।</pre>', NULL, NULL),
+(4030, 'App\\Models\\Testimonial', 7, 'ne', 'name', 'रामबाबु DEO', NULL, NULL),
+(4031, 'App\\Models\\Testimonial', 7, 'ne', 'designation', 'आईटी प्रमुख, आम्दा नेपाल', NULL, NULL),
+(4032, 'App\\Models\\Testimonial', 7, 'ne', 'message', 'हाम्रो अवस्थित टेन्डर व्यवस्थापन प्रणाली र शैक्षिक व्यवस्थापन प्रणालीलाई सुधार गर्न जनमले महत्त्वपूर्ण भूमिका खेलेको थियो। लाराभेल र MySQL मा उनको विशेषज्ञताले कार्यसम्पादनलाई अनुकूलन गर्न, बगहरू समाधान गर्न र निर्बाध रूपमा नयाँ सुविधाहरू परिचय गर्न मद्दत गर्‍यो। उनको समर्थन अमूल्य भएको छ, र म कुनै पनि वेब विकास आवश्यकताहरूको लागि उनलाई अत्यधिक सिफारिस गर्दछु!', NULL, NULL),
+(4033, 'App\\Models\\Testimonial', 6, 'ne', 'name', 'होटल सनवे', NULL, NULL),
+(4034, 'App\\Models\\Testimonial', 6, 'ne', 'designation', 'आतिथ्य क्षेत्र', NULL, NULL),
+(4035, 'App\\Models\\Testimonial', 6, 'ne', 'message', 'हाम्रो टोलीको लागि विकास गरिएको कस्टम वेब एप्लिकेसन जनमले हाम्रो म्यानुअल कामको घण्टा बचत गरेको छ। प्रयोगकर्ता प्रमाणीकरणदेखि वास्तविक-समय डेटा अपडेटहरू सम्म, सबै कुरा निर्दोष रूपमा काम गर्दछ। उहाँ साँच्चै व्यापारिक आवश्यकताहरू बुझ्नुहुन्छ र फरक पार्ने समाधानहरू प्रदान गर्नुहुन्छ!', NULL, NULL),
+(4036, 'App\\Models\\Testimonial', 5, 'ne', 'name', 'सञ्जय रौनियार', NULL, NULL),
+(4037, 'App\\Models\\Testimonial', 5, 'ne', 'designation', 'मालिक, ग्लोबलटेक नेपाल', NULL, NULL),
+(4038, 'App\\Models\\Testimonial', 5, 'ne', 'message', 'हामीले हाम्रो ब्लग र सामग्री व्यवस्थापन प्रणालीलाई पुन: परिमार्जन गर्न जनमलाई नियुक्त गर्यौं, र उनले अपेक्षाहरू भन्दा बढी काम गरे। SEO, क्यासिङ रणनीतिहरू, र लाराभेलको गतिशील मार्गको बारेमा उनको बुझाइले प्रदर्शन र दृश्यता दुवैमा सुधार ल्यायो। कुनै पनि PHP-आधारित परियोजनाको लागि उनलाई अत्यधिक सिफारिस गर्नुहोस्!', NULL, NULL),
+(4039, 'App\\Models\\Testimonial', 4, 'ne', 'name', 'बिनोद कँडेल', NULL, NULL),
+(4040, 'App\\Models\\Testimonial', 4, 'ne', 'designation', 'निर्देशक, सनराइज एजुकेशन नेटवर्क प्रा. लि.', NULL, NULL),
+(4041, 'App\\Models\\Testimonial', 4, 'ne', 'message', 'हाम्रो समग्र प्रक्रिया व्यवस्थापन गर्न मलाई एउटा द्रुत वेब अनुप्रयोग चाहियो, र जनमले अपेक्षाभन्दा बढी काम गर्‍यो। उनले बनाएको अनुकूलन वेब अनुप्रयोगको कारण साइट सुन्दर, उत्तरदायी र व्यवस्थापन गर्न सजिलो छ। मेरा पाठकहरूलाई नयाँ अनुभव मन पर्यो, र मेरो ट्राफिक दोब्बर भएको छ!', NULL, NULL),
+(4042, 'App\\Models\\Service', 5, 'ne', 'name', 'वेबसाइट विकास', NULL, NULL),
+(4043, 'App\\Models\\Service', 4, 'ne', 'name', 'डिजिटल मार्केटिङ', NULL, NULL),
+(4044, 'App\\Models\\Service', 3, 'ne', 'name', 'सफ्टवेयर विकास', NULL, NULL),
+(4045, 'App\\Models\\Service', 1, 'ne', 'name', 'वेब विकास', NULL, NULL),
+(4046, 'App\\Models\\Blog', 12, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4047, 'App\\Models\\Blog', 12, 'ne', 'blog_title', '२०२५ मा उत्कृष्ट वेब विकास उपकरणहरू र फ्रेमवर्कहरू', NULL, NULL),
+(4048, 'App\\Models\\Blog', 11, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4049, 'App\\Models\\Blog', 11, 'ne', 'blog_title', 'वेब विकासमा SEO किन महत्त्वपूर्ण छ: प्रमुख अनुकूलन रणनीतिहरू', NULL, NULL),
+(4050, 'App\\Models\\Blog', 10, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4051, 'App\\Models\\Blog', 10, 'ne', 'blog_title', 'फुल-स्ट्याक वेब एप्लिकेसन निर्माण गर्न शुरुवातकर्ताको लागि गाइड', NULL, NULL),
+(4052, 'App\\Models\\Blog', 9, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4053, 'App\\Models\\Blog', 9, 'ne', 'blog_title', 'वेबसाइट कार्यसम्पादन कसरी सुधार गर्ने: विकासकर्ताहरूको लागि उत्तम अभ्यासहरू', NULL, NULL),
+(4054, 'App\\Models\\Blog', 8, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4055, 'App\\Models\\Blog', 8, 'ne', 'blog_title', 'वेब विकासको भविष्य: २०२५ मा हेर्न लायक प्रवृत्तिहरू', NULL, NULL),
+(4056, 'App\\Models\\Blog', 7, 'ne', 'author_name', 'जनम पाण्डे', NULL, NULL),
+(4057, 'App\\Models\\Blog', 7, 'ne', 'blog_title', 'PHP, Laravel, MySQL, र Blade को साथ स्केलेबल वेब अनुप्रयोग निर्माण गर्दै', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -781,7 +837,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -793,7 +849,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `resume_details`
@@ -823,7 +879,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `storages`
 --
 ALTER TABLE `storages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -841,7 +897,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4019;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4058;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
