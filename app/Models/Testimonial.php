@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\CentralLogics\Helpers;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,6 +49,30 @@ class Testimonial extends Model
         if (count($this->translations) > 0) {   
             foreach ($this->translations as $translation) {
                 if ($translation['key'] == 'name') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
+    
+    public function getDesignationAttribute($value){
+        if (count($this->translations) > 0) {   
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'designation') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
+
+    public function getMessageAttribute($value){
+        if (count($this->translations) > 0) {   
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'message') {
                     return $translation['value'];
                 }
             }

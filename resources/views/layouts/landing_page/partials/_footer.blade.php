@@ -3,9 +3,9 @@
   <div class="container">
     <div class="row justify-content-center text-center">
       <div class="col-lg-6">
-        <h4>I'm Available for work</h4>
-        <p>"I am available for PHP/Laravel development and web projects—let’s build something great together!"</p>
-        <p class="mb-0"><a href="{{ route('contact') }}" class="btn btn-primary py-3 px-5">Hire me</a></p>
+        <h4>{{ translate('messages.I_am_available_for_work') }}</h4>
+        <p>{{ translate('messages.I_am_available_for_PHP/Laravel_development_and_web_projects-let_us_build_something_great_together!') }}</p>
+        <p class="mb-0"><a href="{{ route('contact') }}" class="btn btn-primary py-3 px-5">{{ translate('messages.hire_me') }}</a></p>
       </div>
     </div>
   </div>
@@ -29,10 +29,10 @@
     <div class="col-lg-2 col-md-3 footer-links">
       <h4>Useful Links</h4>
       <ul>
-        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home') }}">Home</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('about') }}">About me</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('blog') }}">Blogs</a></li>
-        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('contact') }}">Contact me</a></li>
+        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('home') }}">{{ translate('messages.home') }}</a></li>
+        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('about') }}">{{ translate('messages.about_me') }}</a></li>
+        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('blog') }}">{{ translate('messages.blog') }}</a></li>
+        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('contact') }}">{{ translate('messages.contact') }}</a></li>
       </ul>
     </div>
 
@@ -47,7 +47,7 @@
 
     <div class="col-lg-4 col-md-12">
       <h4>Follow Me</h4>
-      <p>I am available on most of the social media.</p>
+      <p>{{ translate('messages.I_am_available_on_most_of_the_social_media.') }}</p>
       <div class="social-links d-flex">
         @foreach ($social_media as $socialmedia)
         @if($socialmedia->name == 'github')

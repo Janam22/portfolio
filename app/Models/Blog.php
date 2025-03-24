@@ -41,6 +41,30 @@ class Blog extends Model
     {
         return $query->where('status', '=', 1);
     }
+    
+    public function getAuthornameAttribute($value){
+        if (count($this->translations) > 0) {   
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'author_name') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
+    
+    public function getBlogtitleAttribute($value){
+        if (count($this->translations) > 0) {   
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'blog_title') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
 
     protected static function booted()
     {

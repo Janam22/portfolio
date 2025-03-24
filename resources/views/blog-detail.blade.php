@@ -9,8 +9,8 @@
       <nav class="breadcrumbs">
         <div class="container">
           <ol>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('blog') }}">Blogs</a></li>
+            <li><a href="{{ route('home') }}">{{ translate('messages.home') }}</a></li>
+            <li><a href="{{ route('blog') }}">{{ translate('messages.blogs') }}</a></li>
             <li class="current">{{ $blog_detail->blog_title }}</li>
           </ol>
         </div>
@@ -45,7 +45,7 @@
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('blog.detail', ['slug' => $blog_detail->slug]) }}">{{ $blog_detail->author_name}}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ route('blog.detail', ['slug' => $blog_detail->slug]) }}">{{ $blog_detail->author_name }}</a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ route('blog.detail', ['slug' => $blog_detail->slug]) }}"><time datetime="2020-01-01">{{ \App\CentralLogics\Helpers::date_format($blog_detail->created_at) }}</time></a></li>
                   </ul>
                 </div><!-- End meta top -->
@@ -110,7 +110,7 @@
                 <div class="post-item">
                   <img src="{{ $recent_blog['image_full_url'] }}" alt="" class="flex-shrink-0">
                   <div>
-                    <h4><a href="{{ route('blog.detail', ['slug' => $blog_detail->slug]) }}">{{ $recent_blog->blog_title }}</a></h4>
+                    <h4><a href="{{ route('blog.detail', ['slug' => $recent_blog->slug]) }}">{{ $recent_blog->blog_title }}</a></h4>
                     <time datetime="2020-01-01">{{ \App\CentralLogics\Helpers::date_format($recent_blog->created_at) }}</time>
                   </div>
                 </div><!-- End recent post item-->

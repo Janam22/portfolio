@@ -5,15 +5,18 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
-
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">Janam Pandey</h1>            
+            <h1 data-aos="fade-up">Janam Pandey</h1>      
+            <div class="container">
+              <p class="static-text" style="display: inline-block;font-size:23px;">I AM</p>
+              <p data-aos="fade-up" data-aos-delay="100" class="dynamic-text" style="color:green;display: inline-block;"> </p>
+            </div>
             <p data-aos="fade-up" data-aos-delay="100">We are team of talented designers making websites with Bootstrap</p>
             <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-              <a href="{{ route('contact') }}" class="btn-get-started">Hire Me <i class="bi bi-arrow-right"></i></a>
-              <a href="https://github.com/Janam22" target="_new" class="btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0"><i class="bi bi-github"></i><span>View Github Profile</span></a>
+              <a href="{{ route('contact') }}" class="btn-get-started">{{ translate('messages.hire_me') }} <i class="bi bi-arrow-right"></i></a>
+              <a href="https://github.com/Janam22" target="_new" class="btn-watch-video d-flex align-items-center justify-content-center ms-0 ms-md-4 mt-4 mt-md-0"><i class="bi bi-github"></i><span>{{ translate('messages.view_github_profile') }}</span></a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out">
@@ -21,7 +24,6 @@
           </div>
         </div>
       </div>
-
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
@@ -32,14 +34,14 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h1>Who I Am</h1>
+              <h1>{{ translate('messages.who_i_am') }}</h1>
               <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
               <p>
                 {!! Str::limit(strip_tags($landing_data['about_me']), 200, '...') !!}
               </p>
               <div class="text-center text-lg-start">
                 <a href="{{ route('about') }}" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                  <span>Read More</span>
+                  <span>{{ translate('messages.read_more') }}</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
               </div>
@@ -381,159 +383,20 @@
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul><!-- End Portfolio Filters -->
-
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
+          @foreach ($projects as $project)
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/app-1.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ $project['image_full_url'] }}" class="img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>App 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/app-1.jpg') }}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>{{ $project->services->name }}</h4>
+                  <p>{{ $project->name }}</p>
+                  <a href="{{ $project['image_full_url'] }}" title="{{ $project->name }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ $project->link }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/product-1.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/product-1.jpg') }}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-1.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-1.jpg') }}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/books-1.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/books-1.jpg') }}" title="Branding 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/app-2.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/app-2.jpg') }}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/product-2.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/product-2.jpg') }}" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-2.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-2.jpg') }}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/books-2.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/books-2.jpg') }}" title="Branding 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/app-3.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/app-3.jpg') }}" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/product-3.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Product 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/product-3.jpg') }}" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-3.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Branding 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/branding-3.jpg') }}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="{{ dynamicAsset('public/assets/landing/img/portfolio/books-3.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Books 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ dynamicAsset('public/assets/landing/img/portfolio/books-3.jpg') }}" title="Branding 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+          @endforeach
 
           </div><!-- End Portfolio Container -->
 
@@ -548,8 +411,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>What client say about me<br></p>
+        <h2>{{ translate('messages.testimonials') }}</h2>
+        <p>{{ translate('messages.what_client_say_about_me?') }}<br></p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -720,4 +583,21 @@
       </div>
 
     </section><!-- /Recent Posts Section -->
+    <script>
+        const words = ["LARAVEL DEVELOPER", "DESIGNER", "FREELANCER"];
+        const dynamicText = document.querySelector(".dynamic-text");
+        let index = 0;
+
+        function changeWord() {
+            dynamicText.style.opacity = 0;  // Fade out
+            setTimeout(() => {
+                dynamicText.textContent = words[index];
+                dynamicText.style.opacity = 1;  // Fade in
+                index = (index + 1) % words.length; // Loop back to start
+            }, 100); // Wait for fade-out effect
+        }
+
+        changeWord(); // Initial call
+        setInterval(changeWord, 2000); // Change word every 2 seconds
+    </script>
 @endsection

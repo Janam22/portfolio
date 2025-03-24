@@ -8,8 +8,8 @@
       <nav class="breadcrumbs">
         <div class="container">
           <ol>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li class="current">Blogs</li>
+            <li><a href="{{ route('home') }}">{{ translate('messages.home') }}</a></li>
+            <li class="current">{{ translate('messages.blogs') }}</li>
           </ol>
         </div>
       </nav>
@@ -17,8 +17,8 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>Blogs</h1>
-              <p class="mb-0">Get my latest blogs here..</p>
+              <h1>{{ translate('messages.blogs') }}</h1>
+              <p class="mb-0">{{ translate('messages.Get_my_latest_blogs_here...') }}</p>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
                         </p>
 
                         <div class="read-more">
-                          <a href="{{ route('blog.detail', ['slug' => $blog->slug]) }}">Read More</a>
+                          <a href="{{ route('blog.detail', ['slug' => $blog->slug]) }}">{{ translate('messages.read_more') }}</a>
                         </div>
                       </div>
 

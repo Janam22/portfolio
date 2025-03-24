@@ -9,8 +9,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Contact Me</p>
+        <h2>{{ translate('messages.contact') }}</h2>
+        <p>{{ translate('messages.contact_me') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -23,7 +23,7 @@
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
+                  <h3>{{ translate('messages.address') }}</h3>
                   <p>{{ $landing_data['address'] }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -31,7 +31,7 @@
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
-                  <h3>Call Me</h3>
+                  <h3>{{ translate('call_me') }}</h3>
                   <p>{{ $landing_data['phone'] }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -39,7 +39,7 @@
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
-                  <h3>Email Me</h3>
+                  <h3>{{ translate('messages.email_me') }}</h3>
                   <p>{{ $landing_data['email_address'] }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -47,7 +47,7 @@
               <div class="col-md-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="500">
                   <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
+                  <h3>{{ translate('messages.open_hours') }}</h3>
                   <p>Sunday - Friday</p>
                   <p>9:00AM - 06:00PM</p>
                 </div>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="col-12 text-center">
-                  <button type="submit">Send Message</button>
+                  <button type="submit">{{ translate('messages.send_message') }}</button>
                 </div>
 
               </div>

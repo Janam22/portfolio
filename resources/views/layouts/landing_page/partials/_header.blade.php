@@ -9,23 +9,23 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">Home<br></a></li>
-          <li><a href="{{ route('about') }}" class="{{ Request::is('about') ? 'active' : '' }}">About</a></li>
-          <li><a href="{{ route('blog') }}" class="{{ Request::is('blogs') || Request::is('blog/*') ? 'active' : '' }}">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">{{ translate('messages.home') }}<br></a></li>
+          <li><a href="{{ route('about') }}" class="{{ Request::is('about') ? 'active' : '' }}">{{ translate('messages.about_me') }}</a></li>
+          <li><a href="{{ route('blog') }}" class="{{ Request::is('blogs') || Request::is('blog/*') ? 'active' : '' }}">{{ translate('messages.blog') }}</a></li>
+          <li class="dropdown"><a href="#"><span>{{ translate('messages.services') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               @foreach ($services as $service)
               <li><a href="#">{{ $service->name }} </a></li>
               @endforeach
             </ul>
           </li>
-          <li><a href="{{ route('contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">Contact</a></li>
+          <li><a href="{{ route('contact') }}" class="{{ Request::is('contact') ? 'active' : '' }}">{{ translate('messages.contact') }}</a></li>
           
           <li class="dropdown">
               <a href="#"><span>{{ strtoupper(app()->getLocale()) }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                   <li><a href="{{ url('lang/en') }}">🇬🇧 English</a></li>
-                  <li><a href="{{ url('lang/np') }}">🇳🇵 नेपाली</a></li>
+                  <li><a href="{{ url('lang/ne') }}">🇳🇵 नेपाली</a></li>
               </ul>
           </li>
 
@@ -33,7 +33,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted flex-md-shrink-0" href="https://drive.google.com/file/d/1cQaWFW5_7hMjv1o80jKg9ErIyDe6_7UD/view?usp=sharing" target="_new">Download CV</a>
+      <a class="btn-getstarted flex-md-shrink-0" href="https://drive.google.com/file/d/1cQaWFW5_7hMjv1o80jKg9ErIyDe6_7UD/view?usp=sharing" target="_new">{{ translate('messages.download_cv') }}</a>
 
     </div>
   </header>

@@ -8,8 +8,12 @@ use App\Models\Service;
 use App\Models\SocialMedia;
 use App\Models\Blog;
 use App\Models\Testimonial;
+use App\Models\Project;
+use App\Models\SystemSetting;
+use App\Models\DataSetting;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\App;
 
 class LandingController extends Controller
 {
@@ -22,11 +26,12 @@ class LandingController extends Controller
         $social_media = SocialMedia::Active()->get();
         $blogs = Blog::Active()->latest()->take(3)->get();
         $testimonials = Testimonial::Active()->latest()->get();
+        $projects = Project::with('services')->Active()->latest()->get();
         $landing_data = Helpers::get_landing_data();
-        return view('home', compact('landing_data', 'services', 'social_media', 'blogs', 'testimonials'));
+        return view('home', compact('landing_data', 'services', 'social_media', 'blogs', 'testimonials', 'projects'));
     }
     
-    public function about()
+    public function about(Request $request)
     {
         $services = Service::Active()->get();
         $social_media = SocialMedia::Active()->get();
@@ -132,6 +137,43 @@ class LandingController extends Controller
             Toastr::error(translate('messages.Something_went_wrong._Please_try_again_later.'));
             return back();
         }
+    }
+
+    public static function get_settings($name)
+    {
+        $data = DataSetting::where(['key' => $name])->first()?->value;
+        return $data;
+    }
+
+    public function lang($local)
+    {
+        $direction = SystemSetting::where('key', 'site_direction')->first();
+        $direction = $direction->value ?? 'ltr';
+        $language = SystemSetting::where('key', 'system_language')->first();
+        foreach (json_decode($language['value'], true) as $key => $data) {
+            if ($data['code'] == $local) {
+                $direction = isset($data['direction']) ? $data['direction'] : 'ltr';
+            }
+        }
+        session()->forget('landing_language_settings');
+        Helpers::landing_language_load();
+        session()->put('landing_site_direction', $direction);
+        session()->put('landing_local', $local);
+        return redirect()->back();
+    }
+
+    public static function get_settings_localization($name,$lang)
+    {
+        $config = null;
+        $data = DataSetting::withoutGlobalScope('translate')->with(['translations' => function ($query) use ($lang) {
+            return $query->where('locale', $lang);
+        }])->where(['key' => $name])->first();
+        if($data && count($data->translations)>0){
+            $data = $data->translations[0]['value'];
+        }else{
+            $data = $data ? $data->value: '';
+        }
+        return $data;
     }
 
 }

@@ -33,6 +33,11 @@ class Project extends Model
 
         return Helpers::get_full_url('project',$value,'public');
     }
+    public function services()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
     public function storage()
     {
         return $this->morphMany(Storage::class, 'data');

@@ -9,8 +9,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>About Me</p>
+        <h2>{{ translate('messages.about') }}</h2>
+        <p>{{ translate('messages.about_me') }}</p>
       </div><!-- End Section Title -->
       
         <div class="container">
@@ -21,11 +21,9 @@
 
                 <div class="offset-lg-1 col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="content">
-                        <h1>Let’s <br>
-                            Introduce about <br>
-                            myself</h1>
+                        <h1>{{ translate('messages.Lets_Introduce_about_myself') }}</h1>
                             {!! $landing_data['about_me'] !!}
-                        <p class="mb-0"><a href="https://drive.google.com/file/d/1cQaWFW5_7hMjv1o80jKg9ErIyDe6_7UD/view?usp=sharing" target="_new" class="btn btn-primary py-3 px-5">Download CV</a></p>
+                        <p class="mb-0"><a href="https://drive.google.com/file/d/1cQaWFW5_7hMjv1o80jKg9ErIyDe6_7UD/view?usp=sharing" target="_new" class="btn btn-primary py-3 px-5">{{ translate('messages.download_cv') }}</a></p>
                     </div>
                 </div>
             </div>
@@ -45,7 +43,7 @@
                 <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
                 <div>
                 <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['client_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Clients</p>
+                <p>{{ translate('messages.happy_clients') }}</p>
                 </div>
             </div>
             </div><!-- End Stats Item -->
@@ -55,7 +53,7 @@
                 <i class="bi bi-journal-richtext color-orange flex-shrink-0" style="color: #ee6c20;"></i>
                 <div>
                 <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['project_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
+                <p>{{ translate('messages.projects') }}</p>
                 </div>
             </div>
             </div><!-- End Stats Item -->
@@ -65,7 +63,7 @@
                 <i class="bi bi-headset color-green flex-shrink-0" style="color: #15be56;"></i>
                 <div>
                 <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['service_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Services</p>
+                <p>{{ translate('messages.services') }}</p>
                 </div>
             </div>
             </div><!-- End Stats Item -->
@@ -75,7 +73,7 @@
                 <i class="bi bi-people color-pink flex-shrink-0" style="color: #bb0852;"></i>
                 <div>
                 <span data-purecounter-start="0" data-purecounter-end="{{ $landing_data['team_count'] }}" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Team Members</p>
+                <p>{{ translate('messages.team_members') }}</p>
                 </div>
             </div>
             </div><!-- End Stats Item -->
@@ -92,7 +90,7 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-        <p>What client say about me<br></p>
+        <p>{{ translate('messages.what_client_say_about_me?') }}<br></p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">

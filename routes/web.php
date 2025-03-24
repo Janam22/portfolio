@@ -29,7 +29,7 @@ Route::post('/reset-password', 'LoginController@user_reset_password_request')->n
 Route::get('/password-reset', 'LoginController@reset_password')->name('change-password');
 Route::post('reset-password-submit', 'LoginController@reset_password_submit')->name('reset-password-submit');
 
-Route::get('lang/{locale}', 'HomeController@lang')->name('lang');
+Route::get('lang/{locale}', 'LandingController@lang')->name('lang');
 Route::get('authentication-failed', function () {
     $errors = [];
     array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthenticated.']);

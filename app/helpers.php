@@ -1,8 +1,7 @@
 <?php
 
 use App\CentralLogics\Helpers;
-use App\Models\BusinessSetting;
-
+use App\Models\SystemSetting;
 
 if (! function_exists('translate')) {
     function translate($key, $replace = [])
@@ -90,7 +89,7 @@ if (!function_exists('getWebConfig')) {
         if (in_array($name, $check) && session()->has($name)) {
             $config = session($name);
         } else {
-            $data = BusinessSetting::where(['key' => $name])->first();
+            $data = SystemSetting::where(['key' => $name])->first();
             if (isset($data)) {
                 $config = json_decode($data['value'], true);
                 if (is_null($config)) {
