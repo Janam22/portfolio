@@ -164,7 +164,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $inquiry_list->subject }}
+                                    {!! Str::limit(strip_tags($inquiry_list->subject), 50, '...') !!}
                                 </td>     
                                 <td>
                                     {{ $inquiry_list->email }}
@@ -173,7 +173,7 @@
                                     {{ $inquiry_list->contact }}
                                 </td>
                                 <td>
-                                    {{ $inquiry_list->message }}
+                                    {!! Str::limit(strip_tags($inquiry_list->message), 50, '...') !!}
                                 </td>   
                                 <td>
                                     <label class="badge">

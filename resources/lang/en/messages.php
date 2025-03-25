@@ -7234,4 +7234,7 @@
   'Service_Unavailable' => 'Service Unavailable',
   'service_priority_updated successfully' => 'Service priority updated successfully',
   'project_priority_updated successfully' => 'Project priority updated successfully',
+  'inquiry_list' => 'Inquiry list',
+  'Inquiry_Analytics' => 'Inquiry Analytics',
+  'Inquiry_date' => 'Inquiry date',
 );

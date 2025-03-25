@@ -94,7 +94,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => 'inquiries', 'as' => 'inquiry.'], function () {
             Route::get('lists', 'InquiryController@list')->name('list');
             Route::delete('delete/{id}', 'InquiryController@delete')->name('delete');
-            Route::get('export-inquiries', 'InquiryController@export_inquirires')->name('export-inquiries');
+            Route::get('export-inquiries', 'InquiryController@export_inquiries')->name('export-inquiries');
         });
         
         Route::group(['prefix' => 'resumedetails', 'as' => 'resumedetail.'], function () {
