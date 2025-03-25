@@ -13,7 +13,7 @@ use App\Models\SystemSetting;
 use App\Models\DataSetting;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 
 class LandingController extends Controller
 {
@@ -110,7 +110,11 @@ class LandingController extends Controller
     {
         $services = Service::Active()->get();
         $social_media = SocialMedia::Active()->get();
-        $landing_data = Helpers::get_landing_data();
+        // Cache the landing data for 60 minutes
+        $landing_data = Cache::remember('landing_data', 60, function () {
+            return Helpers::get_landing_data();
+        });
+        // $landing_data = Helpers::get_landing_data();
         return view('contact', compact('landing_data', 'services', 'social_media'));
     }
     

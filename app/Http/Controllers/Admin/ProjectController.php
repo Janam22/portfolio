@@ -114,9 +114,10 @@ class ProjectController extends Controller
         return back();
     }
 
-    public function update_priority(Project $project, Request $request)
+    public function update_priority(Request $request, $id)
     {
         $priority = $request->priority??0;
+        $project = Project::findOrFail($id);
         $project->priority = $priority;
         $project->save();
         Toastr::success(translate('messages.project_priority_updated successfully'));

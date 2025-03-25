@@ -106,9 +106,10 @@ class ServiceController extends Controller
         return back();
     }
 
-    public function update_priority(Service $service, Request $request)
+    public function update_priority(Request $request, $id)
     {
         $priority = $request->priority??0;
+        $service = Service::findOrFail($id);
         $service->priority = $priority;
         $service->save();
         Toastr::success(translate('messages.service_priority_updated successfully'));

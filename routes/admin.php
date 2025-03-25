@@ -64,7 +64,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('store', 'ProjectController@store')->name('store');
             Route::get('edit/{id}', 'ProjectController@edit')->name('edit');
             Route::post('update/{id}', 'ProjectController@update')->name('update');
-            Route::get('update-priority/{category}', 'ProjectController@update_priority')->name('priority');
+            Route::get('update-priority/{id}', 'ProjectController@update_priority')->name('priority');
             Route::get('status/{id}/{status}', 'ProjectController@status')->name('status');
             Route::delete('delete/{id}', 'ProjectController@delete')->name('delete');
             Route::get('export-projects', 'ProjectController@export_projects')->name('export-projects');
@@ -111,7 +111,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('store', 'ServiceController@store')->name('store');
             Route::get('edit/{id}', 'ServiceController@edit')->name('edit');
             Route::post('update/{id}', 'ServiceController@update')->name('update');
-            Route::get('update-priority/{category}', 'ServiceController@update_priority')->name('priority');
+            Route::get('update-priority/{id}', 'ServiceController@update_priority')->name('priority');
             Route::get('status/{id}/{status}', 'ServiceController@status')->name('status');
             Route::delete('delete/{id}', 'ServiceController@delete')->name('delete');
             Route::get('export-services', 'ServiceController@export_services')->name('export-services');

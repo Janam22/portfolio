@@ -7231,4 +7231,7 @@
   'open_hours' => 'Open hours',
   'Get_my_latest_blogs_here...' => 'Get my latest blogs here...',
   'send_message' => 'Send message',
+  'Service_Unavailable' => 'Service Unavailable',
+  'service_priority_updated successfully' => 'Service priority updated successfully',
+  'project_priority_updated successfully' => 'Project priority updated successfully',
 );
